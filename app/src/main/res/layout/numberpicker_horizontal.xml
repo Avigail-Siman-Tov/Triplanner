@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <Button
+        android:id="@+id/btn_less"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="-"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/blue" />
+
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:inputType="number"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_more"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="+"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/blue" />
+</LinearLayout>

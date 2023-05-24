@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_profile">
+
+    <fragment
+        android:id="@+id/nav_plan_trip"
+        android:name="com.triplanner.triplanner.ui.planTrip.PlanTripFragment"
+        android:label="@string/menu_plan_trip"
+        tools:layout="@layout/fragment_plan_trip">
+        <action
+            android:id="@+id/action_nav_plan_trip_to_splashPlanTripFragment"
+            app:destination="@id/splashPlanTripFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_myTrip"
+        android:name="com.triplanner.triplanner.ui.MyTrip.ListMyTripFragment"
+        android:label="fragment_list_my_trip"
+        tools:layout="@layout/fragment_list_my_trip" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/placeDetailsFragment"
+        android:name="com.triplanner.triplanner.ui.planTrip.PlaceDetailsFragment"
+        android:label="1"
+        tools:layout="@layout/fragment_place_details">
+        <argument
+            android:name="place"
+            app:argType="com.triplanner.triplanner.Model.PlacePlanning" />
+    </fragment>
+    <fragment
+        android:id="@+id/travelerEditProfileFragment"
+        android:name="com.triplanner.triplanner.ui.profile.TravelerEditProfileFragment"
+        android:label="1"
+        tools:layout="@layout/fragment_traveler_edit_profile">
+        <argument
+            android:name="traveler"
+            app:argType="com.triplanner.triplanner.Model.Traveler" />
+        <argument
+            android:name="listCategories"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_travelerEditProfileFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.triplanner.triplanner.ui.profile.TravelerProfileFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_traveler_profile">
+        <action
+            android:id="@+id/action_nav_profile_to_travelerEditProfileFragment"
+            app:destination="@id/travelerEditProfileFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_logoutActivity"
+            app:destination="@id/logoutActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/placesListFragment"
+        android:name="com.triplanner.triplanner.ui.planTrip.PlacesListFragment"
+        android:label="@string/blank"
+        tools:layout="@layout/fragment_places_list">
+        <argument
+            android:name="arrayPlaces"
+            app:argType="com.triplanner.triplanner.Model.PlacePlanning[]" />
+        <action
+            android:id="@+id/action_placesListFragment_to_placeDetailsFragment"
+            app:destination="@id/placeDetailsFragment" />
+        <argument
+            android:name="tripDays"
+            app:argType="integer" />
+        <argument
+            android:name="tripName"
+            app:argType="string" />
+        <argument
+            android:name="locationTrip"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashPlanTripFragment"
+        android:name="com.triplanner.triplanner.ui.planTrip.SplashPlanTripFragment"
+        android:label="1"
+        tools:layout="@layout/fragment_shplash_plan_trip">
+        <argument
+            android:name="tripDays"
+            app:argType="integer" />
+        <argument
+            android:name="locationTrip"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_splashPlanTripFragment_to_placesListFragment"
+            app:destination="@id/placesListFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="float" />
+        <argument
+            android:name="longitude"
+            app:argType="float" />
+        <argument
+            android:name="nameTrip"
+            app:argType="string" />
+    </fragment>
+
+    <activity
+        android:id="@+id/logoutActivity"
+        android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"
+        android:label="activity_logout"
+        tools:layout="@layout/activity_logout" />
+</navigation>

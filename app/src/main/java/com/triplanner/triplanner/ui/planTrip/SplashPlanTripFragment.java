@@ -33,8 +33,6 @@ import io.realm.mongodb.User;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-
 public class SplashPlanTripFragment extends Fragment {
     JSONObject jsonDataPage1=null,jsonDataPage2=null,jsonDataPage3=null;
     String placeName;
@@ -184,7 +182,6 @@ public class SplashPlanTripFragment extends Fragment {
 
     }
     static class SortByDatePlace implements Comparator<PlacePlanning> {
-
         @Override
         public int compare(PlacePlanning o1, PlacePlanning o2) {
 

@@ -17,17 +17,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
 import com.squareup.picasso.Picasso;
+import com.triplanner.triplanner.Model.Model;
+import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.Model.PlacePlanning;
 import com.triplanner.triplanner.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
-
-
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class PlacesListFragment extends Fragment {
     ListView listViewPlaces;
@@ -36,22 +45,22 @@ public class PlacesListFragment extends Fragment {
     ImageView imagev,imageBest;
     RatingBar rating;
     PlacePlanning[] arrayPlaces;
+    ArrayList<PlacePlanning> chosenPlaces;
     Button button;
     TextView planBtn;
     Integer tripDays,placesNum=0;
     TextView amountUserPlace,location;
     ProgressDialog myLoadingDialog;
     String tripName,tripLocation;
+    int[] colorArray;
     User user;
     String packageName;
-
-    int[] colorArray;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_places_list, container, false);
         listViewPlaces =view.findViewById(R.id.fragment_places_list_listview);
-        colorArray= getContext().getResources().getIntArray(R.array.array_name);
+
         arrayPlaces =PlacesListFragmentArgs.fromBundle(getArguments()).getArrayPlaces();
         tripDays=PlacesListFragmentArgs.fromBundle(getArguments()).getTripDays();
         String destination = PlacesListFragmentArgs.fromBundle(getArguments()).getLocationTrip();
@@ -70,14 +79,129 @@ public class PlacesListFragment extends Fragment {
         user = app.currentUser();
         tripName= PlacesListFragmentArgs.fromBundle(getArguments()).getTripName();
         tripLocation = PlacesListFragmentArgs.fromBundle(getArguments()).getLocationTrip();
+        chosenNumber(arrayPlaces);
         amountUserPlace=view.findViewById(R.id.fragment_places_list_count_place_user);
         amountUserPlace.setText(String.valueOf(placesNum));
         location = view.findViewById(R.id.fragment_places_list_location);
         location.setText(destination);
         planBtn=view.findViewById(R.id.fragment_places_list_planBtn);
         myLoadingDialog=new ProgressDialog(getContext());
+        planBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(placesNum==0)
+                    Toast.makeText(getContext(),"no places selected ", Toast.LENGTH_SHORT).show();
+                else if (placesNum<tripDays)
+                    Toast.makeText(getContext(),"Too few places selected ",Toast.LENGTH_SHORT).show();
+                else if (placesNum > tripDays*3)
+                    Toast.makeText(getContext(),"Too many places selected ",Toast.LENGTH_SHORT).show();
+                else
+                    CreateListForPlanning();
+            }
+        });
+        colorArray= getContext().getResources().getIntArray(R.array.array_name);
         return view;
     }
+
+    private void chosenNumber(PlacePlanning[] arrayPlaces) {
+        placesNum=0;
+        for(int i=0; i<arrayPlaces.length;++i)
+            if(arrayPlaces[i].getStatus()==true)
+                placesNum++;
+    }
+    int count;
+    int j;
+    private void CreateListForPlanning() {
+        planBtn.setEnabled(false);
+        myLoadingDialog.setTitle("Planing Trip");
+        myLoadingDialog.setMessage("Please Wait, planing your trip");
+        myLoadingDialog.setCanceledOnTouchOutside(false);
+        myLoadingDialog.show();
+        chosenPlaces=new ArrayList<PlacePlanning>();
+//        for(int i=0;i<arrayPlaces.length;i++)
+//        {
+//            if(arrayPlaces[i].getStatus()==true) {
+//                PlacePlanning place = getPlaceDetailsById(arrayPlaces[i].getPlaceID());
+//                chosenPlaces.add(place);
+//            }
+//        }
+
+
+//        Model.instance.planTrip(chosenPlaces, tripDays, new Model.PlanTripListener() {
+//            @Override
+//            public void onComplete(ArrayList<PlacePlanning> chosenPlaces1) {
+//
+//                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
+//                    @Override
+//                    public void onComplete(String  tripId) {
+//                        addPlaces(chosenPlaces1,0,tripId);
+//                    }
+//                });
+//            }
+//        });
+    }
+
+    JSONObject jsonData=null;
+    String jsonStringPlace;
+//    private  PlacePlanning getPlaceDetailsById(String placeId) {
+//        PlacePlanning p=new PlacePlanning();
+//        Thread placeThread=new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try{
+//                    String url="https://maps.googleapis.com/maps/api/place/details/json?place_id=";
+//                    url+=placeId+"&key="+getString(R.string.places_api_key);
+//                    OkHttpClient client = new OkHttpClient().newBuilder()
+//                            .build();
+//                    Request request = new Request.Builder()
+//                            .url(url)
+//                            .method("GET", null)
+//                            .build();
+//                    Response response = client.newCall(request).execute();
+//                    jsonStringPlace= response.body().string();
+//                    jsonData = new JSONObject(jsonStringPlace);
+//                }catch (IOException | JSONException f){
+//                }
+//            }
+//        });
+//        placeThread.start();
+//        try {
+//            placeThread.join();
+//            if(jsonData!=null)
+//            {
+//                JSONObject result=(JSONObject)jsonData.get("result");
+//                p=PlacesList.JsonToPlace(result);
+//            }
+//        } catch (InterruptedException | JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return p;
+//    }
+//    public void addPlaces(ArrayList<PlacePlanning> chosenPlaces,int index,String tripId){
+//        if(index==chosenPlaces.size()) {
+//
+//
+//            Model.instance.getAllPlacesOfTrip(tripId, getContext(), new Model.GetAllPlacesOfTrip() {
+//                @Override
+//                public void onComplete(Place[] places) {
+//                    myLoadingDialog.dismiss();
+//                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
+//                    Navigation.findNavController(getView()).navigate( action);
+//                }
+//            });
+//
+//        }
+//        else {
+//            Model.instance.addPlace(chosenPlaces.get(index), tripLocation, user.getProfile().getEmail(), tripId, getContext(),new Model.AddPlaceListener() {
+//                @Override
+//                public void onComplete(boolean isSuccess) {
+//                    addPlaces(chosenPlaces, index + 1, tripId);
+//                }
+//
+//            });
+//        }
+//    }
+
 
     class MyAdapter extends BaseAdapter {
         @Override
@@ -99,37 +223,6 @@ public class PlacesListFragment extends Fragment {
             return 0;
         }
 
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup) {
-//            if (view == null) {
-//                LayoutInflater inflater = getLayoutInflater();
-//                view = inflater.inflate(R.layout.place_list_row, null);
-//            } else {
-//
-//            }
-//            PlacePlanning place=arrayPlaces[i];
-//
-//            name = view.findViewById(R.id.place_list_row_name_trip);
-//            imagev = view.findViewById(R.id.place_list_row_image);
-//            imageBest = view.findViewById(R.id.place_list_row__image_best_place);
-//
-//
-//            button=view.findViewById(R.id.place_list_row_button);
-//            name.setText(place.getPlaceName());
-//            imagev.setTag(place.getPlaceImgUrl());
-//            rating=view.findViewById(R.id.place_list_row_rating);
-//            rating.setRating(place.getPlaceRating());
-//            Drawable drawable = rating.getProgressDrawable();
-//            drawable.setColorFilter(Color.parseColor("#FDC313"), PorterDuff.Mode.SRC_ATOP);
-//            if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
-//                if (place.getPlaceImgUrl() == imagev.getTag()) {
-//                    Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
-//                }
-//            } else {
-//
-//            }
-//            return view;
-//        }
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
@@ -160,6 +253,7 @@ public class PlacesListFragment extends Fragment {
 
 
             }
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

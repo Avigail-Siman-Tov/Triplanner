@@ -131,8 +131,6 @@ package com.triplanner.triplanner.Model;
 //    }
 //}
 
-
-
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;

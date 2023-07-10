@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn=findViewById(R.id.activity_login_btn_signin);
         forgotPassword=findViewById(R.id.activity_login_forget_password);
         createAccount=findViewById(R.id.activity_login_create_new_account);
-        myLoadingDialog=new ProgressDialog(this);
+        myLoadingDialog= new ProgressDialog(this);
 
         Realm.init(this); // context, usually an Activity or Application
         app=new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
@@ -93,30 +94,32 @@ public class LoginActivity extends AppCompatActivity {
             myLoadingDialog.setCanceledOnTouchOutside(false);
             myLoadingDialog.show();
             Credentials credential = Credentials.emailPassword(mail,password);
-        app.loginAsync(credential,new App.Callback<User>(){
-            @Override
-            public void onResult(App.Result<User> result) {
-                if(result.isSuccess()){
-                    Model.instance.getTravelerByEmailInServer(mail, getApplicationContext(), new Model.GetTravelerByEmailListener() {
-                        @Override
-                        public void onComplete(Traveler traveler, List<String> favoriteCategories) {
-                            myLoadingDialog.dismiss();
-                            Toast.makeText(LoginActivity.this,"Log-in Succeeded",Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-
+            app.loginAsync(credential,new App.Callback<User>(){
+                @Override
+                public void onResult(App.Result<User> result) {
+                    if(result.isSuccess()){
+                        Log.d("mylog","aaa");
+                        Model.instance.getTravelerByEmailInServer(mail, getApplicationContext(), new Model.GetTravelerByEmailListener() {
+                            @Override
+                            public void onComplete(Traveler traveler, List<String> favoriteCategories) {
+                                Log.d("mylog","I am before");
+                                myLoadingDialog.dismiss();
+                                Log.d("mylog","I am after");
+                                Toast.makeText(LoginActivity.this,"Log-in Succeeded",Toast.LENGTH_LONG).show();
+                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+                    else{
+                        myLoadingDialog.dismiss();
+                        Toast.makeText(LoginActivity.this,"Log-in Failed",Toast.LENGTH_LONG).show();
+                    }
                 }
-                else{
-                    myLoadingDialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"Log-in Failed",Toast.LENGTH_LONG).show();
-                }
-            }
 
-        });
+            });
         }
     }
     private void showError(TextInputLayout field, String text) {

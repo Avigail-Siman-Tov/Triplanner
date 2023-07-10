@@ -27,6 +27,8 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
 
+
+
 public class PlacesListFragment extends Fragment {
     ListView listViewPlaces;
     MyAdapter adapter;
@@ -42,12 +44,14 @@ public class PlacesListFragment extends Fragment {
     String tripName,tripLocation;
     User user;
     String packageName;
+
+    int[] colorArray;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_places_list, container, false);
         listViewPlaces =view.findViewById(R.id.fragment_places_list_listview);
-
+        colorArray= getContext().getResources().getIntArray(R.array.array_name);
         arrayPlaces =PlacesListFragmentArgs.fromBundle(getArguments()).getArrayPlaces();
         tripDays=PlacesListFragmentArgs.fromBundle(getArguments()).getTripDays();
         String destination = PlacesListFragmentArgs.fromBundle(getArguments()).getLocationTrip();
@@ -95,6 +99,37 @@ public class PlacesListFragment extends Fragment {
             return 0;
         }
 
+//        @Override
+//        public View getView(int i, View view, ViewGroup viewGroup) {
+//            if (view == null) {
+//                LayoutInflater inflater = getLayoutInflater();
+//                view = inflater.inflate(R.layout.place_list_row, null);
+//            } else {
+//
+//            }
+//            PlacePlanning place=arrayPlaces[i];
+//
+//            name = view.findViewById(R.id.place_list_row_name_trip);
+//            imagev = view.findViewById(R.id.place_list_row_image);
+//            imageBest = view.findViewById(R.id.place_list_row__image_best_place);
+//
+//
+//            button=view.findViewById(R.id.place_list_row_button);
+//            name.setText(place.getPlaceName());
+//            imagev.setTag(place.getPlaceImgUrl());
+//            rating=view.findViewById(R.id.place_list_row_rating);
+//            rating.setRating(place.getPlaceRating());
+//            Drawable drawable = rating.getProgressDrawable();
+//            drawable.setColorFilter(Color.parseColor("#FDC313"), PorterDuff.Mode.SRC_ATOP);
+//            if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
+//                if (place.getPlaceImgUrl() == imagev.getTag()) {
+//                    Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
+//                }
+//            } else {
+//
+//            }
+//            return view;
+//        }
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
@@ -123,6 +158,36 @@ public class PlacesListFragment extends Fragment {
                 }
             } else {
 
+
+            }
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!place.getStatus()){
+                        place.setStatus(true);
+                        placesNum++;
+                        arrayPlaces[i].setStatus(true);
+                        amountUserPlace.setText(String.valueOf(placesNum));
+
+                    }
+                    else{
+                        place.setStatus(false);
+                        placesNum--;
+                        arrayPlaces[i].setStatus(false);
+                        amountUserPlace.setText(String.valueOf(placesNum));
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+
+            button.setTag(place.getStatus());
+            if(!place.getStatus() && String.valueOf(button.getTag()).equals("false")){
+                button.setText("Add");
+                button.setBackgroundColor(colorArray[1]);
+            }
+            else{
+                button.setText("Remove");
+                button.setBackgroundColor(colorArray[0]);
             }
             return view;
         }

@@ -91,6 +91,22 @@ public class PlaceDetailsFragment extends Fragment {
             }
         }
 
+        if(!placePlanning.getStatus()){
+            addBtn.setText("Add");
+            addBtn.setBackgroundColor(colorArray[1]);
+        }
+        else{
+            addBtn.setText("Remove");
+            addBtn.setBackgroundColor(colorArray[0]);
+        }
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placeChosen();
+            }
+        });
+
         return view;
     }
 
@@ -127,5 +143,19 @@ public class PlaceDetailsFragment extends Fragment {
             e.printStackTrace();
         }
         return p;
+    }
+
+    private void placeChosen() {
+        if(!placePlanning.getStatus()){
+            placePlanning.setStatus(true);
+            addBtn.setText("Remove");
+            addBtn.setBackgroundColor(colorArray[0]);
+        }
+        else{
+            placePlanning.setStatus(false);
+            addBtn.setText("Add");
+            addBtn.setBackgroundColor(colorArray[1]);
+        }
+        addBtn.setTag(placePlanning.getStatus());
     }
 }

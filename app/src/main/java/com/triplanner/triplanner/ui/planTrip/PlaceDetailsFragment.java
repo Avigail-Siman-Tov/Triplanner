@@ -146,7 +146,6 @@ public class PlaceDetailsFragment extends Fragment {
         return view;
     }
 
-
     public void openMoovitWithTripName(final String tripName) {
         AsyncTask<Void, Void, String> geocodingTask = new AsyncTask<Void, Void, String>() {
             @Override

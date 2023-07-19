@@ -13,6 +13,7 @@
         android:roundIcon="@drawable/img_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Triplanner">
+
         <activity
             android:name="com.triplanner.triplanner.ui.MyTrip.MapActivity"
             android:exported="false" />

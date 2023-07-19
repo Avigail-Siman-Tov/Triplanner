@@ -1,6 +1,8 @@
 package com.triplanner.triplanner.ui.planTrip;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +33,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 public class PlaceDetailsFragment extends Fragment {
+
+    private static final String WAZE_NOTE_URL = "https://waze.com/ul?q=%s";
     PlacePlanning placePlanning,placeFullDetails;
     ImageView placeImg;
     TextView placeName,placeAddress,placeOpeningHours,placeWebsite,placePhone;
     RatingBar ratingBar;
     double placeRating;
-    Button addBtn;
+    Button addBtn ,noteBtn;
     JSONObject jsonData=null;
     String jsonStringPlace;
 
@@ -57,6 +62,7 @@ public class PlaceDetailsFragment extends Fragment {
         placePhone = view.findViewById(R.id.fragment_place_details_place_phone);
         String placeId=placePlanning.getPlaceID();
         placeFullDetails=getPlaceDetailsById(placeId);
+        noteBtn = view.findViewById(R.id.btn_waze);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -104,6 +110,16 @@ public class PlaceDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 placeChosen();
+            }
+        });
+
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String place = ""+placeName.getText(); // Replace with the actual place you want to note
+                String url = String.format(WAZE_NOTE_URL, Uri.encode(place));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
             }
         });
 

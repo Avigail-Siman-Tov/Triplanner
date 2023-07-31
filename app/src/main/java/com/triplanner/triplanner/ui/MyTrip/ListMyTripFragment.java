@@ -39,8 +39,6 @@ public class ListMyTripFragment extends Fragment {
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         user = app.currentUser();
 
-
-
         return view;
     }
     class MyAdapter extends BaseAdapter {

@@ -19,7 +19,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Place;
@@ -35,8 +34,14 @@ import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
+import okhttp3.Request;
+
+import android.os.Build;
+
+
 
 public class PlacesListFragment extends Fragment {
     ListView listViewPlaces;
@@ -95,8 +100,8 @@ public class PlacesListFragment extends Fragment {
                     Toast.makeText(getContext(),"Too few places selected ",Toast.LENGTH_SHORT).show();
                 else if (placesNum > tripDays*3)
                     Toast.makeText(getContext(),"Too many places selected ",Toast.LENGTH_SHORT).show();
-                else
-                    CreateListForPlanning();
+//                else
+//                    CreateListForPlanning();
             }
         });
         colorArray= getContext().getResources().getIntArray(R.array.array_name);
@@ -111,96 +116,45 @@ public class PlacesListFragment extends Fragment {
     }
     int count;
     int j;
-    private void CreateListForPlanning() {
-        planBtn.setEnabled(false);
-        myLoadingDialog.setTitle("Planing Trip");
-        myLoadingDialog.setMessage("Please Wait, planing your trip");
-        myLoadingDialog.setCanceledOnTouchOutside(false);
-        myLoadingDialog.show();
-        chosenPlaces=new ArrayList<PlacePlanning>();
-//        for(int i=0;i<arrayPlaces.length;i++)
-//        {
-//            if(arrayPlaces[i].getStatus()==true) {
-//                PlacePlanning place = getPlaceDetailsById(arrayPlaces[i].getPlaceID());
-//                chosenPlaces.add(place);
-//            }
-//        }
 
-
-//        Model.instance.planTrip(chosenPlaces, tripDays, new Model.PlanTripListener() {
-//            @Override
-//            public void onComplete(ArrayList<PlacePlanning> chosenPlaces1) {
-//
-//                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
-//                    @Override
-//                    public void onComplete(String  tripId) {
-//                        addPlaces(chosenPlaces1,0,tripId);
-//                    }
-//                });
-//            }
-//        });
-    }
 
     JSONObject jsonData=null;
     String jsonStringPlace;
-//    private  PlacePlanning getPlaceDetailsById(String placeId) {
-//        PlacePlanning p=new PlacePlanning();
-//        Thread placeThread=new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try{
-//                    String url="https://maps.googleapis.com/maps/api/place/details/json?place_id=";
-//                    url+=placeId+"&key="+getString(R.string.places_api_key);
-//                    OkHttpClient client = new OkHttpClient().newBuilder()
-//                            .build();
-//                    Request request = new Request.Builder()
-//                            .url(url)
-//                            .method("GET", null)
-//                            .build();
-//                    Response response = client.newCall(request).execute();
-//                    jsonStringPlace= response.body().string();
-//                    jsonData = new JSONObject(jsonStringPlace);
-//                }catch (IOException | JSONException f){
-//                }
-//            }
-//        });
-//        placeThread.start();
-//        try {
-//            placeThread.join();
-//            if(jsonData!=null)
-//            {
-//                JSONObject result=(JSONObject)jsonData.get("result");
-//                p=PlacesList.JsonToPlace(result);
-//            }
-//        } catch (InterruptedException | JSONException e) {
-//            e.printStackTrace();
-//        }
-//        return p;
-//    }
-//    public void addPlaces(ArrayList<PlacePlanning> chosenPlaces,int index,String tripId){
-//        if(index==chosenPlaces.size()) {
-//
-//
-//            Model.instance.getAllPlacesOfTrip(tripId, getContext(), new Model.GetAllPlacesOfTrip() {
-//                @Override
-//                public void onComplete(Place[] places) {
-//                    myLoadingDialog.dismiss();
-//                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
-//                    Navigation.findNavController(getView()).navigate( action);
-//                }
-//            });
-//
-//        }
-//        else {
-//            Model.instance.addPlace(chosenPlaces.get(index), tripLocation, user.getProfile().getEmail(), tripId, getContext(),new Model.AddPlaceListener() {
-//                @Override
-//                public void onComplete(boolean isSuccess) {
-//                    addPlaces(chosenPlaces, index + 1, tripId);
-//                }
-//
-//            });
-//        }
-//    }
+    private  PlacePlanning getPlaceDetailsById(String placeId) {
+        PlacePlanning p=new PlacePlanning();
+        Thread placeThread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    String url="https://maps.googleapis.com/maps/api/place/details/json?place_id=";
+                    url+=placeId+"&key="+getString(R.string.places_api_key);
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .method("GET", null)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    jsonStringPlace= response.body().string();
+                    jsonData = new JSONObject(jsonStringPlace);
+                }catch (IOException | JSONException f){
+                }
+            }
+        });
+        placeThread.start();
+        try {
+            placeThread.join();
+            if(jsonData!=null)
+            {
+                JSONObject result=(JSONObject)jsonData.get("result");
+                p=PlacesList.JsonToPlace(result);
+            }
+        } catch (InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+
 
 
     class MyAdapter extends BaseAdapter {
@@ -241,10 +195,6 @@ public class PlacesListFragment extends Fragment {
             button=view.findViewById(R.id.place_list_row_button);
             name.setText(place.getPlaceName());
             imagev.setTag(place.getPlaceImgUrl());
-            rating=view.findViewById(R.id.place_list_row_rating);
-            rating.setRating(place.getPlaceRating());
-            Drawable drawable = rating.getProgressDrawable();
-            drawable.setColorFilter(Color.parseColor("#FDC313"), PorterDuff.Mode.SRC_ATOP);
             if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
                 if (place.getPlaceImgUrl() == imagev.getTag()) {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);

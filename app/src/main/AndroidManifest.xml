@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.triplanner.triplanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,54 +27,19 @@
             android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"
             android:exported="false" />
         <activity android:name="com.triplanner.triplanner.UserDetailsActivity" />
-        <activity
-            android:name=".ResetPassActivity"
+
+        <activity android:name=".ResetPassActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
+                <action android:name="android.intent.action.VIEN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Define your deep link URL here -->
                 <data
-                    android:scheme="http"
-                    android:host="triplanner.com"
-                    android:pathPrefix="/reset_password" />
-                <data
-                    android:scheme="https"
-                    android:host="triplanner.com"
-                    android:pathPrefix="/reset_password" />
+                    android:host="theiitiancoder.com/resetpassword"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
-        <!--        <activity-->
-<!--            android:name="com.triplanner.triplanner.ResetPassActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEN" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                <data-->
-<!--                    android:scheme="https"-->
-<!--                    android:host="www.triplanner.com"-->
-<!--                    android:pathPrefix="/resetPassword" />-->
-
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                <data-->
-<!--                    android:host="triplanner.com"-->
-<!--                    android:pathPattern="/resetPassword"-->
-<!--                    android:scheme="https" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
         <activity android:name="com.triplanner.triplanner.ForgotPasswordActivity" />
         <activity
             android:name="com.triplanner.triplanner.SplashActivity"

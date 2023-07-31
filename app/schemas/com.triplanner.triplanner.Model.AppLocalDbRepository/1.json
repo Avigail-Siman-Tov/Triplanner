@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "76feb709f193b55983e57c2d0d28d885",
+    "identityHash": "fbbf83bd0d0c47f6e42eb5aafcaa72da",
     "entities": [
       {
         "tableName": "Traveler",
@@ -62,6 +62,56 @@
         "primaryKey": {
           "columnNames": [
             "category"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Trip",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trip` TEXT NOT NULL, `travelerMail` TEXT, `tripDestination` TEXT, `tripName` TEXT, `tripDaysNumber` INTEGER NOT NULL, `date` TEXT, PRIMARY KEY(`id_trip`))",
+        "fields": [
+          {
+            "fieldPath": "id_trip",
+            "columnName": "id_trip",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelerMail",
+            "columnName": "travelerMail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tripDestination",
+            "columnName": "tripDestination",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tripName",
+            "columnName": "tripName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tripDaysNumber",
+            "columnName": "tripDaysNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_trip"
           ],
           "autoGenerate": false
         },
@@ -201,7 +251,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"76feb709f193b55983e57c2d0d28d885\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fbbf83bd0d0c47f6e42eb5aafcaa72da\")"
     ]
   }
 }

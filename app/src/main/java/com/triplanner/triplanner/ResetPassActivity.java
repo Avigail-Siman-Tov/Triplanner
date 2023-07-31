@@ -39,12 +39,12 @@ public class ResetPassActivity extends AppCompatActivity {
 
         myLoadingDialog=new ProgressDialog(this);
 
-            resPasswordBtm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    resetPassword();
-                }
-            });
+        resPasswordBtm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPassword();
+            }
+        });
         handleIntent(getIntent());
     }
 
@@ -66,17 +66,17 @@ public class ResetPassActivity extends AppCompatActivity {
         }
     }
     private void resetPassword() {
-            String password= InputPassword.getEditText().getText().toString();
-            String verifyPassword= InputVerifyPassword.getEditText().getText().toString();
-             if(password.isEmpty() || password.length()<6){
-                showError(InputPassword,"Password must be longer than 6 characters");
-            }
-            else if(!verifyPassword.equals(password)){
-                showError(InputVerifyPassword,"Password does not equal");
-            }
-            else{
-                 resetPasswordInMongoDb(password);
-            }
+        String password= InputPassword.getEditText().getText().toString();
+        String verifyPassword= InputVerifyPassword.getEditText().getText().toString();
+        if(password.isEmpty() || password.length()<6){
+            showError(InputPassword,"Password must be longer than 6 characters");
+        }
+        else if(!verifyPassword.equals(password)){
+            showError(InputVerifyPassword,"Password does not equal");
+        }
+        else{
+            resetPasswordInMongoDb(password);
+        }
 
     }
     private void showError(TextInputLayout field, String text) {
@@ -101,7 +101,7 @@ public class ResetPassActivity extends AppCompatActivity {
                     myLoadingDialog.dismiss();
                     Toast.makeText(ResetPassActivity.this,"Password reset failed",Toast.LENGTH_LONG).show();
                 }
-                Intent intent=new Intent(ResetPassActivity.this,LoginActivity.class);
+                Intent intent=new Intent(ResetPassActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

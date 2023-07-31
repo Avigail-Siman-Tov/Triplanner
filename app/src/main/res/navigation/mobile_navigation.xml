@@ -16,13 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_myTrip"
-        android:name="com.triplanner.triplanner.ui.MyTrip.ListMyTripFragment"
-        android:label="fragment_list_my_trip"
-        tools:layout="@layout/fragment_list_my_trip" >
-    </fragment>
-
-    <fragment
         android:id="@+id/placeDetailsFragment"
         android:name="com.triplanner.triplanner.ui.planTrip.PlaceDetailsFragment"
         android:label="1"
@@ -104,6 +97,12 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_myTrip"
+        android:name="com.triplanner.triplanner.ui.MyTrip.ListMyTripFragment"
+        android:label="fragment_list_my_trip"
+        tools:layout="@layout/fragment_list_my_trip" >
+    </fragment>
     <activity
         android:id="@+id/logoutActivity"
         android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"

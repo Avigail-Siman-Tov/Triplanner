@@ -2,11 +2,14 @@ package com.triplanner.triplanner.Model;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.User;
 
 public class Model {
     public final static Model instance = new Model();
@@ -28,9 +31,10 @@ public class Model {
         travelerModelSQL.getTravelerByMail(travelerMail, context,listener);
 
     }
-
+    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,Context context, Model.AddTripListener listener){
+        travelerModelServer.addTrip(tripName,tripLocation,travelerMail,tripDays,context,  listener );
+    }
     public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
-
         travelerModelServer.getTraveler(travelerMail, context,listener);
 
     }
@@ -43,13 +47,19 @@ public class Model {
     }
     public void getAllFavoriteCategoriesOfTraveler(String travelerMail,Context context,final  GetTravelerFavoriteCategories listener) {
 
-      travelerModelSQL.getAllFavoriteCategoriesOfTraveler(travelerMail,context, listener);
+        travelerModelSQL.getAllFavoriteCategoriesOfTraveler(travelerMail,context, listener);
     }
+//    public  void planTrip(ArrayList<PlacePlanning> chosenPlaces,int tripDays,Model.PlanTripListener listener ){
+//        travelerModelServer.planTrip(chosenPlaces,tripDays,listener);
+//    }
 
     public void getOpenHoursOfPlace(String placeId,Context context,Model.GetOpenHoursOfPlaceListener listener){
         travelerModelSQL.getOpenHoursOfPlace(placeId,context,listener);
     }
 
+    public interface AddTripListener{
+        void onComplete(String tripId);
+    }
     public interface AddTravelerAndFavoriteCategoriesListener{
         void onComplete(boolean isSuccess);
     }
@@ -64,6 +74,9 @@ public class Model {
     }
     public interface EditTravelerListener{
         void onComplete(String isSuccess);
+    }
+    public interface PlanTripListener{
+        void onComplete(ArrayList<PlacePlanning> chosenPlaces);
     }
 
     public interface GetOpenHoursOfPlaceListener{

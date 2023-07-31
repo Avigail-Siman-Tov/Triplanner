@@ -36,6 +36,31 @@ public class PlaceDetails implements Parcelable{
     }
 
 
+    protected PlaceDetails(Parcel in) {
+        placeID = in.readString();
+        placeName = in.readString();
+        placeLocationLat = in.readDouble();
+        placeLocationLng = in.readDouble();
+        placeFormattedAddress = in.readString();
+        placeInternationalPhoneNumber = in.readString();
+        placeOpeningHours = in.createStringArrayList();
+        placeRating = in.readFloat();
+        placeWebsite = in.readString();
+        placeImgUrl = in.readString();
+    }
+
+    public static final Creator<PlaceDetails> CREATOR = new Creator<PlaceDetails>() {
+        @Override
+        public PlaceDetails createFromParcel(Parcel in) {
+            return new PlaceDetails(in);
+        }
+
+        @Override
+        public PlaceDetails[] newArray(int size) {
+            return new PlaceDetails[size];
+        }
+    };
+
     public String getPlaceID() {
         return placeID;
     }
@@ -124,6 +149,15 @@ public class PlaceDetails implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(placeID);
+        dest.writeString(placeName);
+        dest.writeDouble(placeLocationLat);
+        dest.writeDouble(placeLocationLng);
+        dest.writeString(placeFormattedAddress);
+        dest.writeString(placeInternationalPhoneNumber);
+        dest.writeStringList(placeOpeningHours);
+        dest.writeFloat(placeRating);
+        dest.writeString(placeWebsite);
+        dest.writeString(placeImgUrl);
     }
 }

@@ -9,6 +9,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+
+import android.content.Context;
+import android.os.AsyncTask;
+
+import androidx.lifecycle.LiveData;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class ModelTravelerSQL {
     public List<Traveler> getTravelerByEmail(String travelerMail,Context context) {
         return AppLocalDB.getDatabase(context).travelerDao().getTravelerByEmail(travelerMail);
@@ -62,6 +72,27 @@ public class ModelTravelerSQL {
         task.execute();
 
     }
+
+    public void addTrip(Trip trip,Context context,Model.AddTripListener listener ){
+        class MyAsynchTask extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                AppLocalDB.getDatabase(context).tripDao().insertAll(trip);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                if (listener != null) {
+                    listener.onComplete("true");
+                }
+            }
+        }
+        MyAsynchTask task = new MyAsynchTask();
+        task.execute();
+    }
+
     public  void editTraveler(Traveler traveler,List<FavoriteCategories> favoriteCategories ,Context context,final Model.AddTravelerListener listener) {
         class MyAsynchTask extends AsyncTask {
             @Override
@@ -136,6 +167,8 @@ public class ModelTravelerSQL {
         MyAsynchTask task = new MyAsynchTask();
         task.execute();
     }
+
+
 
     public void getOpenHoursOfPlace(String placeId,Context context,Model.GetOpenHoursOfPlaceListener listener){
         class MyAsynchTask extends AsyncTask {

@@ -72,7 +72,6 @@ public class PlanTripFragment extends Fragment {
         planTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
                 tripName=InputsTripName.getEditText().getText().toString();
                 tripDaysNumber=Integer.parseInt(tripDays.getText().toString());
                 if(checkName(InputsTripName.getEditText().getText().toString()) )

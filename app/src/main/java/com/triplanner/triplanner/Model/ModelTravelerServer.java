@@ -186,5 +186,12 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
 
     }
+    public void planTrip(ArrayList<PlacePlanning> chosenPlaces, int tripDays, Model.PlanTripListener listener ){
+        final String URL_PLAN_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/plantrip/samesizekmeans";
+        HttpCall httpCallPost = new HttpCall();
+        httpCallPost.setMethodtype(HttpCall.GET);
+        httpCallPost.setUrl(URL_PLAN_TRIP);
+
+    }
 
 }

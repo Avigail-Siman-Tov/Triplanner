@@ -164,22 +164,26 @@
 
             <Button
                 android:id="@+id/btn_waze"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="81dp"
+                android:layout_height="82dp"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/logo_waze_icon"
                 android:text="waze"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintHorizontal_bias="0.112"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintVertical_bias="0.434" />
 
             <Button
                 android:id="@+id/btn_moovit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="81dp"
+                android:layout_height="82dp"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/logo_waze_icon"
                 android:text="Moovit"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/blue"

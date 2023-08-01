@@ -180,10 +180,10 @@
 
             <Button
                 android:id="@+id/btn_moovit"
-                android:layout_width="81dp"
-                android:layout_height="82dp"
+                android:layout_width="95dp"
+                android:layout_height="97dp"
                 android:background="@android:color/transparent"
-                android:drawableBottom="@drawable/logo_waze_icon"
+                android:drawableBottom="@drawable/moovit"
                 android:text="Moovit"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/blue"

@@ -191,7 +191,25 @@ public class ModelTravelerServer {
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_PLAN_TRIP);
+        HashMap<String, String> paramsPost = new HashMap<>();
+
+        for (int i = 0; i < chosenPlaces.size(); ++i) {
+            paramsPost.put("t" + "[" + i + "]", String.valueOf(chosenPlaces.get(i).getPlaceLocationLat()) + "," + String.valueOf(chosenPlaces.get(i).getPlaceLocationLng()));
+        }
+        paramsPost.put("numDayTrip", String.valueOf(tripDays));
+        httpCallPost.setParams(paramsPost);
+        new HttpRequest() {
+            @Override
+            public void onResponse(String response) {
+                super.onResponse(response);
+                Log.d("My Response:",response.toString());
+                String result = response.toString();
+
+            }
+        }.execute(httpCallPost);
 
     }
 
+
 }
+

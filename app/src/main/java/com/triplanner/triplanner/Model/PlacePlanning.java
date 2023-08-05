@@ -15,7 +15,6 @@ public class PlacePlanning extends PlaceDetails implements Parcelable {
         this.status=status;
     }
 
-
     protected PlacePlanning(Parcel in) {
         status = in.readByte() != 0;
     }

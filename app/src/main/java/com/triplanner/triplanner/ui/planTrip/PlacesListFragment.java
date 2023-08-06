@@ -123,6 +123,7 @@ public class PlacesListFragment extends Fragment {
             }
         }
 
+
     }
 
     private void chosenNumber(PlacePlanning[] arrayPlaces) {

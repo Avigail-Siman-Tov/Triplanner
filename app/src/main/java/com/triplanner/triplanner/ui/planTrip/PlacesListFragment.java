@@ -100,12 +100,29 @@ public class PlacesListFragment extends Fragment {
                     Toast.makeText(getContext(),"Too few places selected ",Toast.LENGTH_SHORT).show();
                 else if (placesNum > tripDays*3)
                     Toast.makeText(getContext(),"Too many places selected ",Toast.LENGTH_SHORT).show();
-//                else
-//                    CreateListForPlanning();
+                else
+                    CreateListForPlanning();
             }
         });
         colorArray= getContext().getResources().getIntArray(R.array.array_name);
         return view;
+    }
+
+    private void CreateListForPlanning() {
+        planBtn.setEnabled(false);
+        myLoadingDialog.setTitle("Planing Trip");
+        myLoadingDialog.setMessage("Please Wait, planing your trip");
+        myLoadingDialog.setCanceledOnTouchOutside(false);
+        myLoadingDialog.show();
+        chosenPlaces=new ArrayList<PlacePlanning>();
+        for(int i=0;i<arrayPlaces.length;i++)
+        {
+            if(arrayPlaces[i].getStatus()==true) {
+                PlacePlanning place = getPlaceDetailsById(arrayPlaces[i].getPlaceID());
+                chosenPlaces.add(place);
+            }
+        }
+
     }
 
     private void chosenNumber(PlacePlanning[] arrayPlaces) {

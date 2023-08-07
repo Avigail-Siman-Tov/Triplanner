@@ -103,6 +103,24 @@
         android:label="fragment_list_my_trip"
         tools:layout="@layout/fragment_list_my_trip" >
     </fragment>
+    <fragment
+        android:id="@+id/listDayInTripFragment"
+        android:name="com.triplanner.triplanner.ui.MyTrip.ListDayInTripFragment"
+        tools:layout="@layout/fragment_list_day_in_trip">
+        <argument
+            android:name="tripName"
+            app:argType="string" />
+        <argument
+            android:name="tripLocation"
+            app:argType="string" />
+        <argument
+            android:name="tripDays"
+            app:argType="integer" />
+        <argument
+            android:name="arrPlaces"
+            app:argType="com.triplanner.triplanner.Model.Place[]" />
+
+    </fragment>
     <activity
         android:id="@+id/logoutActivity"
         android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"

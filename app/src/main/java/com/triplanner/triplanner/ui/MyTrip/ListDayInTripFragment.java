@@ -41,17 +41,29 @@ public class ListDayInTripFragment extends Fragment {
     class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            if (arrDays == null) {
+            if (arrDays== null) {
                 return 0;
             } else {
                 return arrDays.length;
             }
         }
 
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+
 
     }
 
-    }
+
+}
 
 
 }

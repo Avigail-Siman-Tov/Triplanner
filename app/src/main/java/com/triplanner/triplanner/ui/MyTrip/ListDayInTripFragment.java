@@ -58,11 +58,21 @@ public class ListDayInTripFragment extends Fragment {
             return 0;
         }
 
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if (view == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                view = inflater.inflate(R.layout.day_list_row, null);
+            } else {
 
+            }
+            numDay = view.findViewById(R.id.day_list_row_textview);
+            numDay.setText("Day "+(i+1));
+            return view;
+        }
 
     }
 
 
 }
-
 

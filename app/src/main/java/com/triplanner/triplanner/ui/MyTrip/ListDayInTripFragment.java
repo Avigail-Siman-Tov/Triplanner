@@ -104,6 +104,5 @@ public class ListDayInTripFragment extends Fragment {
 
     }
 
-
 }
 

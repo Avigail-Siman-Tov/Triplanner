@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.theiitiancoder.com"
+                    android:host="www.example.com"
                     android:pathPrefix="/resetPassword"
                     android:scheme="https" />
             </intent-filter>
@@ -37,11 +37,12 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="theiitiancoder.com"
+                    android:host="example.com"
                     android:pathPattern="/resetPassword"
                     android:scheme="https" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.triplanner.triplanner.ForgotPasswordActivity" />
         <activity
             android:name="com.triplanner.triplanner.SplashActivity"

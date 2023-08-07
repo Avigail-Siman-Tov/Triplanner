@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,14 +29,12 @@ public class ResetPassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
+        Log.d("mylog","I am til");
         InputPassword =findViewById(R.id.fragment_reset_password_password);
         InputVerifyPassword =findViewById(R.id.fragment_reset_password_verify_password);
         resPasswordBtm=findViewById(R.id.fragment_reset_password_btm);
         Realm.init(this); // context, usually an Activity or Application
         app=new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
-
-
-
 
         myLoadingDialog=new ProgressDialog(this);
 
@@ -56,6 +55,7 @@ public class ResetPassActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) {
+        Log.d("mylog","I am stress");
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null){

@@ -62,13 +62,13 @@ public class ListDayInTripFragment extends Fragment {
                 Place[] newArrayPlaces = new Place[array_place_days_planing.get(i).size()];
                 array_place_days_planing.get(i).toArray(newArrayPlaces);
                 ListDayInTripFragmentDirections.ActionListDayInTripFragmentToListTripInDayFragment action =  ListDayInTripFragmentDirections.actionListDayInTripFragmentToListTripInDayFragment(newArrayPlaces,location);
-                Navigation.findNavController(view).navigate( action);
+                Navigation.findNavController(view).navigate(action);
             }
         });
         return view;
     }
 
-    }
+
     class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {

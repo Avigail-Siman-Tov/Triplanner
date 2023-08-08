@@ -34,7 +34,11 @@ public class Model {
     public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,Context context, Model.AddTripListener listener){
         travelerModelServer.addTrip(tripName,tripLocation,travelerMail,tripDays,context,  listener );
     }
-    public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
+
+    public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener) {
+        travelerModelServer.addPlace(place, tripLocation, travelerMail, tripId, context, listener);
+    }
+        public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
         travelerModelServer.getTraveler(travelerMail, context,listener);
 
     }

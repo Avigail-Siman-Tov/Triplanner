@@ -121,6 +121,18 @@
             app:argType="com.triplanner.triplanner.Model.Place[]" />
 
     </fragment>
+    <fragment
+        android:id="@+id/listTripInDayFragment"
+        android:name="com.triplanner.triplanner.ui.MyTrip.ListTripInDayFragment"
+        android:label="1"
+        tools:layout="@layout/fragment_list_trip_in_day">
+        <argument
+            android:name="arrPlaces"
+            app:argType="com.smartrack.smartrack.Model.Place[]" />
+        <argument
+            android:name="tripDestination"
+            app:argType="string" />
+    </fragment>
     <activity
         android:id="@+id/logoutActivity"
         android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"

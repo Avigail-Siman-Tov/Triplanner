@@ -38,6 +38,9 @@ public class Model {
     public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener) {
         travelerModelServer.addPlace(place, tripLocation, travelerMail, tripId, context, listener);
     }
+    public void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
+        travelerModelSQL.getAllTrip(travelerMail,context,listener);
+    }
         public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
         travelerModelServer.getTraveler(travelerMail, context,listener);
 
@@ -75,6 +78,12 @@ public class Model {
     }
     public  interface DeleteTravelerListener{
         void onComplete(boolean isSuccess);
+    }
+    public interface AddPlaceListener{
+        void onComplete(boolean isSuccess);
+    }
+    public interface GetAllTripListener{
+        void onComplete(Trip[] trips);
     }
     public interface EditTravelerListener{
         void onComplete(String isSuccess);

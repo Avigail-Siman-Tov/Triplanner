@@ -38,6 +38,28 @@ public class ListMyTripFragment extends Fragment {
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         user = app.currentUser();
+        Model.instance.getAllTrip(user.getProfile().getEmail(), getContext(), new Model.GetAllTripListener() {
+            @Override
+            public void onComplete(Trip[] trips) {
+                arrayTrip=trips;
+                listViewTrip = view.findViewById(R.id.fragment_list_my_trip_list);
+                adapter=new MyAdapter();
+                listViewTrip.setAdapter(adapter);
+                listViewTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                        Model.instance.getAllPlacesOfTrip(arrayTrip[i].getId_trip(), getContext(), new Model.GetAllPlacesOfTrip() {
+                            @Override
+                            public void onComplete(Place[] places) {
+                                ListMyTripFragmentDirections.ActionNavMyTripToListDayInTripFragment action=ListMyTripFragmentDirections.actionNavMyTripToListDayInTripFragment(arrayTrip[i].getTripName(),arrayTrip[i].getTripDestination(),arrayTrip[i].getTripDaysNumber(),places);
+                                Navigation.findNavController(view).navigate( action);
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
 
         return view;
     }

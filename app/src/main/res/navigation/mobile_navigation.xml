@@ -128,7 +128,7 @@
         tools:layout="@layout/fragment_list_trip_in_day">
         <argument
             android:name="arrPlaces"
-            app:argType="com.smartrack.smartrack.Model.Place[]" />
+            app:argType="com.triplanner.triplanner.Model.Place[]" />
         <argument
             android:name="tripDestination"
             app:argType="string" />

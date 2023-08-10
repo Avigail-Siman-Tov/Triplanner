@@ -123,6 +123,20 @@ public class PlacesListFragment extends Fragment {
             }
         }
 
+        Model.instance.planTrip(chosenPlaces, tripDays, new Model.PlanTripListener() {
+            @Override
+            public void onComplete(ArrayList<PlacePlanning> chosenPlaces1) {
+
+                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
+                    @Override
+                    public void onComplete(String  tripId) {
+                        addPlaces(chosenPlaces1,0,tripId);
+                    }
+                });
+            }
+        });
+
+
 
     }
 

@@ -59,9 +59,9 @@ public class Model {
 
         travelerModelSQL.getAllFavoriteCategoriesOfTraveler(travelerMail,context, listener);
     }
-//    public  void planTrip(ArrayList<PlacePlanning> chosenPlaces,int tripDays,Model.PlanTripListener listener ){
-//        travelerModelServer.planTrip(chosenPlaces,tripDays,listener);
-//    }
+    public  void planTrip(ArrayList<PlacePlanning> chosenPlaces,int tripDays,Model.PlanTripListener listener ){
+        travelerModelServer.planTrip(chosenPlaces,tripDays,listener);
+    }
 
     public void getOpenHoursOfPlace(String placeId,Context context,Model.GetOpenHoursOfPlaceListener listener){
         travelerModelSQL.getOpenHoursOfPlace(placeId,context,listener);

@@ -1,5 +1,8 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.R;
 
@@ -43,7 +47,8 @@ public class ListTripInDayFragment extends Fragment {
         listViewPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-
+                ListTripInDayFragmentDirections.ActionListTripInDayFragmentToPlaceTravelerDetailsFragment action= ListTripInDayFragmentDirections.actionListTripInDayFragmentToPlaceTravelerDetailsFragment(arrayPlaces[i],destination);
+                Navigation.findNavController(view).navigate( action);
             }
         });
         return view;
@@ -71,9 +76,31 @@ public class ListTripInDayFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return null;
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if (view == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                view = inflater.inflate(R.layout.trip_in_day_row, null);
+            } else {
+
+            }
+            Place place=arrayPlaces[i];
+
+            name = view.findViewById(R.id.trip_in_day_row_name_trip);
+            imagev = view.findViewById(R.id.trip_in_day_row_image);
+            name.setText(place.getPlaceName());
+            imagev.setTag(place.getPlaceImgUrl());
+
+            if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
+                if (place.getPlaceImgUrl() == imagev.getTag()) {
+                    Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
+                }
+            } else {
+
+            }
+
+            return view;
         }
+
     }
 
 }

@@ -190,4 +190,68 @@ public class ModelTravelerSQL {
         MyAsynchTask task = new MyAsynchTask();
         task.execute();
     }
+    public  void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
+        class MyAsynchTask extends AsyncTask {
+            Trip [] arrTrip ;
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                List<Trip> trips = AppLocalDB.getDatabase(context).tripDao().getTripByEmail(travelerMail);
+
+                if(trips!=null){
+                    Collections.sort(trips, new SortByDate());
+                    arrTrip=new Trip[trips.size()];
+                    trips.toArray(arrTrip);
+
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                if (listener != null) {
+                    listener.onComplete(arrTrip);
+                }
+            }
+        }
+        MyAsynchTask task = new MyAsynchTask();
+        task.execute();
+    }
+    static class SortByDate implements Comparator<Trip> {
+
+        @Override
+        public int compare(Trip o1, Trip o2) {
+            return o1.getDate().compareTo(o2.getDate())*-1;
+        }
+    }
+
+    public void getAllPlacesOfTrip(String tripId,Context context,Model.GetAllPlacesOfTrip listener){
+
+        class MyAsynchTask extends AsyncTask {
+            Place [] arrPlaces;
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                List<Place> places = AppLocalDB.getDatabase(context).placeDao().getPlaceOfTrip(tripId);
+
+                if(places!=null){
+                    arrPlaces=new Place[places.size()];
+                    places.toArray(arrPlaces);
+
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                if (listener != null) {
+                    listener.onComplete(arrPlaces);
+                }
+            }
+        }
+        MyAsynchTask task = new MyAsynchTask();
+        task.execute();
+
+
+    }
+
+
 }

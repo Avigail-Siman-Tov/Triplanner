@@ -41,6 +41,7 @@ public class Model {
     public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener) {
         travelerModelServer.addPlace(place, tripLocation, travelerMail, tripId, context, listener);
     }
+
     public void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
         travelerModelSQL.getAllTrip(travelerMail,context,listener);
     }

@@ -147,15 +147,21 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/placeTravelerDetailsFragment"
-        android:name="com.triplanner.triplanner.ui.MyTrip.PlaceTravelerDetailsFragment"
-        android:label="fragment_place_traveler_details"
-        tools:layout="@layout/fragment_place_traveler_details" >
-    </fragment>
     <activity
         android:id="@+id/logoutActivity"
         android:name="com.triplanner.triplanner.ui.profile.LogoutActivity"
         android:label="activity_logout"
         tools:layout="@layout/activity_logout" />
+    <fragment
+        android:id="@+id/placeTravelerDetailsFragment"
+        android:name="com.triplanner.triplanner.ui.MyTrip.PlaceTravelerDetailsFragment"
+        android:label="fragment_place_traveler_details"
+        tools:layout="@layout/fragment_place_traveler_details" >
+        <argument
+            android:name="place"
+            app:argType="com.triplanner.triplanner.Model.Place" />
+        <argument
+            android:name="tripDestination"
+            app:argType="string" />
+    </fragment>
 </navigation>

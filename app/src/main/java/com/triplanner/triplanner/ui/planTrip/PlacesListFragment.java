@@ -130,7 +130,7 @@ public class PlacesListFragment extends Fragment {
                 Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
                     @Override
                     public void onComplete(String  tripId) {
-                        addPlaces(chosenPlaces1,0,tripId);
+//                        addPlaces(chosenPlaces1,0,tripId);
                     }
                 });
             }

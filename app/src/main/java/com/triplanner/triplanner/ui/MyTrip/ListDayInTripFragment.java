@@ -102,7 +102,9 @@ public class ListDayInTripFragment extends Fragment {
             return view;
         }
 
+
     }
+
 
 }
 

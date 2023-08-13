@@ -150,7 +150,7 @@ public class PlaceDetailsFragment extends Fragment {
         AsyncTask<Void, Void, String> geocodingTask = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... voids) {
-                String apiKey = "AIzaSyD5iAAUo7k43rJzBeOhfx8fDO1qV-Zm7Lw";
+                String apiKey = "AIzaSyB0gqb2HzqxnzBCXTpZwkZZT9KM0FvN7D4";
                 String geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + tripName + "&key=" + apiKey;
                 try {
                     URL url = new URL(geocodingUrl);

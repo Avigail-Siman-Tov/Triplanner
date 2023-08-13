@@ -1,7 +1,10 @@
 package com.triplanner.triplanner.ui.planTrip;
 
+import static io.realm.Realm.getApplicationContext;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +65,8 @@ public class PlanTripFragment extends Fragment {
             @Override
             public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
-//                Toast.makeText(getApplicationContext(), status.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), status.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("mylog",status.toString());
             }
         });
         final HorizontalNumberPicker np_channel_nr = view.findViewById(R.id.np_channel_nr);

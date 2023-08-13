@@ -219,7 +219,6 @@ public class ModelTravelerServer {
             }
         }.execute(httpCallPost);
 
-
     }
 
     public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener){
@@ -250,10 +249,35 @@ public class ModelTravelerServer {
             paramsPlace.put("placeOpeningHours","");
         }
         httpCallPost.setParams(paramsPlace);
+        new HttpRequest() {
+            @Override
+            public void onResponse(String response) {
+                super.onResponse(response);
+                Log.d("My Response:",response.toString());
+                String result = response.toString();
+                List<OpenHours>openHoursList= new ArrayList<OpenHours>();
+                try {
+                    Place newPlace=new Place(place.getPlaceID(),place.getPlaceName(),place.getPlaceLocationLat(),place.getPlaceLocationLng(),place.getPlaceFormattedAddress(),place.getPlaceInternationalPhoneNumber(), place.getPlaceRating(), place.getPlaceWebsite(), place.getPlaceImgUrl(), place.getDay_in_trip(),travelerMail,tripId);
+                    if(place.getPlaceOpeningHours()!=null){
+                        for(int i=0;i<place.getPlaceOpeningHours().size();++i){
+                            openHoursList.add(new OpenHours(place.getPlaceOpeningHours().get(i),place.getPlaceID()));
+                        }
+                    }
+                    travelerModelSQL.addPlace(newPlace, openHoursList, context, new Model.AddTripListener() {
+                        @Override
+                        public void onComplete(String tripId) {
+                            listener.onComplete(true);
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(httpCallPost);
 
 
     }
-
 
 
 }

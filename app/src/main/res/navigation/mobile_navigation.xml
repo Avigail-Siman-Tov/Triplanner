@@ -71,6 +71,9 @@
         <argument
             android:name="locationTrip"
             app:argType="string" />
+        <action
+            android:id="@+id/action_placesListFragment_to_listDayInTripFragment"
+            app:destination="@id/listDayInTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashPlanTripFragment"
@@ -102,6 +105,9 @@
         android:name="com.triplanner.triplanner.ui.MyTrip.ListMyTripFragment"
         android:label="fragment_list_my_trip"
         tools:layout="@layout/fragment_list_my_trip" >
+        <action
+            android:id="@+id/action_nav_myTrip_to_listDayInTripFragment"
+            app:destination="@id/listDayInTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/listDayInTripFragment"
@@ -119,6 +125,9 @@
         <argument
             android:name="arrPlaces"
             app:argType="com.triplanner.triplanner.Model.Place[]" />
+        <action
+            android:id="@+id/action_listDayInTripFragment_to_listTripInDayFragment"
+            app:destination="@id/listTripInDayFragment" />
 
     </fragment>
     <fragment

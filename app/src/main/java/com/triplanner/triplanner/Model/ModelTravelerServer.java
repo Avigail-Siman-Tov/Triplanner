@@ -210,6 +210,39 @@ public class ModelTravelerServer {
 
     }
 
+    public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener){
+        final String URL_ADD_Place = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/addPlace";
+        HttpCall httpCallPost = new HttpCall();
+        httpCallPost.setMethodtype(HttpCall.GET);
+        httpCallPost.setUrl(URL_ADD_Place);
+        HashMap<String, String> paramsPlace = new HashMap<>();
+        paramsPlace.put("placeId",place.getPlaceID());
+        paramsPlace.put("placeName",place.getPlaceName());
+        paramsPlace.put("placeLocationLat",String.valueOf(place.getPlaceLocationLat()));
+        paramsPlace.put("placeLocationLng",String.valueOf(place.getPlaceLocationLng()));
+        paramsPlace.put("placeFormattedAddress", place.getPlaceFormattedAddress());
+        paramsPlace.put("placeInternationalPhoneNumber", place.getPlaceInternationalPhoneNumber());
+        paramsPlace.put("placeRating", String.valueOf(place.getPlaceRating()));
+        paramsPlace.put("placeWebsite",place.getPlaceWebsite());
+        paramsPlace.put("placeImgUrl",place.getPlaceImgUrl());
+        paramsPlace.put("placeDayInTrip",String.valueOf(place.getDay_in_trip()));
+        paramsPlace.put("travelerMail", travelerMail);
+        paramsPlace.put("tripDestination", tripLocation);
+        paramsPlace.put("tripId",tripId);
+        if(place.getPlaceOpeningHours()!=null){
+            for (int j=0;j<place.getPlaceOpeningHours().size();++j){
+                paramsPlace.put("placeOpeningHours"+"[" + j + "]",place.getPlaceOpeningHours().get(j));
+            }
+        }
+        else{
+            paramsPlace.put("placeOpeningHours","");
+        }
+        httpCallPost.setParams(paramsPlace);
+
+
+    }
+
+
 
 }
 

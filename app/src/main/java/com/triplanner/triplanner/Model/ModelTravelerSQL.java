@@ -190,7 +190,32 @@ public class ModelTravelerSQL {
         MyAsynchTask task = new MyAsynchTask();
         task.execute();
     }
-    public  void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
+
+    public void addPlace(Place place,List<OpenHours>listOpenHours,Context context,Model.AddTripListener listener) {
+        class MyAsynchTask extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                AppLocalDB.getDatabase(context).placeDao().insertAll(place);
+                if (listOpenHours != null) {
+                    for (int i = 0; i < listOpenHours.size(); ++i) {
+                        AppLocalDB.getDatabase(context).openHoursDao().insertAll(listOpenHours.get(i));
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                if (listener != null) {
+                    listener.onComplete("true");
+                }
+            }
+        }
+        MyAsynchTask task = new MyAsynchTask();
+        task.execute();
+    }
+        public  void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
         class MyAsynchTask extends AsyncTask {
             Trip [] arrTrip ;
             @Override

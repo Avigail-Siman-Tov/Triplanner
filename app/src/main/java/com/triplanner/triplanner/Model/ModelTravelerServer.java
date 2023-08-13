@@ -204,9 +204,21 @@ public class ModelTravelerServer {
                 super.onResponse(response);
                 Log.d("My Response:",response.toString());
                 String result = response.toString();
+                try {
+                    String[] arrOfStr = result.split(",");
+                    for (int j=0; j<chosenPlaces.size();++j){
+                        String[] temp = arrOfStr[j].split("=");
+                        chosenPlaces.get(j).setDay_in_trip(Integer.parseInt((temp[1]))+1);
+
+                    }
+                    listener.onComplete(chosenPlaces);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         }.execute(httpCallPost);
+
 
     }
 

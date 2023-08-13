@@ -48,7 +48,7 @@ public class ListTripInDayFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 ListTripInDayFragmentDirections.ActionListTripInDayFragmentToPlaceTravelerDetailsFragment action= ListTripInDayFragmentDirections.actionListTripInDayFragmentToPlaceTravelerDetailsFragment(arrayPlaces[i],destination);
-                Navigation.findNavController(view).navigate( action);
+                Navigation.findNavController(view).navigate(action);
             }
         });
         return view;

@@ -33,6 +33,17 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_place_traveler_details, container, false);
         place = PlaceTravelerDetailsFragmentArgs.fromBundle(getArguments()).getPlace();
+        placeName=view.findViewById(R.id.fragment_place_traveler_details_place_name);
+        placeAddress=view.findViewById(R.id.fragment_place_traveler_details_place_address);
+        destination= PlaceTravelerDetailsFragmentArgs.fromBundle(getArguments()).getTripDestination();
+        placeOpeningHours=view.findViewById(R.id.fragment_place_traveler_details_place_opening_hours);
+        placeWebsite=view.findViewById(R.id.fragment_place_traveler_details_place_website);
+        ratingBar=view.findViewById(R.id.fragment_place_traveler_details_place_rating);
+        placeImg=view.findViewById(R.id.fragment_place_traveler_details_image);
+        placePhone = view.findViewById(R.id.fragment_place_traveler_details_place_phone);
+        placeName.setText(place.getPlaceName());
+        placeAddress.setText(place.getPlaceFormattedAddress());
+        myLoadingDialog=new ProgressDialog(getContext());
         return view;
     }
 

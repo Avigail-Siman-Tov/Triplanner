@@ -245,8 +245,6 @@ public class PlacesListFragment extends Fragment {
             name = view.findViewById(R.id.place_list_row_name_trip);
             imagev = view.findViewById(R.id.place_list_row_image);
             imageBest = view.findViewById(R.id.place_list_row__image_best_place);
-
-
             button=view.findViewById(R.id.place_list_row_button);
             name.setText(place.getPlaceName());
             imagev.setTag(place.getPlaceImgUrl());

@@ -130,7 +130,7 @@ public class PlacesListFragment extends Fragment {
                 Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
                     @Override
                     public void onComplete(String  tripId) {
-//                        addPlaces(chosenPlaces1,0,tripId);
+                     addPlaces(chosenPlaces1,0,tripId);
                     }
                 });
             }
@@ -139,7 +139,30 @@ public class PlacesListFragment extends Fragment {
 
 
     }
+    public void addPlaces(ArrayList<PlacePlanning> chosenPlaces,int index,String tripId){
+        if(index==chosenPlaces.size()) {
 
+
+            Model.instance.getAllPlacesOfTrip(tripId, getContext(), new Model.GetAllPlacesOfTrip() {
+                @Override
+                public void onComplete(Place[] places) {
+                    myLoadingDialog.dismiss();
+//                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
+//                    Navigation.findNavController(getView()).navigate( action);
+                }
+            });
+
+        }
+        else {
+            Model.instance.addPlace(chosenPlaces.get(index), tripLocation, user.getProfile().getEmail(), tripId, getContext(),new Model.AddPlaceListener() {
+                @Override
+                public void onComplete(boolean isSuccess) {
+                    addPlaces(chosenPlaces, index + 1, tripId);
+                }
+
+            });
+        }
+    }
     private void chosenNumber(PlacePlanning[] arrayPlaces) {
         placesNum=0;
         for(int i=0; i<arrayPlaces.length;++i)

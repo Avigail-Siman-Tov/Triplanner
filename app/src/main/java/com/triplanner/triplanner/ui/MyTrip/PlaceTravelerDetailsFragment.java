@@ -1,6 +1,9 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,9 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,12 +26,21 @@ import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlaceTravelerDetailsFragment extends Fragment {
+
+    Button noteBtn ,moovitBtn;
+    private static final String WAZE_NOTE_URL = "https://waze.com/ul?q=%s";
     Place place;
     ImageView placeImg;
     TextView placeName,placeAddress,placeOpeningHours,placeWebsite,placePhone,editRating;
@@ -83,7 +97,74 @@ public class PlaceTravelerDetailsFragment extends Fragment {
                 Picasso.get().load(place.getPlaceImgUrl()).into(placeImg);
             }
         }
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String place = ""+placeName.getText(); // Replace with the actual place you want to note
+                String url = String.format(WAZE_NOTE_URL, Uri.encode(place));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        moovitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tripName = ""+placeName.getText();
+                openMoovitWithTripName(tripName);
+            }
+        });
         return view;
+    }
+
+    public void openMoovitWithTripName(final String tripName) {
+        AsyncTask<Void, Void, String> geocodingTask = new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                String apiKey = "AIzaSyD0kkF6p40unjsZFBE5YWWdElDlTqMK2Aw";
+                String geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + tripName + "&key=" + apiKey;
+                try {
+                    URL url = new URL(geocodingUrl);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    reader.close();
+                    return stringBuilder.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String jsonContent) {
+                if (jsonContent != null) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(jsonContent);
+                        JSONObject location = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+                        double destLat = location.getDouble("lat");
+                        double destLon = location.getDouble("lng");
+                        String uri = "moovit://directions?dest_lat=" + destLat + "&dest_lon=" + destLon + "&dest_name=" + tripName;
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Handle the case when the geocoding data couldn't be fetched properly.
+                    Log.e("MyFragment", "Error fetching geocoding data for tripName: " + tripName);
+                }
+            }
+        };
+
+        geocodingTask.execute();
     }
 
 

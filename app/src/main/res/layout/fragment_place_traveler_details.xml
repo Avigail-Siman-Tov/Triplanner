@@ -161,7 +161,8 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.066" />
 
             <TextView
                 android:id="@+id/fragment_place_traveler_details_place_edit_rating_user"
@@ -175,8 +176,37 @@
                 app:layout_constraintStart_toEndOf="@+id/fragment_place_traveler_details_place_rating_user"
                 app:layout_constraintTop_toTopOf="@+id/fragment_place_traveler_details_place_rating_user" />
 
+            <Button
+                android:id="@+id/btn_waze"
+                android:layout_width="81dp"
+                android:layout_height="82dp"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/logo_waze_icon"
+                android:text="waze"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.266"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/btn_moovit"
+                android:layout_width="66dp"
+                android:layout_height="80dp"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/moovit"
+                android:text="Moovit"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/blue"
+                tools:layout_editor_absoluteX="235dp"
+                tools:layout_editor_absoluteY="600dp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

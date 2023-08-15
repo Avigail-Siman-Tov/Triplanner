@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.R;
@@ -68,13 +69,26 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             String text = "<a href='"+weblink+"'> Link </a>";
             placeWebsite.setText(Html.fromHtml(text));
         }
+        String phone= place.getPlaceInternationalPhoneNumber();
+        if(phone!=null && phone!=""){
+            placePhone.setMovementMethod(LinkMovementMethod.getInstance());
+            String text = "<a href=\"tel:"+phone+"\""+">"+phone+"</a>";
+            placePhone.setText(Html.fromHtml(text));
+        }
+        ratingBar.setRating(place.getPlaceRating());
+        placeImg.setTag(place.getPlaceImgUrl());
+
+        if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
+            if (place.getPlaceImgUrl() == placeImg.getTag()) {
+                Picasso.get().load(place.getPlaceImgUrl()).into(placeImg);
+            }
+        }
         return view;
     }
 
 
     public PlaceTravelerDetailsFragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

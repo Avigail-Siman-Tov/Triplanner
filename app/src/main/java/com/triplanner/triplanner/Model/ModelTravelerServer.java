@@ -278,6 +278,16 @@ public class ModelTravelerServer {
 
 
     }
+    public  void editPlace(Place place,String tripDestination,Context context, Model.EditPlaceListener listener){
+        final String URL_EDIT_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/editTravelerPlace";
+        HttpCall httpCallPost = new HttpCall();
+        httpCallPost.setMethodtype(HttpCall.GET);
+        httpCallPost.setUrl(URL_EDIT_TRIP);
+        HashMap<String, String> paramsPlace = new HashMap<>();
+
+
+    }
+
 
 
 }

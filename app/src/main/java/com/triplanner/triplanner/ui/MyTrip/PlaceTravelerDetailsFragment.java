@@ -1,7 +1,9 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -115,6 +117,11 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
     public void openMoovitWithTripName(final String tripName) {

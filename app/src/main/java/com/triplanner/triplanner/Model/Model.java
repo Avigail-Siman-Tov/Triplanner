@@ -67,6 +67,10 @@ public class Model {
     public void getOpenHoursOfPlace(String placeId,Context context,Model.GetOpenHoursOfPlaceListener listener){
         travelerModelSQL.getOpenHoursOfPlace(placeId,context,listener);
     }
+    public void editPlace(Place place,String tripDestination,Context context, Model.EditPlaceListener listener){
+        travelerModelServer.editPlace(place,tripDestination,context,listener);
+    }
+
 
     public interface AddTripListener{
         void onComplete(String tripId);

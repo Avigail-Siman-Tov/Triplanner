@@ -70,7 +70,9 @@ public class Model {
     public void editPlace(Place place,String tripDestination,Context context, Model.EditPlaceListener listener){
         travelerModelServer.editPlace(place,tripDestination,context,listener);
     }
-
+    public void  getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
+        travelerModelServer.getTripUser(travelerMail,context,listener);
+    }
 
     public interface AddTripListener{
         void onComplete(String tripId);
@@ -108,5 +110,8 @@ public class Model {
 
     public interface GetOpenHoursOfPlaceListener{
         void onComplete(List<String>result);
+    }
+    public interface GetTripUserListener{
+        void onComplete(boolean isSuccess);
     }
 }

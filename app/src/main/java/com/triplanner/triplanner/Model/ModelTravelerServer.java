@@ -31,7 +31,7 @@ import java.util.List;
 public class ModelTravelerServer {
     private ModelTravelerSQL travelerModelSQL=new ModelTravelerSQL();
     public void addTraveler(Traveler traveler, List<FavoriteCategories>listFavoriteCategories, Context context, Model.AddTravelerListener listener) {
-        final String URL_ADD_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/addtraveler";
+        final String URL_ADD_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/addtraveler";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_ADD_TRIP);
@@ -67,7 +67,7 @@ public class ModelTravelerServer {
 
     }
     public void getTraveler(String travelerMail, Context context, Model.GetTravelerByEmailListener listener){
-        final String URL_GET_TRAVELER = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/getinfotraveler";
+        final String URL_GET_TRAVELER = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/getinfotraveler";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_GET_TRAVELER);
@@ -109,7 +109,7 @@ public class ModelTravelerServer {
 
     }
     public void editTraveler(Traveler traveler, List<FavoriteCategories>listFavoriteCategories, Context context, Model.EditTravelerListener listener) {
-        final String URL_EDIT_TRAVELER = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/editTraveler";
+        final String URL_EDIT_TRAVELER = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/editTraveler";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_EDIT_TRAVELER);
@@ -144,7 +144,7 @@ public class ModelTravelerServer {
 
     }
     public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,Context context, Model.AddTripListener listener) {
-        final String URL_ADD_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/addTrip";
+        final String URL_ADD_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/addTrip";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_ADD_TRIP);
@@ -187,7 +187,7 @@ public class ModelTravelerServer {
 
     }
     public void planTrip(ArrayList<PlacePlanning> chosenPlaces, int tripDays, Model.PlanTripListener listener ){
-        final String URL_PLAN_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/plantrip/samesizekmeans";
+        final String URL_PLAN_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/plantrip/samesizekmeans";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_PLAN_TRIP);
@@ -222,7 +222,7 @@ public class ModelTravelerServer {
     }
 
     public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener){
-        final String URL_ADD_Place = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/addPlace";
+        final String URL_ADD_Place = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/addPlace";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_ADD_Place);
@@ -279,7 +279,7 @@ public class ModelTravelerServer {
 
     }
     public  void editPlace(Place place,String tripDestination,Context context, Model.EditPlaceListener listener){
-        final String URL_EDIT_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/editTravelerPlace";
+        final String URL_EDIT_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/editTravelerPlace";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_EDIT_TRIP);
@@ -289,7 +289,7 @@ public class ModelTravelerServer {
     }
 
     public  void getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
-        final String URL_GET_TRIP = "https://triplanner-server-1d6bb31d6c46.herokuapp.com/traveler/getTripUser";
+        final String URL_GET_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/getTripUser";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_GET_TRIP);

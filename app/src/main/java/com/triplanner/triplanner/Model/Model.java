@@ -99,6 +99,9 @@ public class Model {
     public interface EditTravelerListener{
         void onComplete(String isSuccess);
     }
+    public interface EditPlaceListener{
+        void onComplete(boolean isSuccess);
+    }
     public interface PlanTripListener{
         void onComplete(ArrayList<PlacePlanning> chosenPlaces);
     }

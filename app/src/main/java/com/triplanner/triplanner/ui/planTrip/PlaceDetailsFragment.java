@@ -72,8 +72,8 @@ public class PlaceDetailsFragment extends Fragment {
         placePhone = view.findViewById(R.id.fragment_place_details_place_phone);
         String placeId=placePlanning.getPlaceID();
         placeFullDetails=getPlaceDetailsById(placeId);
-        noteBtn = view.findViewById(R.id.btn_waze);
-        moovitBtn = view.findViewById(R.id.btn_moovit);
+//        noteBtn = view.findViewById(R.id.btn_waze);
+//        moovitBtn = view.findViewById(R.id.btn_moovit);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -124,77 +124,77 @@ public class PlaceDetailsFragment extends Fragment {
             }
         });
 
-        noteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String place = ""+placeName.getText(); // Replace with the actual place you want to note
-                String url = String.format(WAZE_NOTE_URL, Uri.encode(place));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            }
-        });
+//        noteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String place = ""+placeName.getText(); // Replace with the actual place you want to note
+//                String url = String.format(WAZE_NOTE_URL, Uri.encode(place));
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                startActivity(intent);
+//            }
+//        });
 
-        moovitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tripName = ""+placeName.getText();
-                openMoovitWithTripName(tripName);
-            }
-        });
+//        moovitBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String tripName = ""+placeName.getText();
+//                openMoovitWithTripName(tripName);
+//            }
+//        });
 
 
         return view;
     }
 
-    public void openMoovitWithTripName(final String tripName) {
-        AsyncTask<Void, Void, String> geocodingTask = new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... voids) {
-                String apiKey = "AIzaSyD0kkF6p40unjsZFBE5YWWdElDlTqMK2Aw";
-                String geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + tripName + "&key=" + apiKey;
-                try {
-                    URL url = new URL(geocodingUrl);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        stringBuilder.append(line);
-                    }
-                    reader.close();
-                    return stringBuilder.toString();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(String jsonContent) {
-                if (jsonContent != null) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(jsonContent);
-                        JSONObject location = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
-                        double destLat = location.getDouble("lat");
-                        double destLon = location.getDouble("lng");
-                        String uri = "moovit://directions?dest_lat=" + destLat + "&dest_lon=" + destLon + "&dest_name=" + tripName;
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(uri));
-                        startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    // Handle the case when the geocoding data couldn't be fetched properly.
-                    Log.e("MyFragment", "Error fetching geocoding data for tripName: " + tripName);
-                }
-            }
-        };
-
-        geocodingTask.execute();
-    }
+//    public void openMoovitWithTripName(final String tripName) {
+//        AsyncTask<Void, Void, String> geocodingTask = new AsyncTask<Void, Void, String>() {
+//            @Override
+//            protected String doInBackground(Void... voids) {
+//                String apiKey = "AIzaSyD0kkF6p40unjsZFBE5YWWdElDlTqMK2Aw";
+//                String geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + tripName + "&key=" + apiKey;
+//                try {
+//                    URL url = new URL(geocodingUrl);
+//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("GET");
+//                    connection.connect();
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        stringBuilder.append(line);
+//                    }
+//                    reader.close();
+//                    return stringBuilder.toString();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String jsonContent) {
+//                if (jsonContent != null) {
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(jsonContent);
+//                        JSONObject location = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+//                        double destLat = location.getDouble("lat");
+//                        double destLon = location.getDouble("lng");
+//                        String uri = "moovit://directions?dest_lat=" + destLat + "&dest_lon=" + destLon + "&dest_name=" + tripName;
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        intent.setData(Uri.parse(uri));
+//                        startActivity(intent);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    // Handle the case when the geocoding data couldn't be fetched properly.
+//                    Log.e("MyFragment", "Error fetching geocoding data for tripName: " + tripName);
+//                }
+//            }
+//        };
+//
+//        geocodingTask.execute();
+//    }
 
     private PlacePlanning getPlaceDetailsById(String placeId) {
         PlacePlanning p=new PlacePlanning();

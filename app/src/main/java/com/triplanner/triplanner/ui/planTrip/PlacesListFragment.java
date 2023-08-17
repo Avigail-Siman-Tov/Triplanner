@@ -137,7 +137,6 @@ public class PlacesListFragment extends Fragment {
         });
 
 
-
     }
     public void addPlaces(ArrayList<PlacePlanning> chosenPlaces,int index,String tripId){
         if(index==chosenPlaces.size()) {
@@ -147,8 +146,8 @@ public class PlacesListFragment extends Fragment {
                 @Override
                 public void onComplete(Place[] places) {
                     myLoadingDialog.dismiss();
-//                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
-//                    Navigation.findNavController(getView()).navigate( action);
+                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
+                    Navigation.findNavController(getView()).navigate( action);
                 }
             });
 

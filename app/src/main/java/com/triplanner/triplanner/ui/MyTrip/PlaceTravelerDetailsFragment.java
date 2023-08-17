@@ -69,6 +69,8 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         placeName.setText(place.getPlaceName());
         placeAddress.setText(place.getPlaceFormattedAddress());
         myLoadingDialog=new ProgressDialog(getContext());
+        noteBtn = view.findViewById(R.id.btn_waze);
+        moovitBtn = view.findViewById(R.id.btn_moovit);
         Model.instance.getOpenHoursOfPlace(place.getPlaceID(), getContext(), new Model.GetOpenHoursOfPlaceListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

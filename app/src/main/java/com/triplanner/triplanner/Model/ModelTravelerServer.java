@@ -296,7 +296,28 @@ public class ModelTravelerServer {
         HashMap<String, String> paramsPlace = new HashMap<>();
         paramsPlace.put("travelerMail", travelerMail);
         httpCallPost.setParams(paramsPlace);
+        new HttpRequest() {
+            @Override
+            public void onResponse(String response) {
+                super.onResponse(response);
 
+                try {
+                    if (response != "false") {
+                        JSONObject object  = new JSONObject(response);
+                        JSONArray trips = (JSONArray) object.get("trips");
+                        JSONArray placeTraveler = (JSONArray)object.get("placeTraveler") ;
+
+                        listener.onComplete(true);
+                    }
+                    else{
+                        listener.onComplete(false);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(httpCallPost);
 
     }
 

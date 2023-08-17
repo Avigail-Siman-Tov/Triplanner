@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ import java.util.stream.Collectors;
 
 public class PlaceTravelerDetailsFragment extends Fragment {
 
-    Button noteBtn ,moovitBtn;
+    ImageButton wazeBtn ,moovitBtn;
     private static final String WAZE_NOTE_URL = "https://waze.com/ul?q=%s";
     Place place;
     ImageView placeImg;
@@ -69,7 +70,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         placeName.setText(place.getPlaceName());
         placeAddress.setText(place.getPlaceFormattedAddress());
         myLoadingDialog=new ProgressDialog(getContext());
-        noteBtn = view.findViewById(R.id.btn_waze);
+        wazeBtn = view.findViewById(R.id.btn_waze);
         moovitBtn = view.findViewById(R.id.btn_moovit);
         Model.instance.getOpenHoursOfPlace(place.getPlaceID(), getContext(), new Model.GetOpenHoursOfPlaceListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -101,7 +102,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
                 Picasso.get().load(place.getPlaceImgUrl()).into(placeImg);
             }
         }
-        noteBtn.setOnClickListener(new View.OnClickListener() {
+        wazeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String place = ""+placeName.getText(); // Replace with the actual place you want to note

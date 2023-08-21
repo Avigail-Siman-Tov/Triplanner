@@ -284,7 +284,13 @@ public class ModelTravelerServer {
         httpCallPost.setMethodtype(HttpCall.GET);
         httpCallPost.setUrl(URL_EDIT_TRIP);
         HashMap<String, String> paramsPlace = new HashMap<>();
-
+        paramsPlace.put("travelerMail", place.getTravelerMail());
+        paramsPlace.put("placeId", place.getPlaceID());
+        paramsPlace.put("tripId", place.getId_trip());
+        paramsPlace.put("placeDayInTrip", String.valueOf(place.getDay_in_trip()));
+        paramsPlace.put("travelerPlaceRating", String.valueOf(place.getTravelerRating()));
+        paramsPlace.put("tripDestination", tripDestination);
+        httpCallPost.setParams(paramsPlace);
 
     }
 

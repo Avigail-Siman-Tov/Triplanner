@@ -306,7 +306,22 @@ public class ModelTravelerServer {
                         JSONObject object  = new JSONObject(response);
                         JSONArray trips = (JSONArray) object.get("trips");
                         JSONArray placeTraveler = (JSONArray)object.get("placeTraveler") ;
+                        for(int k=0;k<trips.length();++k){
+                            JSONObject trip = trips.getJSONObject(k);
+                            String id_trip = trip.get("tripId").toString();
+                            String travelerMail=  trip.get("travelerMail").toString();
+                            String tripDestination = trip.get("tripDestination").toString();
+                            String tripName = trip.get("tripName").toString();
+                            int tripDaysNumber= Integer.parseInt(trip.get("tripDaysNumber").toString());
+                            String date= trip.get("tripDate").toString();
+                            Trip myTrip=new Trip(id_trip,date,travelerMail,tripDestination,tripName,tripDaysNumber);
+                            travelerModelSQL.addTrip(myTrip, context, new Model.AddTripListener() {
+                                @Override
+                                public void onComplete(String tripId) {
 
+                                }
+                            });
+                        }
                         listener.onComplete(true);
                     }
                     else{

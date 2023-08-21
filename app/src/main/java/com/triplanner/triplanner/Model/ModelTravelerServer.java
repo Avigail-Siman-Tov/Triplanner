@@ -322,6 +322,39 @@ public class ModelTravelerServer {
                                 }
                             });
                         }
+                        for(int i=0;i<placeTraveler.length();++i){
+                            JSONObject placeObject= placeTraveler.getJSONObject(i);
+                            String placeID = placeObject.get("placeId").toString();
+                            String placeName = placeObject.get("placeName").toString();
+                            double placeLocationLat = Double.valueOf(placeObject.get("placeLocationLat").toString());
+                            double placeLocationLng = Double.valueOf(placeObject.get("placeLocationLng").toString());
+                            String placeFormattedAddress = placeObject.get("placeFormattedAddress").toString();
+                            String placeInternationalPhoneNumber=placeObject.get("placeInternationalPhoneNumber").toString();
+                            float placeRating = Float.parseFloat(placeObject.get("placeRating").toString());
+                            String placeWebsite = placeObject.get("placeWebsite").toString();
+                            String placeImgUrl = placeObject.get("placeImgUrl").toString();
+                            int day_in_trip = Integer.parseInt(placeObject.get("placeDayInTrip").toString());
+                            String travelerMail = placeObject.get("travelerMail").toString();
+                            String id_trip = placeObject.get("tripId").toString();
+                            float travelerRating = Float.parseFloat(placeObject.get("travelerPlaceRating").toString());
+                            JSONArray openHours = placeObject.getJSONArray("placeOpeningHours");
+                            Place place= new Place(placeID,placeName,placeLocationLat,placeLocationLng,placeFormattedAddress,placeInternationalPhoneNumber,placeRating,placeWebsite,placeImgUrl,day_in_trip,travelerMail,id_trip);
+                            place.setTravelerRating(travelerRating);
+                            List<OpenHours> myOpenHours=null;
+                            if(openHours.length()>0) {
+                                myOpenHours= new ArrayList<>();
+                                for (int j = 0; j < openHours.length(); ++j) {
+                                    myOpenHours.add(new OpenHours(openHours.get(j).toString(), travelerMail));
+                                }
+                            }
+
+                            travelerModelSQL.addPlace(place, myOpenHours, context, new Model.AddTripListener() {
+                                @Override
+                                public void onComplete(String tripId) {
+
+                                }
+                            });
+                        }
                         listener.onComplete(true);
                     }
                     else{

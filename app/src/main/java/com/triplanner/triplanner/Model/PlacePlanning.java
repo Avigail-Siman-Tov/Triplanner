@@ -7,6 +7,7 @@ import java.util.List;
 public class PlacePlanning extends PlaceDetails implements Parcelable {
     private boolean status;
     private int day_in_trip;
+    private String isRecommended;
 
     public PlacePlanning() {
     }
@@ -15,13 +16,13 @@ public class PlacePlanning extends PlaceDetails implements Parcelable {
         super(placeID, placeName, placeLocationLat, placeLocationLng, placeFormattedAddress, placeInternationalPhoneNumber,  placeOpeningHours, placeRating,  placeWebsite,  placeImgUrl);
         this.status=status;
         this.day_in_trip = 0;
-
+        this.isRecommended="0";
     }
 
     protected PlacePlanning(Parcel in) {
-
         status = in.readByte() != 0;
         day_in_trip = in.readInt();
+        isRecommended = in.readString();
     }
 
 
@@ -54,6 +55,7 @@ public class PlacePlanning extends PlaceDetails implements Parcelable {
         super.writeToParcel(dest, flags);
         dest.writeByte((byte) (status ? 1 : 0));
         dest.writeInt(day_in_trip);
+        dest.writeString(isRecommended);
     }
     public int getDay_in_trip() {
         return day_in_trip;
@@ -63,5 +65,11 @@ public class PlacePlanning extends PlaceDetails implements Parcelable {
         this.day_in_trip = day_in_trip;
     }
 
+    public String isRecommended() {
+        return isRecommended;
+    }
 
+    public void setRecommended(String recommended) {
+        isRecommended = recommended;
+    }
 }

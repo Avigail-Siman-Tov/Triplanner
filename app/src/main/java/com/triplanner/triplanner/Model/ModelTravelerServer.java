@@ -291,6 +291,30 @@ public class ModelTravelerServer {
         paramsPlace.put("travelerPlaceRating", String.valueOf(place.getTravelerRating()));
         paramsPlace.put("tripDestination", tripDestination);
         httpCallPost.setParams(paramsPlace);
+        new HttpRequest() {
+            @Override
+            public void onResponse(String response) {
+                super.onResponse(response);
+
+                try {
+                    if (response != "false") {
+                        travelerModelSQL.editPlace(place, context, new Model.EditPlaceListener() {
+                            @Override
+                            public void onComplete(boolean isSuccess) {
+                                listener.onComplete(true);
+                            }
+                        });
+                    }
+                    else{
+                        listener.onComplete(false);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(httpCallPost);
+    }
 
     }
 

@@ -316,7 +316,7 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
     }
 
-    }
+
 
     public  void getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
         final String URL_GET_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/getTripUser";

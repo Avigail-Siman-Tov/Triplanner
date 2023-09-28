@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,13 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.R;
@@ -32,6 +40,7 @@ public class ListTripInDayFragment extends Fragment {
     ListView listViewPlaces;
     String destination;
     MyAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +48,9 @@ public class ListTripInDayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list_trip_in_day, container, false);
         listViewPlaces =view.findViewById(R.id.fragment_list_trip_in_day_list_view);
         arrayPlaces =  ListTripInDayFragmentArgs.fromBundle(getArguments()).getArrPlaces();
+        for(int i=0 ; i<arrayPlaces.length;i++){
+            Log.d("mylog","place:"+arrayPlaces[i].getPlaceFormattedAddress());
+        }
         destination= ListTripInDayFragmentArgs.fromBundle(getArguments()).getTripDestination();
         numDay = view.findViewById(R.id.fragment_list_trip_in_day_num_day);
         numDay.setText("Day "+String.valueOf(arrayPlaces[0].getDay_in_trip()));
@@ -53,6 +65,8 @@ public class ListTripInDayFragment extends Fragment {
         });
         return view;
     }
+
+
 
 
     class MyAdapter extends BaseAdapter {
@@ -102,5 +116,7 @@ public class ListTripInDayFragment extends Fragment {
         }
 
     }
+
+
 
 }

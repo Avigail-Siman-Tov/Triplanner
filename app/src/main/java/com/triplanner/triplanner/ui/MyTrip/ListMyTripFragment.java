@@ -1,5 +1,6 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,12 +31,14 @@ public class ListMyTripFragment extends Fragment {
     TextView name,destination,numDays,date;
     ListView listViewTrip;
     MyAdapter adapter;
+    Button btn_map;
     User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragmen
         View view=inflater.inflate(R.layout.fragment_list_my_trip, container, false);
+        btn_map = view.findViewById(R.id.btn_map);
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         user = app.currentUser();
@@ -60,7 +64,6 @@ public class ListMyTripFragment extends Fragment {
                 });
             }
         });
-
         return view;
     }
     class MyAdapter extends BaseAdapter {

@@ -3,14 +3,13 @@ plugins {
     id "androidx.navigation.safeargs"
 }
 apply plugin: 'realm-android'
-//apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.triplanner.triplanner"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -65,4 +64,9 @@ dependencies {
     implementation("androidx.room:room-runtime:2.2.0-rc01")
     implementation 'androidx.room:room-runtime:2.2.5'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+
 }

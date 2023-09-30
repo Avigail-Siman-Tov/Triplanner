@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.MyTrip.ListTripInDayFragment"
     android:paddingBottom="?attr/actionBarSize">
 
-
     <TextView
         android:id="@+id/fragment_list_trip_in_day_num_day"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
@@ -21,33 +21,25 @@
         android:textColor="@color/blue"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="Day Number"/>
 
+    <!-- Your existing ListView -->
     <ListView
         android:id="@+id/fragment_list_trip_in_day_list_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/fragment_list_trip_in_day_num_day"
-        app:layout_constraintBottom_toTopOf="@id/mapView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="List View"/>
 
+    <!-- Your existing MapView -->
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="20dp"
         app:liteMode="true"
-        app:layout_constraintTop_toBottomOf="@id/fragment_list_trip_in_day_list_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="Map View"
-         />
+        android:contentDescription="Map View"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

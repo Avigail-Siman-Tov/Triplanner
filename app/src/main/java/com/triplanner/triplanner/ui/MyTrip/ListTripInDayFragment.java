@@ -1,14 +1,8 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,47 +11,40 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.R;
-
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TravelMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListTripInDayFragment extends Fragment {
-
     TextView name,numDay;
     ImageView imagev;
     Place[] arrayPlaces;
-
     ListView listViewPlaces;
     String destination;
     MyAdapter adapter;
-
     private MapView mapView;
     private GoogleMap googleMap;
 
     private static final String API_KEY = "AIzaSyANQj_r2MAGPHMi7JZLlxyT80AysMRV3IA";
     private static final GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(API_KEY).build();
+    private List<Polyline> polylines = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,8 +71,6 @@ public class ListTripInDayFragment extends Fragment {
 
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
-
         mapView.getMapAsync(gMap -> {
             googleMap = gMap;
             // Set your preferred map settings here if needed.
@@ -93,30 +78,51 @@ public class ListTripInDayFragment extends Fragment {
         });
         return view;
     }
-
     private void drawRoutes() {
-        // Define your three places (LatLng objects).
-        LatLng placeA = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng()); // Replace with your coordinates
-        LatLng placeB = new LatLng(arrayPlaces[1].getPlaceLocationLat(), arrayPlaces[1].getPlaceLocationLng()); // Replace with your coordinates
-        LatLng placeC = new LatLng(arrayPlaces[2].getPlaceLocationLat(), arrayPlaces[2].getPlaceLocationLng());   // Replace with your coordinates
+        // Define and initialize the LatLng array for places.
+        LatLng[] placeLatLngs = new LatLng[arrayPlaces.length];
 
-        // Add markers for the places on the map.
-        googleMap.addMarker(new MarkerOptions().position(placeA).title(arrayPlaces[0].getPlaceName()));
-        googleMap.addMarker(new MarkerOptions().position(placeB).title(arrayPlaces[1].getPlaceName()));
-        googleMap.addMarker(new MarkerOptions().position(placeC).title(arrayPlaces[2].getPlaceName()));
+        // Add markers for the places on the map and calculate/display routes.
+        for (int i = 0; i < arrayPlaces.length; i++) {
+            placeLatLngs[i] = new LatLng(arrayPlaces[i].getPlaceLocationLat(), arrayPlaces[i].getPlaceLocationLng());
+            googleMap.addMarker(new MarkerOptions().position(placeLatLngs[i]).title(arrayPlaces[i].getPlaceName()));
+            // Calculate and display routes between this place and all previous places.
+            for (int j = 0; j < i; j++) {
+                calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
+            }
+        }
 
-        // Calculate and display routes between the places.
-        calculateAndDisplayRoute(placeA, placeB);
-        calculateAndDisplayRoute(placeB, placeC);
+//        // Define your three places (LatLng objects).
+//        LatLng placeA = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
+//        LatLng placeB = new LatLng(arrayPlaces[1].getPlaceLocationLat(), arrayPlaces[1].getPlaceLocationLng());
+//        LatLng placeC = new LatLng(arrayPlaces[2].getPlaceLocationLat(), arrayPlaces[2].getPlaceLocationLng());
+//
+//        // Add markers for the places on the map.
+//        googleMap.addMarker(new MarkerOptions().position(placeA).title(arrayPlaces[0].getPlaceName()));
+//        googleMap.addMarker(new MarkerOptions().position(placeB).title(arrayPlaces[1].getPlaceName()));
+//        googleMap.addMarker(new MarkerOptions().position(placeC).title(arrayPlaces[2].getPlaceName()));
+//
+//        // Calculate and display routes between the places.
+//        calculateAndDisplayRoute(placeA, placeB);
+//        calculateAndDisplayRoute(placeB, placeC);
 //        calculateAndDisplayRoute(placeA, placeC);
 
-        // Zoom to fit all markers
+        // Create a LatLngBounds.Builder to include all points in the routes
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(placeA);
-        builder.include(placeB);
-        builder.include(placeC);
+
+        // Include all points in the polylines
+        for (Polyline polyline : polylines) {
+            for (LatLng point : polyline.getPoints()) {
+                builder.include(point);
+            }
+        }
+
+        // Build the bounds
         LatLngBounds bounds = builder.build();
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
+        // Calculate padding to ensure the entire route is visible
+        int padding = 100; // Adjust this value as needed
+        // Zoom to fit all markers and polylines with padding
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
     }
 
     private void calculateAndDisplayRoute(LatLng origin, LatLng destination) {
@@ -142,12 +148,14 @@ public class ListTripInDayFragment extends Fragment {
                         .width(10)
                         .color(0xFF2196F3);
 
-                googleMap.addPolyline(polylineOptions);
+                Polyline polyline = googleMap.addPolyline(polylineOptions);
+                polylines.add(polyline); // Add the polyline to the collection
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void onResume() {
@@ -172,9 +180,6 @@ public class ListTripInDayFragment extends Fragment {
         super.onLowMemory();
         mapView.onLowMemory();
     }
-
-
-
 
     class MyAdapter extends BaseAdapter {
         @Override
@@ -221,9 +226,5 @@ public class ListTripInDayFragment extends Fragment {
 
             return view;
         }
-
     }
-
-
-
 }

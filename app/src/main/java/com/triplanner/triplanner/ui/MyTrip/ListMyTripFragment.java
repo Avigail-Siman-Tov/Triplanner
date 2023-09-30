@@ -31,14 +31,12 @@ public class ListMyTripFragment extends Fragment {
     TextView name,destination,numDays,date;
     ListView listViewTrip;
     MyAdapter adapter;
-    Button btn_map;
     User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragmen
         View view=inflater.inflate(R.layout.fragment_list_my_trip, container, false);
-        btn_map = view.findViewById(R.id.btn_map);
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         user = app.currentUser();

@@ -40,10 +40,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_reset_password_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="16dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="50dp"
                 android:layout_marginEnd="32dp"
                 app:boxBackgroundMode="none"
                 app:boxStrokeColor="@color/black"

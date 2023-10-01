@@ -74,7 +74,7 @@
                 android:layout_marginBottom="16dp"
                 android:focusable="false"
                 android:text="ADD"
-                app:backgroundTint="@color/blue"
+                app:backgroundTint="#29AEBF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/place_list_row_rating"
                 app:layout_constraintStart_toStartOf="@+id/place_list_row_rating" />

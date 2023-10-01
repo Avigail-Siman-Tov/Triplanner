@@ -9,17 +9,17 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#75FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="#75FFFFFF">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_login_input_password"
@@ -70,7 +70,8 @@
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/blue"
+                app:backgroundTint="#29AEBF"
+                app:cornerRadius="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_login_forget_password" />
@@ -82,8 +83,8 @@
                 android:layout_marginTop="8dp"
                 android:enabled="true"
                 android:text="Create New Account"
-                android:textSize="18sp"
                 android:textColor="#29AEBF"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/activity_login_btn_signin"
                 app:layout_constraintTop_toBottomOf="@+id/activity_login_btn_signin" />
@@ -120,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="188dp"
                 android:layout_marginEnd="50dp"
                 android:text="Login"
                 android:textColor="#29AEBF"
@@ -129,6 +130,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="170dp"
+                android:layout_height="115dp"
+                app:srcCompat="@drawable/login"
+                tools:layout_editor_absoluteX="120dp"
+                tools:layout_editor_absoluteY="73dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

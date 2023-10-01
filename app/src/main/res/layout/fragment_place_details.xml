@@ -118,7 +118,7 @@
                 android:layout_marginBottom="60dp"
                 android:text="ADD"
                 android:textColor="@color/white"
-                app:backgroundTint="@color/blue"
+                app:backgroundTint="#29AEBF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResetPassActivity"
-    android:background="@drawable/img_back">
+    android:background="@drawable/background2">
 
     <androidx.cardview.widget.CardView
         android:layout_width="301dp"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:text="Reset Password"
-                android:textColor="@color/black"
+                android:textColor="#29AEBF"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,12 +40,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_reset_password_password"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="32dp"
+                app:boxBackgroundMode="none"
                 app:boxStrokeColor="@color/black"
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                     android:id="@+id/fragment_reset_password_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password "
+                    android:hint="Password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +94,9 @@
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/blue"
+                app:backgroundTint="#29AEBF"
+                app:cardCornerRadius="80dp"
+                app:cornerRadius="70dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_reset_password_verify_password" />

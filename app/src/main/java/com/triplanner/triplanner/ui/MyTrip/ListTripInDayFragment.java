@@ -73,7 +73,7 @@ public class ListTripInDayFragment extends Fragment {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(gMap -> {
             googleMap = gMap;
-            // Set your preferred map settings here if needed.
+                // Set your preferred map settings here if needed.
             drawRoutes();
         });
         return view;
@@ -87,11 +87,14 @@ public class ListTripInDayFragment extends Fragment {
             placeLatLngs[i] = new LatLng(arrayPlaces[i].getPlaceLocationLat(), arrayPlaces[i].getPlaceLocationLng());
             googleMap.addMarker(new MarkerOptions().position(placeLatLngs[i]).title(arrayPlaces[i].getPlaceName()));
             // Calculate and display routes between this place and all previous places.
-            for (int j = 0; j < i; j++) {
-                calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
+            if(arrayPlaces.length > 1){
+                for (int j = 0; j < i; j++) {
+                    calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
+                }
             }
         }
 
+        LatLngBounds bounds = null;
 //        // Define your three places (LatLng objects).
 //        LatLng placeA = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
 //        LatLng placeB = new LatLng(arrayPlaces[1].getPlaceLocationLat(), arrayPlaces[1].getPlaceLocationLng());
@@ -107,19 +110,31 @@ public class ListTripInDayFragment extends Fragment {
 //        calculateAndDisplayRoute(placeB, placeC);
 //        calculateAndDisplayRoute(placeA, placeC);
 
-        // Create a LatLngBounds.Builder to include all points in the routes
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        if(arrayPlaces.length > 1){
+            // Create a LatLngBounds.Builder to include all points in the routes
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-        // Include all points in the polylines
-        for (Polyline polyline : polylines) {
-            for (LatLng point : polyline.getPoints()) {
-                builder.include(point);
+            // Include all points in the polylines
+            for (Polyline polyline : polylines) {
+                for (LatLng point : polyline.getPoints()) {
+                    builder.include(point);
+                }
+            }
+
+            // Build the bounds
+            bounds = builder.build();
+            // Calculate padding to ensure the entire route is visible
+
+
+        }
+        else{
+            if(arrayPlaces.length == 1){
+                LatLng singleLocation = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
+                bounds = new LatLngBounds(singleLocation, singleLocation);
+
+
             }
         }
-
-        // Build the bounds
-        LatLngBounds bounds = builder.build();
-        // Calculate padding to ensure the entire route is visible
         int padding = 100; // Adjust this value as needed
         // Zoom to fit all markers and polylines with padding
         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));

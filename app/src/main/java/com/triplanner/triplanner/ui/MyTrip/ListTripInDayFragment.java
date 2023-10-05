@@ -78,41 +78,91 @@ public class ListTripInDayFragment extends Fragment {
         });
         return view;
     }
+//    private void drawRoutes() {
+//        // Define and initialize the LatLng array for places.
+//        LatLng[] placeLatLngs = new LatLng[arrayPlaces.length];
+//
+//        // Add markers for the places on the map and calculate/display routes.
+//        for (int i = 0; i < arrayPlaces.length; i++) {
+//            placeLatLngs[i] = new LatLng(arrayPlaces[i].getPlaceLocationLat(), arrayPlaces[i].getPlaceLocationLng());
+//            googleMap.addMarker(new MarkerOptions().position(placeLatLngs[i]).title(arrayPlaces[i].getPlaceName()));
+//            // Calculate and display routes between this place and all previous places.
+//            if(arrayPlaces.length > 1){
+//                for (int j = 0; j < i; j++) {
+//                    calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
+//                }
+//            }
+//        }
+//
+//        LatLngBounds bounds = null;
+////        // Define your three places (LatLng objects).
+////        LatLng placeA = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
+////        LatLng placeB = new LatLng(arrayPlaces[1].getPlaceLocationLat(), arrayPlaces[1].getPlaceLocationLng());
+////        LatLng placeC = new LatLng(arrayPlaces[2].getPlaceLocationLat(), arrayPlaces[2].getPlaceLocationLng());
+////
+////        // Add markers for the places on the map.
+////        googleMap.addMarker(new MarkerOptions().position(placeA).title(arrayPlaces[0].getPlaceName()));
+////        googleMap.addMarker(new MarkerOptions().position(placeB).title(arrayPlaces[1].getPlaceName()));
+////        googleMap.addMarker(new MarkerOptions().position(placeC).title(arrayPlaces[2].getPlaceName()));
+////
+////        // Calculate and display routes between the places.
+////        calculateAndDisplayRoute(placeA, placeB);
+////        calculateAndDisplayRoute(placeB, placeC);
+////        calculateAndDisplayRoute(placeA, placeC);
+//
+//        if(arrayPlaces.length > 1){
+//            // Create a LatLngBounds.Builder to include all points in the routes
+//            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//
+//            // Include all points in the polylines
+//            for (Polyline polyline : polylines) {
+//                for (LatLng point : polyline.getPoints()) {
+//                    builder.include(point);
+//                }
+//            }
+//
+//            // Build the bounds
+//            bounds = builder.build();
+//            // Calculate padding to ensure the entire route is visible
+//
+//
+//        }
+//        else{
+//            if(arrayPlaces.length == 1){
+//                LatLng singleLocation = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
+//                bounds = new LatLngBounds(singleLocation, singleLocation);
+//
+//
+//            }
+//        }
+//        int padding = 100; // Adjust this value as needed
+//        // Zoom to fit all markers and polylines with padding
+//        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
+//    }
+
     private void drawRoutes() {
         // Define and initialize the LatLng array for places.
         LatLng[] placeLatLngs = new LatLng[arrayPlaces.length];
 
-        // Add markers for the places on the map and calculate/display routes.
+        // Add markers for the places on the map.
         for (int i = 0; i < arrayPlaces.length; i++) {
             placeLatLngs[i] = new LatLng(arrayPlaces[i].getPlaceLocationLat(), arrayPlaces[i].getPlaceLocationLng());
             googleMap.addMarker(new MarkerOptions().position(placeLatLngs[i]).title(arrayPlaces[i].getPlaceName()));
-            // Calculate and display routes between this place and all previous places.
-            if(arrayPlaces.length > 1){
+        }
+
+        LatLngBounds bounds;
+
+        // Create a LatLngBounds.Builder to include all points in the routes
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+        // Check if there are more than 1 place before calculating/displaying routes
+        if (arrayPlaces.length > 1) {
+            // Calculate and display routes between places
+            for (int i = 1; i < arrayPlaces.length; i++) {
                 for (int j = 0; j < i; j++) {
                     calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
                 }
             }
-        }
-
-        LatLngBounds bounds = null;
-//        // Define your three places (LatLng objects).
-//        LatLng placeA = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
-//        LatLng placeB = new LatLng(arrayPlaces[1].getPlaceLocationLat(), arrayPlaces[1].getPlaceLocationLng());
-//        LatLng placeC = new LatLng(arrayPlaces[2].getPlaceLocationLat(), arrayPlaces[2].getPlaceLocationLng());
-//
-//        // Add markers for the places on the map.
-//        googleMap.addMarker(new MarkerOptions().position(placeA).title(arrayPlaces[0].getPlaceName()));
-//        googleMap.addMarker(new MarkerOptions().position(placeB).title(arrayPlaces[1].getPlaceName()));
-//        googleMap.addMarker(new MarkerOptions().position(placeC).title(arrayPlaces[2].getPlaceName()));
-//
-//        // Calculate and display routes between the places.
-//        calculateAndDisplayRoute(placeA, placeB);
-//        calculateAndDisplayRoute(placeB, placeC);
-//        calculateAndDisplayRoute(placeA, placeC);
-
-        if(arrayPlaces.length > 1){
-            // Create a LatLngBounds.Builder to include all points in the routes
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
             // Include all points in the polylines
             for (Polyline polyline : polylines) {
@@ -120,25 +170,24 @@ public class ListTripInDayFragment extends Fragment {
                     builder.include(point);
                 }
             }
+        } else if (arrayPlaces.length == 1) {
+            // If there is only one place, set an appropriate zoom level to display it
+            LatLng placeLatLng = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
+            builder.include(placeLatLng);
 
-            // Build the bounds
-            bounds = builder.build();
-            // Calculate padding to ensure the entire route is visible
-
-
+            // Set a fixed zoom level (e.g., 15) for a single place
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 15));
         }
-        else{
-            if(arrayPlaces.length == 1){
-                LatLng singleLocation = new LatLng(arrayPlaces[0].getPlaceLocationLat(), arrayPlaces[0].getPlaceLocationLng());
-                bounds = new LatLngBounds(singleLocation, singleLocation);
 
+        // Build the bounds
+        bounds = builder.build();
 
-            }
-        }
         int padding = 100; // Adjust this value as needed
         // Zoom to fit all markers and polylines with padding
         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
     }
+
+
 
     private void calculateAndDisplayRoute(LatLng origin, LatLng destination) {
         DirectionsApiRequest request = DirectionsApi.newRequest(geoApiContext)

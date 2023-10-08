@@ -176,6 +176,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fragment_place_traveler_details_place_rating_user" />
 
+            <RatingBar
+                android:id="@+id/fragment_place_traveler_details_place_rating_user"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:numStars="5"
+                android:theme="@style/RatingBar"
+                app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                app:layout_constraintStart_toEndOf="@+id/textView23"
+                app:layout_constraintTop_toTopOf="@+id/textView23" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -195,18 +207,18 @@
             android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/circle_background"
-            android:src="@drawable/icon_waze_round"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_waze_round" />
 
         <ImageButton
             android:id="@+id/btn_moovit"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/circle_background"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_moovit_round"
-            android:layout_marginLeft="20dp"/>
+            android:src="@drawable/icon_moovit_round" />
 
     </LinearLayout>
 

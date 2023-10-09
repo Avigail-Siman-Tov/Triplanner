@@ -49,7 +49,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/trip_in_day_row_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/trip_in_day_row_rating"/>
+
+            <RatingBar
+                android:id="@+id/trip_in_day_row_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:saveEnabled="false"
+                android:stepSize="0.2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/trip_in_day_row_name_trip"
+                app:layout_constraintHorizontal_bias="0.541"
+                app:layout_constraintStart_toStartOf="@+id/trip_in_day_row_name_trip" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

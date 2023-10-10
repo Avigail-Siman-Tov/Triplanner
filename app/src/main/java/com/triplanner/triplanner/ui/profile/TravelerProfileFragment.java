@@ -56,6 +56,15 @@ public class TravelerProfileFragment extends Fragment {
             "church","city_hall","library","mosque", "synagogue"
     };
     @RequiresApi(api = Build.VERSION_CODES.N)
+    public void onSelectImageClick(View view) {
+        if (isNetworkConnected()) {
+            // Launch the image selection
+            Intent imagePickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
+        } else {
+            Toast.makeText(getContext(), "Error! Connect to the Internet", Toast.LENGTH_SHORT).show();
+        }
+    }
    public View onCreateView(@NonNull LayoutInflater inflater,
                                ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_traveler_profile, container, false);
@@ -76,6 +85,7 @@ public class TravelerProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(TravelerProfileFragmentDirections.actionNavProfileToLogoutActivity());
             }
         });
+
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,11 +114,11 @@ public class TravelerProfileFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (isNetworkConnected()) {
-                            // Add the following lines to launch the image selection
+                            // Launch the image selection
                             Intent imagePickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
                         } else {
-                            Toast.makeText(getContext(), "Error! Connect to Internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Error! Connect to the Internet", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background8"
     tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/icon_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login4"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#75FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,13 +33,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_login_input_password"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="50dp"
-                app:boxBackgroundColor="@null"
+                app:boxBackgroundColor="@android:color/transparent"
                 app:boxStrokeColor="@color/blue"
                 app:hintTextColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="@+id/activity_login_input_mail"
@@ -40,7 +50,7 @@
                     android:id="@+id/login_input_password1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                    android:background="@android:color/transparent"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:textSize="18sp" />
@@ -91,14 +101,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_login_input_mail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="51dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="50dp"
-                android:background="@null"
-                app:boxBackgroundColor="@null"
+                app:boxBackgroundColor="@android:color/transparent"
                 app:boxStrokeColor="@color/blue"
                 app:hintTextColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,19 +118,20 @@
                     android:id="@+id/activity_login_input_mail1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@android:drawable/sym_action_email"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/ic_mail"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:textColor="#29AEBF"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="188dp"
+                android:layout_marginTop="180dp"
                 android:layout_marginEnd="50dp"
                 android:text="Login"
                 android:textColor="#29AEBF"
@@ -131,15 +141,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="170dp"
-                android:layout_height="115dp"
-                app:srcCompat="@drawable/login"
-                tools:layout_editor_absoluteX="120dp"
-                tools:layout_editor_absoluteY="73dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+

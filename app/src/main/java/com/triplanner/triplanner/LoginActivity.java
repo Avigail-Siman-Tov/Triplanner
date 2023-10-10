@@ -1,16 +1,21 @@
 package com.triplanner.triplanner;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Traveler;
@@ -31,6 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPassword, createAccount;
     ProgressDialog myLoadingDialog;
     App app;
+
+    private ImageButton togglePasswordButton;
+    private boolean isPasswordVisible = false;
+
+    private TextInputLayout passwordEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +76,19 @@ public class LoginActivity extends AppCompatActivity {
                 sentLinkToEmailResPassword();
             }
         });
+
+
+        passwordEditText = findViewById(R.id.activity_login_input_password);
+        togglePasswordButton = findViewById(R.id.togglePasswordButton);
+
+        togglePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPasswordVisible = !isPasswordVisible;
+                togglePasswordVisibility();
+            }
+        });
+
     }
     private void sentLinkToEmailResPassword() {
         Intent intent=new Intent(LoginActivity.this,ForgotPasswordActivity.class);
@@ -123,4 +147,21 @@ public class LoginActivity extends AppCompatActivity {
         field.setError(text);
         field.requestFocus();
     }
+
+
+    private void togglePasswordVisibility() {
+        int cursorPosition = passwordEditText.getEditText().getSelectionStart();
+        if (isPasswordVisible) {
+            setPasswordVisibility(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, R.drawable.view);
+        } else {
+            setPasswordVisibility(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, R.drawable.hide);
+        }
+        passwordEditText.getEditText().setSelection(cursorPosition); // Restore cursor position
+    }
+
+    private void setPasswordVisibility(int inputType, @DrawableRes int iconResource) {
+        passwordEditText.getEditText().setInputType(inputType);
+        togglePasswordButton.setImageResource(iconResource);
+    }
+
 }

@@ -1,5 +1,8 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -11,10 +14,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,6 +46,8 @@ public class ListTripInDayFragment extends Fragment {
     MyAdapter adapter;
     private MapView mapView;
     private GoogleMap googleMap;
+
+    RatingBar rating;
 
     private static final String API_KEY = "AIzaSyANQj_r2MAGPHMi7JZLlxyT80AysMRV3IA";
     private static final GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(API_KEY).build();
@@ -71,10 +78,13 @@ public class ListTripInDayFragment extends Fragment {
 
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(gMap -> {
-            googleMap = gMap;
-                // Set your preferred map settings here if needed.
-            drawRoutes();
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                googleMap = map;
+                // Initialize your map settings and drawRoutes() here
+                drawRoutes();
+            }
         });
         return view;
     }
@@ -156,6 +166,7 @@ public class ListTripInDayFragment extends Fragment {
     }
 
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -215,6 +226,10 @@ public class ListTripInDayFragment extends Fragment {
             name.setText(place.getPlaceName());
             imagev.setTag(place.getPlaceImgUrl());
 
+            rating=view.findViewById(R.id.trip_in_day_row_rating);
+            rating.setRating(place.getPlaceRating());
+            Drawable drawable = rating.getProgressDrawable();
+            drawable.setColorFilter(Color.parseColor("#FDC313"), PorterDuff.Mode.SRC_ATOP);
             if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
                 if (place.getPlaceImgUrl() == imagev.getTag()) {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);

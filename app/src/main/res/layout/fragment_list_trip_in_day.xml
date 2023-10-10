@@ -23,24 +23,36 @@
         android:textStyle="bold"
         android:contentDescription="Day Number"/>
 
-    <!-- Your existing ListView -->
-    <ListView
-        android:id="@+id/fragment_list_trip_in_day_list_view"
+    <!-- Wrap both List View and Map View in a ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:contentDescription="List View"/>
+        android:layout_weight="1">
 
-    <!-- Your existing MapView -->
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:liteMode="true"
-        android:contentDescription="Map View"/>
+        <!-- Wrap List View and Map View in a LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Your existing ListView -->
+            <ListView
+                android:id="@+id/fragment_list_trip_in_day_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:contentDescription="List View"/>
+
+            <!-- Your existing MapView -->
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:liteMode="true"
+                android:contentDescription="Map View"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

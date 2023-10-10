@@ -12,7 +12,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:drawableStart="@drawable/ic_ckeck"
+        android:drawableStart="@drawable/baseline_star_24"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="18sp"

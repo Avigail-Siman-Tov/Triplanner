@@ -7,16 +7,6 @@
     android:background="@drawable/background8"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/icon_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/login4"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -131,15 +121,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="195dp"
                 android:layout_marginEnd="50dp"
                 android:text="Login"
-                android:textColor="#29AEBF"
+                android:textColor="#646561"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_login"
+                android:layout_width="198dp"
+                android:layout_height="181dp"
+                android:src="@drawable/login11"
+                tools:layout_editor_absoluteX="106dp"
+                tools:layout_editor_absoluteY="49dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

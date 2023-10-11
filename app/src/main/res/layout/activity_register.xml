@@ -76,7 +76,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_register_input_password1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="46dp"
                     android:background="@android:color/transparent"
                     android:hint="Password"
                     android:inputType="textPassword" />

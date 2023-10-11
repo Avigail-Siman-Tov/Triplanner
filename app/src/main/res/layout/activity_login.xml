@@ -53,12 +53,9 @@
                     android:layout_height="44dp"
                     android:background="?android:selectableItemBackground"
                     android:contentDescription="Toggle Password Visibility"
-                    android:src="@drawable/hide"
-                    app:layout_constraintBottom_toBottomOf="@id/activity_login_input_password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/activity_login_input_password" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:src="@drawable/hide" />
 
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -128,6 +125,7 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textSize="18sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -135,13 +135,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginEnd="50dp"
                 android:text="Login"
                 android:textColor="#646561"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,10 +150,10 @@
                 android:id="@+id/icon_login"
                 android:layout_width="198dp"
                 android:layout_height="181dp"
-                android:layout_marginEnd="152dp"
+                android:layout_marginEnd="96dp"
                 android:src="@drawable/login11"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="5dp" />
+                tools:layout_editor_absoluteY="54dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -82,6 +82,18 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ImageButton
+                android:id="@+id/togglePasswordButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="Toggle Password Visibility"
+                android:src="@drawable/hide"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_input_password"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_input_password" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_register_input_verify_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
@@ -102,6 +114,18 @@
                     android:hint="Verify Password "
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/togglePasswordButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="Toggle Password Visibility"
+                android:src="@drawable/hide"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_input_verify_password"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_input_verify_password"/>
+
 
             <TextView
                 android:id="@+id/activity_register_Have_Account"

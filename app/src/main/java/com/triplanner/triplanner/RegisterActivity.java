@@ -1,10 +1,13 @@
 package com.triplanner.triplanner;
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,6 +25,11 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog myLoadingDialog;
     Button signUpBtn;
     App app;
+
+    private ImageButton togglePasswordButton3, togglePasswordButton4;
+    private boolean isPasswordVisible3 = false , isPasswordVisible4 = false;
+
+    private TextInputLayout passwordEditText3 ,passwordEditText4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,27 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToLogIn();
+            }
+        });
+
+        passwordEditText3 = findViewById(R.id.activity_register_input_password);
+        togglePasswordButton3 = findViewById(R.id.togglePasswordButton3);
+
+        togglePasswordButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPasswordVisible3 = !isPasswordVisible3;
+                togglePasswordVisibility(passwordEditText3 , isPasswordVisible3,togglePasswordButton3);
+            }
+        });
+
+        passwordEditText4 = findViewById(R.id.activity_register_input_verify_password);
+        togglePasswordButton4 = findViewById(R.id.togglePasswordButton4);
+        togglePasswordButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPasswordVisible4 = !isPasswordVisible4;
+                togglePasswordVisibility(passwordEditText4 , isPasswordVisible4,togglePasswordButton4);
             }
         });
     }
@@ -126,5 +155,20 @@ public class RegisterActivity extends AppCompatActivity {
     private void showError(TextInputLayout field, String text) {
         field.setError(text);
         field.requestFocus();
+    }
+
+    private void togglePasswordVisibility(TextInputLayout passwordEditText , boolean isPasswordVisible,ImageButton togglePasswordButton) {
+        int cursorPosition = passwordEditText.getEditText().getSelectionStart();
+        if (isPasswordVisible) {
+            setPasswordVisibility(passwordEditText, InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, R.drawable.view,togglePasswordButton);
+        } else {
+            setPasswordVisibility(passwordEditText,InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, R.drawable.hide,togglePasswordButton);
+        }
+        passwordEditText.getEditText().setSelection(cursorPosition); // Restore cursor position
+    }
+
+    private void setPasswordVisibility(TextInputLayout passwordEditText, int inputType, @DrawableRes int iconResource, ImageButton togglePasswordButton) {
+        passwordEditText.getEditText().setInputType(inputType);
+        togglePasswordButton.setImageResource(iconResource);
     }
 }

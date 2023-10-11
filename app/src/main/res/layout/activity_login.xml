@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="50dp"
                 android:text="login"
                 android:textAllCaps="false"
@@ -88,6 +88,7 @@
                 app:backgroundTint="#29AEBF"
                 app:cornerRadius="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_login_forget_password" />
 

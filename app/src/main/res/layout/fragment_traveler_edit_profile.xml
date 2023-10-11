@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_back"
+    android:background="@drawable/background8"
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".ui.profile.TravelerEditProfileFragment">
 
@@ -27,14 +27,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="76dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center"
                 android:text="Edit Profile"
-                android:textColor="@color/blue"
+                android:textColor="#646561"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,12 +54,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_edit_profile_userName"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="222dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-
-                app:hintTextColor="@color/black"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxStrokeColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
@@ -68,6 +69,7 @@
                     android:id="@+id/fragment_edit_profile_input_userName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
                     android:inputType="textPersonName"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -166,10 +168,11 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="20dp"
                 android:text="Save "
+                app:cornerRadius="80dp"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/blue"
+                app:backgroundTint="#29AEBF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_edit_profile_cancel_btn"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -184,6 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:text="Cancel"
+                app:cornerRadius="80dp"
+
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"

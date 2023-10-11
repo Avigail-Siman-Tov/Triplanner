@@ -102,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="edit"
+        app:cornerRadius="80dp"
         app:backgroundTint="#29AEBF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

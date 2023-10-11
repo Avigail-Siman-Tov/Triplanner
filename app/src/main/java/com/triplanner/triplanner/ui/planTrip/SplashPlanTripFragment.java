@@ -1,9 +1,13 @@
 package com.triplanner.triplanner.ui.planTrip;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,6 +15,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.PlacePlanning;
@@ -53,6 +58,8 @@ public class SplashPlanTripFragment extends Fragment {
         longitude = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getLongitude();
         tripName = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getNameTrip();
         tripLocation = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getLocationTrip();
+
+
         Runnable runnable=new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

@@ -82,6 +82,18 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ImageButton
+                android:id="@+id/togglePasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="Toggle Password Visibility"
+                android:src="@drawable/hide"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Button
                 android:id="@+id/fragment_reset_password_btm"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

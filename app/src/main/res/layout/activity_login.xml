@@ -9,8 +9,8 @@
     tools:context=".LoginActivity">
 
     <ScrollView
-        android:layout_width="393dp"
-        android:layout_height="747dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,9 +26,9 @@
                 android:id="@+id/activity_login_input_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="0dp"
+                android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="50dp"
                 app:boxBackgroundColor="@android:color/transparent"
                 app:boxStrokeColor="@color/blue"
@@ -114,42 +114,40 @@
                 android:layout_marginEnd="50dp"
                 app:boxBackgroundColor="@android:color/transparent"
                 app:boxStrokeColor="@color/blue"
-                app:endIconContentDescription="Email Icon"
-                app:endIconDrawable="@drawable/ic_mail"
-                app:endIconDrawableTint="@color/your_icon_color"
-                app:endIconMode="custom"
                 app:hintTextColor="@color/blue"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_mail"
+                app:endIconContentDescription="Email Icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_login_input_mail1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:paddingRight="16dp"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_login_input_mail1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="200dp"
-                android:layout_marginEnd="50dp"
-                android:text="Login"
-                android:textColor="#646561"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@android:color/transparent"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingRight="16dp"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="50dp"
+            android:text="Login"
+            android:textColor="#646561"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/icon_login"

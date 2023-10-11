@@ -1,14 +1,17 @@
 package com.triplanner.triplanner;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,6 +28,12 @@ public class ResetPassActivity extends AppCompatActivity {
     Intent intent;
     Uri data;
     String data1,data2;
+
+    private ImageButton togglePasswordButton1, togglePasswordButton2;
+    private boolean isPasswordVisible1 = false , isPasswordVisible2 = false;
+
+    private TextInputLayout passwordEditText1 ,passwordEditText2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +54,27 @@ public class ResetPassActivity extends AppCompatActivity {
             }
         });
         handleIntent(getIntent());
+
+        passwordEditText1 = findViewById(R.id.fragment_reset_password_password);
+        togglePasswordButton1 = findViewById(R.id.togglePasswordButton1);
+
+        togglePasswordButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPasswordVisible1 = !isPasswordVisible1;
+                togglePasswordVisibility(passwordEditText1 , isPasswordVisible1,togglePasswordButton1);
+            }
+        });
+
+        passwordEditText2 = findViewById(R.id.fragment_reset_password_verify_password);
+        togglePasswordButton2 = findViewById(R.id.togglePasswordButton2);
+        togglePasswordButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPasswordVisible2 = !isPasswordVisible2;
+                togglePasswordVisibility(passwordEditText2 , isPasswordVisible2,togglePasswordButton2);
+            }
+        });
     }
 
 
@@ -107,6 +137,21 @@ public class ResetPassActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void togglePasswordVisibility(TextInputLayout passwordEditText , boolean isPasswordVisible,ImageButton togglePasswordButton) {
+        int cursorPosition = passwordEditText.getEditText().getSelectionStart();
+        if (isPasswordVisible) {
+            setPasswordVisibility(passwordEditText,InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, R.drawable.view,togglePasswordButton);
+        } else {
+            setPasswordVisibility(passwordEditText,InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, R.drawable.hide,togglePasswordButton);
+        }
+        passwordEditText.getEditText().setSelection(cursorPosition); // Restore cursor position
+    }
+
+    private void setPasswordVisibility(TextInputLayout passwordEditText, int inputType, @DrawableRes int iconResource,ImageButton togglePasswordButton) {
+        passwordEditText.getEditText().setInputType(inputType);
+        togglePasswordButton.setImageResource(iconResource);
     }
 
 }

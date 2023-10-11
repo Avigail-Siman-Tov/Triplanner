@@ -22,23 +22,24 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#DDFAFAFA"
             >
 
             <TextView
-                android:background="@drawable/btn"
                 android:id="@+id/day_list_row_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn"
                 android:gravity="center_horizontal"
                 android:text="TextView"
-                android:textColor="@color/blue"
+                android:textColor="#646561"
                 android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

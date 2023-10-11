@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="@drawable/background8"
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".ui.MyTrip.ListDayInTripFragment">
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Name Trip"
-        android:textColor="@color/black"
+        android:textColor="#646561"
         android:textSize="28sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:layout_marginTop="12dp"
         android:drawableStart="@drawable/ic_location"
         android:text="trip Location"
-        android:textColor="@color/black"
+        android:textColor="#29AEBF"
         android:textColorHint="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,19 +1,15 @@
 package com.triplanner.triplanner.ui.profile;
 import android.content.Intent;
-import android.net.Uri;
-import android.app.Activity;
-import android.graphics.Bitmap;
+
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ImageView;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import java.io.IOException;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -39,9 +35,7 @@ public class TravelerProfileFragment extends Fragment {
     MyAdapter adapter;
     String [] arrCategory;
     TextView category,logout;
-    private static final int PICK_IMAGE_REQUEST = 1;
 
-    private ImageView profileImage; // Add this line
 
     final String[] categoriesArray={
             "amusement park","aquarium","art gallery","bar","casino",
@@ -56,15 +50,7 @@ public class TravelerProfileFragment extends Fragment {
             "church","city_hall","library","mosque", "synagogue"
     };
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void onSelectImageClick(View view) {
-        if (isNetworkConnected()) {
-            // Launch the image selection
-            Intent imagePickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
-        } else {
-            Toast.makeText(getContext(), "Error! Connect to the Internet", Toast.LENGTH_SHORT).show();
-        }
-    }
+
    public View onCreateView(@NonNull LayoutInflater inflater,
                                ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_traveler_profile, container, false);
@@ -73,8 +59,6 @@ public class TravelerProfileFragment extends Fragment {
         mail = view.findViewById(R.id.traveler_profile_email);
         name = view.findViewById(R.id.traveler_profile_name);
         listCategory=view.findViewById(R.id.traveler_profile_list_category);
-        profileImage = view.findViewById(R.id.profileImage); // Add this line
-
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         User user = app.currentUser();
@@ -86,20 +70,6 @@ public class TravelerProfileFragment extends Fragment {
             }
         });
 
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkConnected()) {
-                    // ... (your existing code)
-
-                    // Add the following lines to launch the image selection
-                    Intent imagePickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
-                } else {
-                    Toast.makeText(getContext(), "Error! Connect to Internet", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
        Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
@@ -110,40 +80,13 @@ public class TravelerProfileFragment extends Fragment {
                 adapter=new MyAdapter();
                 listCategory.setAdapter(adapter);
                 editBtn= view.findViewById(R.id.traveler_profile_edit_btn);
-                editBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (isNetworkConnected()) {
-                            // Launch the image selection
-                            Intent imagePickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
-                        } else {
-                            Toast.makeText(getContext(), "Error! Connect to the Internet", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
             }
         });
 
         return view;
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                // User picked an image from the gallery
-                Uri selectedImage = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
-                    profileImage.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:text="ByeBye\n See you Soon"
         android:textAlignment="center"
-        android:textColor="#29AEBF"
+        android:textColor="#646561"
         android:textSize="50sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"

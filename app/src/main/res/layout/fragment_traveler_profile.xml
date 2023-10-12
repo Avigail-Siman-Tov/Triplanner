@@ -10,10 +10,10 @@
         android:id="@+id/cameraBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="236dp"
         android:text="Camera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
 
@@ -21,19 +21,19 @@
         android:id="@+id/galleryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="32dp"
         android:text="Gallery"
         app:layout_constraintBottom_toBottomOf="@+id/cameraBtn"
         app:layout_constraintStart_toEndOf="@+id/cameraBtn"
         app:layout_constraintTop_toTopOf="@+id/cameraBtn"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/traveler_profile_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:drawableStart="@drawable/ic_logout"
         android:gravity="end"
@@ -41,7 +41,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,8 +74,8 @@
         app:layout_constraintTop_toBottomOf="@+id/traveler_profile_name" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="341dp"
-        android:layout_height="312dp"
+        android:layout_width="365dp"
+        android:layout_height="246dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,17 +100,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/traveler_profile_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your favorite categories:"
+                android:textColor="#646561"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="0dp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/traveler_profile_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your favorite categories:"
-            android:textColor="#646561"
-            android:textSize="24sp"
-            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -130,9 +133,11 @@
     <ImageView
         android:id="@+id/displayImageView"
         android:layout_width="181dp"
-        android:layout_height="151dp"
+        android:layout_height="140dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/ic_launcher_background"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="204dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

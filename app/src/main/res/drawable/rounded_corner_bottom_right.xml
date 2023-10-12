@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="0dp" android:left="0dp" android:right="0dp">
+        <shape>
+            <corners
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="24dp" />
+            <solid android:color="#FF0000" />
+        </shape>
+    </item>
+    <item android:bottom="0dp">
+        <bitmap
+            android:src="@drawable/img_logo"
+            android:gravity="center" />
+    </item>
+</layer-list>

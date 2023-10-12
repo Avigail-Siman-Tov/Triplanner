@@ -2,8 +2,8 @@
 <resources>
     <color name="progressBarColor">#29AEBF</color>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_500">#29AEBF</color>
+    <color name="purple_700">#29AEBF</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -15,7 +15,7 @@
     <color name="red">#AE4038</color>
     <array name="array_name">
         <item>@color/red</item>
-        <item>@color/blue</item>
+        <item>#29AEBF</item>
     </array>
     <color name="colorPrimary">#039BE5</color>
     <color name="colorPrimaryDark">#0288D1</color>

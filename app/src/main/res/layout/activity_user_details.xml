@@ -148,7 +148,6 @@
                     app:layout_constraintStart_toEndOf="@+id/textView14"
                     app:layout_constraintTop_toTopOf="@+id/textView14">
 
-                    <!-- text view to display selected items-->
                     <TextView
                         android:id="@+id/activity_user_details_category_textView"
                         style="@android:style/Widget.EditText"

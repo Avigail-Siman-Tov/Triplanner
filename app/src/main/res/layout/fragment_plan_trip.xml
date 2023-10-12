@@ -110,7 +110,6 @@
             android:layout_marginStart="16dp"
             app:boxStrokeColor="#000000"
             app:hintTextColor="#070707"
-            android:hint="text"
             app:layout_constraintBottom_toBottomOf="@+id/textView15"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="@+id/textView15">

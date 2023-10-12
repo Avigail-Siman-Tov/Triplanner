@@ -23,19 +23,16 @@
         android:textStyle="bold"
         android:contentDescription="Day Number"/>
 
-    <!-- Wrap both List View and Map View in a ScrollView -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- Wrap List View and Map View in a LinearLayout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Your existing ListView -->
             <ListView
                 android:id="@+id/fragment_list_trip_in_day_list_view"
                 android:layout_width="match_parent"

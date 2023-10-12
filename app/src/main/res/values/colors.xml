@@ -17,4 +17,9 @@
         <item>@color/red</item>
         <item>@color/blue</item>
     </array>
+    <color name="colorPrimary">#039BE5</color>
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="start_color">#29B6F6</color>
+    <color name="end_color">#4FC3F7</color>
 </resources>

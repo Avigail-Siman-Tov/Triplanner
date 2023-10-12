@@ -10,10 +10,10 @@
         android:id="@+id/cameraBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="Camera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
 
@@ -65,8 +65,8 @@
         android:id="@+id/traveler_profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:drawableStart="@drawable/ic_mail"
         android:text="traveler email"
         android:textSize="24sp"
@@ -82,24 +82,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email"
-        app:layout_constraintVertical_bias="0.695">
+        app:layout_constraintVertical_bias="0.937">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="243dp">
-
-            <TextView
-                android:id="@+id/traveler_profile_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="32dp"
-                android:text="Your favorite categories:"
-                android:textColor="#646561"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="324dp"
+            android:layout_height="108dp">
 
             <ListView
                 android:id="@+id/traveler_profile_list_category"
@@ -115,6 +102,15 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/traveler_profile_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your favorite categories:"
+            android:textColor="#646561"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -136,12 +132,7 @@
         android:layout_width="181dp"
         android:layout_height="151dp"
         android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_background"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="123dp" /> <!-- Center the ImageView vertically and horizontally -->
-    />
+        android:src="@drawable/ic_launcher_background" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -126,10 +126,6 @@ public class TravelerProfileFragment extends Fragment {
         cameraBtn = view.findViewById(R.id.cameraBtn);
         galleryBtn = view.findViewById(R.id.galleryBtn);
 
-        Glide.with(this)
-                .load(R.drawable.ic_launcher_background)
-                .transform(new CircleCrop())
-                .into(selectedImage);
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override

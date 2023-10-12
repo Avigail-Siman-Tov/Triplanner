@@ -9,7 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#8E918E</color>
-    <color name="blue">#2877B6</color>
+    <color name="blue">#29AEBF</color>
     <color name="green">#3F9C53</color>
     <color name="gold">#FDC313</color>
     <color name="red">#AE4038</color>
@@ -17,8 +17,8 @@
         <item>@color/red</item>
         <item>#29AEBF</item>
     </array>
-    <color name="colorPrimary">#039BE5</color>
-    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorPrimary">#29AEBF</color>
+    <color name="colorPrimaryDark">#29AEBF</color>
     <color name="colorAccent">#FF4081</color>
     <color name="start_color">#29B6F6</color>
     <color name="end_color">#4FC3F7</color>

@@ -10,9 +10,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="417dp"
-        android:layout_height="240dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="4dp">
+        android:layout_height="261dp"
+        android:background="@drawable/rounded_bottom_shape"
+    app:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/fragment_place_traveler_details_image"
@@ -20,9 +20,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/img_logo" />
-    </androidx.cardview.widget.CardView>
-
-
+</androidx.cardview.widget.CardView>
 
 
 

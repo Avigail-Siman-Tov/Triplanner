@@ -43,7 +43,6 @@
                 android:layout_marginTop="20dp"
                 android:contentDescription="List View"/>
 
-            <!-- Your existing MapView -->
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"

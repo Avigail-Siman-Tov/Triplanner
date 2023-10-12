@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#02FF4081" /> <!-- Background color of the circle button -->
+</shape>

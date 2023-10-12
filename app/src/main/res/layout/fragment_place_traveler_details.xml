@@ -8,6 +8,23 @@
     android:paddingBottom="?attr/actionBarSize"
     android:orientation="vertical">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="417dp"
+        android:layout_height="240dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginBottom="30dp"
+        app:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/fragment_place_traveler_details_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_logo" />
+    </androidx.cardview.widget.CardView>
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -23,18 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-
-            <ImageView
-                android:id="@+id/fragment_place_traveler_details_image"
-                android:layout_width="417dp"
-                android:layout_height="240dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/fragment_place_traveler_details_place_name"
                 android:layout_width="0dp"
@@ -46,9 +51,10 @@
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_place_traveler_details_image" />
+                app:layout_constraintTop_toBottomOf="@id/fragment_place_traveler_details_image"
+                tools:ignore="NotSibling" />
 
             <RatingBar
                 android:id="@+id/fragment_place_traveler_details_place_rating"
@@ -204,6 +210,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/btn_waze"
                 android:layout_width="60dp"
@@ -231,9 +238,10 @@
                 app:layout_constraintStart_toEndOf="@+id/btn_waze"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
-
-
         </LinearLayout>
     </HorizontalScrollView>
-
 </LinearLayout>
+
+
+
+

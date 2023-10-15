@@ -131,6 +131,7 @@ public class TravelerProfileFragment extends Fragment {
 
         cameraGalleryBtn = view.findViewById(R.id.cameraGalleryBtn);
 
+
         cameraGalleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,6 +297,7 @@ public class TravelerProfileFragment extends Fragment {
         // Set onClickListeners for camera and gallery options
         Button cameraOption = dialogView.findViewById(R.id.cameraOption);
         Button galleryOption = dialogView.findViewById(R.id.galleryOption);
+        Button cancelButton = dialogView.findViewById(R.id.cancelOption);
 
         cameraOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -311,6 +313,14 @@ public class TravelerProfileFragment extends Fragment {
                 dialog.dismiss();
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss the dialog or perform any desired action on cancel
+                dialog.dismiss(); // If the "Cancel" button is in a dialog
             }
         });
 

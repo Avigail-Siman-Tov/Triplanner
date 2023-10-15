@@ -12,7 +12,8 @@
         android:textSize="18sp"
         android:textColor="#646561"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30px"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,4 +41,14 @@
             android:background="@android:color/transparent"
             android:textColor="#646561" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/cancelOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:text="Cancel"
+        android:textColor="#646561" />
 </LinearLayout>

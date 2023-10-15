@@ -67,7 +67,7 @@ public class PlaceDetailsFragment extends Fragment {
         placeOpeningHours=view.findViewById(R.id.fragment_place_details_place_opening_hours);
         placeWebsite=view.findViewById(R.id.fragment_place_details_place_website);
         ratingBar=view.findViewById(R.id.fragment_place_details_place_rating);
-        placeImg=view.findViewById(R.id.fragment_place_details_image);
+        placeImg=view.findViewById(R.id.fragment_place_traveler_details_image);
         addBtn= view.findViewById(R.id.fragment_place_details_btn_add_place_btn);
         placePhone = view.findViewById(R.id.fragment_place_details_place_phone);
         String placeId=placePlanning.getPlaceID();

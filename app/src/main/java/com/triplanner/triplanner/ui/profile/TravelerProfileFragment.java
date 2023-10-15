@@ -216,23 +216,52 @@ public class TravelerProfileFragment extends Fragment {
     }
 
     @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == CAMERA_REQUEST_CODE) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                File f = new File(currentPhotoPath);
+//                selectedImage.setImageURI(Uri.fromFile(f));
+//                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
+//
+//                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                Uri contentUri = Uri.fromFile(f);
+//                requireActivity().sendBroadcast(mediaScanIntent);
+//            }
+//        }
+//
+//        if (requestCode == GALLERY_REQUEST_CODE) {
+//            if (resultCode == Activity.RESULT_OK && data != null) {
+//                Uri contentUri = data.getData();
+//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
+//                Log.d("tag", "onActivityResult: Gallery Image Uri:  " + imageFileName);
+//                selectedImage.setImageURI(contentUri);
+//            }
+//        }
+//    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
-                selectedImage.setImageURI(Uri.fromFile(f));
-                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
+                // Handle the result when an image is captured with the camera
+                File imageFile = new File(currentPhotoPath);
+                selectedImage.setImageURI(Uri.fromFile(imageFile));
+                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(imageFile));
 
+                // Tell the media scanner to scan the newly created image file
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                Uri contentUri = Uri.fromFile(f);
+                Uri contentUri = Uri.fromFile(imageFile);
                 requireActivity().sendBroadcast(mediaScanIntent);
             }
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
+                // Handle the result when an image is selected from the gallery
                 Uri contentUri = data.getData();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
@@ -241,7 +270,6 @@ public class TravelerProfileFragment extends Fragment {
             }
         }
     }
-
     private String getFileExt(Uri contentUri) {
         ContentResolver c = requireActivity().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
@@ -280,36 +308,6 @@ public class TravelerProfileFragment extends Fragment {
             }
         }
     }
-
-
-
-//    // Add this method to show a dialog or menu for camera/gallery choice
-//    private void showCameraOrGalleryDialog() {
-//        // You can use AlertDialog or PopupMenu to display the options.
-//        // Here's an example using AlertDialog:
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-//        builder.setTitle("Choose Image Source");
-//
-//        // Add "Camera" option
-//        builder.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                askCameraPermissions();
-//            }
-//        });
-//
-//        // Add "Gallery" option
-//        builder.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
-//            }
-//        });
-//
-//        builder.create().show();
-//    }
 
     private void showCameraOrGalleryDialog() {
         // Create a custom dialog

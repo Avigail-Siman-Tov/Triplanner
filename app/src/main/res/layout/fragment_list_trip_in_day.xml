@@ -36,18 +36,18 @@
             <ListView
                 android:id="@+id/fragment_list_trip_in_day_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="276dp"
                 android:layout_marginTop="20dp"
-                android:contentDescription="List View"/>
+                android:contentDescription="List View" />
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="241dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                app:liteMode="true"
-                android:contentDescription="Map View"/>
+                android:contentDescription="Map View"
+                app:liteMode="true" />
         </LinearLayout>
     </ScrollView>
 

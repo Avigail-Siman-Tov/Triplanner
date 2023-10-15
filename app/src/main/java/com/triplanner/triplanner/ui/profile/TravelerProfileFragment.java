@@ -1,4 +1,6 @@
 package com.triplanner.triplanner.ui.profile;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -73,6 +75,9 @@ public class TravelerProfileFragment extends Fragment {
     String [] arrCategory;
     TextView category,logout;
 
+    Button cameraGalleryBtn;
+
+
 
     final String[] categoriesArray={
             "amusement park","aquarium","art gallery","bar","casino",
@@ -123,22 +128,14 @@ public class TravelerProfileFragment extends Fragment {
 
         //for galary and camera
         selectedImage = view.findViewById(R.id.displayImageView);
-        cameraBtn = view.findViewById(R.id.cameraBtn);
-        galleryBtn = view.findViewById(R.id.galleryBtn);
 
+        cameraGalleryBtn = view.findViewById(R.id.cameraGalleryBtn);
 
-        cameraBtn.setOnClickListener(new View.OnClickListener() {
+        cameraGalleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                askCameraPermissions();
-            }
-        });
-
-        galleryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+                // Show a dialog or menu to allow the user to choose between camera and gallery
+                showCameraOrGalleryDialog();
             }
         });
 
@@ -194,7 +191,6 @@ public class TravelerProfileFragment extends Fragment {
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
     ImageView selectedImage;
-    Button cameraBtn, galleryBtn;
     String currentPhotoPath;
 
 
@@ -283,6 +279,70 @@ public class TravelerProfileFragment extends Fragment {
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
+    }
+
+
+
+//    // Add this method to show a dialog or menu for camera/gallery choice
+//    private void showCameraOrGalleryDialog() {
+//        // You can use AlertDialog or PopupMenu to display the options.
+//        // Here's an example using AlertDialog:
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+//        builder.setTitle("Choose Image Source");
+//
+//        // Add "Camera" option
+//        builder.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                askCameraPermissions();
+//            }
+//        });
+//
+//        // Add "Gallery" option
+//        builder.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+//            }
+//        });
+//
+//        builder.create().show();
+//    }
+
+    private void showCameraOrGalleryDialog() {
+        // Create a custom dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_camera_gallery, null);
+
+        builder.setView(dialogView);
+
+        final AlertDialog dialog = builder.create();
+
+        // Set onClickListeners for camera and gallery options
+        Button cameraOption = dialogView.findViewById(R.id.cameraOption);
+        Button galleryOption = dialogView.findViewById(R.id.galleryOption);
+
+        cameraOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                askCameraPermissions();
+            }
+        });
+
+        galleryOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+            }
+        });
+
+        dialog.show();
     }
 
 }

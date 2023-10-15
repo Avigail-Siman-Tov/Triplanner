@@ -28,14 +28,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="Hello traveler name"
         android:textColor="#646561"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
 
@@ -43,8 +43,8 @@
         android:id="@+id/traveler_profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="24dp"
         android:drawableStart="@drawable/ic_mail"
         android:text="traveler email"
         android:textSize="24sp"
@@ -97,11 +97,12 @@
 
     </androidx.cardview.widget.CardView>
 
+
     <Button
         android:id="@+id/traveler_profile_edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="68dp"
         android:text="edit"
         app:backgroundTint="#29AEBF"
         app:cornerRadius="80dp"
@@ -110,7 +111,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/blue" />
-
 
     <com.triplanner.triplanner.CircularImageView
         android:id="@+id/displayImageView"

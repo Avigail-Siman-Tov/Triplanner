@@ -1,59 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.planTrip.PlaceDetailsFragment"
-    android:paddingBottom="?attr/actionBarSize"
-    android:orientation="vertical">
+    tools:context=".ui.planTrip.PlaceDetailsFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageCardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/fragment_place_traveler_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="377dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_logo" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H, 2:1"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="4dp">
-
-        <ImageView
-            android:id="@+id/fragment_place_details_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_logo" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="20dp"
-        android:id="@+id/textCardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imageCardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="4dp">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="380dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#DCEEF1">
+
 
                 <TextView
                     android:id="@+id/fragment_place_details_place_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="4dp"
                     android:textColor="#000000"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -128,21 +118,24 @@
                     app:layout_constraintStart_toEndOf="@+id/textView4"
                     app:layout_constraintTop_toTopOf="@+id/textView4" />
 
+
                 <Button
                     android:id="@+id/fragment_place_details_btn_add_place_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
+                    android:layout_marginBottom="80dp"
+
                     android:text="ADD"
                     android:textColor="@color/white"
                     app:backgroundTint="#29AEBF"
                     app:cornerRadius="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5"
-                    app:layout_constraintVertical_bias="1.0" />
-
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -180,12 +173,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

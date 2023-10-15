@@ -193,10 +193,7 @@ public class TravelerProfileFragment extends Fragment {
     public static final int GALLERY_REQUEST_CODE = 105;
     ImageView selectedImage;
     String currentPhotoPath;
-
-
-
-
+    
     private void askCameraPermissions() {
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);

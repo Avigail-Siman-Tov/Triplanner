@@ -27,8 +27,8 @@
         android:id="@+id/traveler_profile_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="24dp"
         android:text="Hello traveler name"
         android:textColor="#646561"
@@ -37,14 +37,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_logout" />
+        app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
 
     <TextView
         android:id="@+id/traveler_profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
         android:drawableStart="@drawable/ic_mail"
         android:text="traveler email"
         android:textSize="24sp"
@@ -58,10 +58,10 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email"
-        app:layout_constraintVertical_bias="0.802">
+        app:layout_constraintVertical_bias="0.251">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="324dp"
@@ -116,31 +116,31 @@
         android:id="@+id/displayImageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toTopOf="@+id/cameraGalleryBtn"
         app:layout_constraintCircleRadius="70dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:layout_constraintVertical_bias="0.653"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/login5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cameraGalleryBtn"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/circular_button"
         app:icon="@drawable/ic_camera"
         app:iconGravity="textStart"
         app:iconSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.726"
+        app:layout_constraintHorizontal_bias="0.701"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email" />
+        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_logout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

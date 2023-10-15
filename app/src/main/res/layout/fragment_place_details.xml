@@ -34,7 +34,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#A9CED3">
+                android:background="#DCEEF1">
 
 
                 <TextView
@@ -124,9 +124,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:layout_marginBottom="70dp"
+                    android:layout_marginBottom="80dp"
 
-                    android:text="ADD"
+               android:text="ADD"
                     android:textColor="@color/white"
                     app:backgroundTint="#29AEBF"
                     app:cornerRadius="80dp"

@@ -216,32 +216,6 @@ public class TravelerProfileFragment extends Fragment {
     }
 
     @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == CAMERA_REQUEST_CODE) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                File f = new File(currentPhotoPath);
-//                selectedImage.setImageURI(Uri.fromFile(f));
-//                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
-//
-//                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//                Uri contentUri = Uri.fromFile(f);
-//                requireActivity().sendBroadcast(mediaScanIntent);
-//            }
-//        }
-//
-//        if (requestCode == GALLERY_REQUEST_CODE) {
-//            if (resultCode == Activity.RESULT_OK && data != null) {
-//                Uri contentUri = data.getData();
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
-//                Log.d("tag", "onActivityResult: Gallery Image Uri:  " + imageFileName);
-//                selectedImage.setImageURI(contentUri);
-//            }
-//        }
-//    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 

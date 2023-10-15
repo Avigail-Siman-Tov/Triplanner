@@ -116,25 +116,31 @@
         android:id="@+id/displayImageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="350dp"
+        app:layout_constraintBottom_toTopOf="@+id/cameraGalleryBtn"
         app:layout_constraintCircleRadius="70dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:srcCompat="@drawable/login10" />
+        app:layout_constraintVertical_bias="0.653"
+        app:srcCompat="@drawable/login5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/cameraGalleryBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Camera / Gallery"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/circular_button"
+        app:icon="@drawable/ic_camera"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.701"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

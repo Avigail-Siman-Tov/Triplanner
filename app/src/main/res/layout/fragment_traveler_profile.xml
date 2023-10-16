@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background8"
     tools:context=".MainActivity">
 
     <TextView
@@ -57,7 +58,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="365dp"
-        android:layout_height="246dp"
+        android:layout_height="260dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,8 +69,8 @@
         app:layout_constraintVertical_bias="0.251">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="324dp"
-            android:layout_height="108dp">
+            android:layout_width="342dp"
+            android:layout_height="match_parent">
 
             <ListView
                 android:id="@+id/traveler_profile_list_category"
@@ -131,7 +132,7 @@
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/login5" />
+        app:srcCompat="@drawable/user" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cameraGalleryBtn"

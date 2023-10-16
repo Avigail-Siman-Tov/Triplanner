@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.view.View;
 import android.content.Context;
@@ -31,6 +32,8 @@ import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,6 +63,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.triplanner.triplanner.R;
+
+import org.bson.types.Binary;
+import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.IOException;
@@ -294,6 +300,7 @@ public class TravelerProfileFragment extends Fragment {
             }
         }
     }
+
 
     private void showCameraOrGalleryDialog() {
         // Create a custom dialog

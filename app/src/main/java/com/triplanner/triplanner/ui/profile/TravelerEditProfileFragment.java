@@ -286,7 +286,6 @@ public class TravelerEditProfileFragment extends Fragment {
                 if (isSuccess.equals("true")) {
                     Toast.makeText(getContext(), "Edit user successful", Toast.LENGTH_LONG).show();
 
-
                 } else {
                     Toast.makeText(getContext(), "Edit user successful", Toast.LENGTH_SHORT).show();
                 }

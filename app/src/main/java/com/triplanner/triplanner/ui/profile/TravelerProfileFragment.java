@@ -115,13 +115,27 @@ public class TravelerProfileFragment extends Fragment {
        Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
-                name.setText("Hello "+traveler.getTravelerName());
+                name.setText(traveler.getTravelerName());
                 mail.setText(traveler.getTravelerMail());
                 arrCategory= new String[favoriteCategories.size()];
                 favoriteCategories.toArray(arrCategory);
                 adapter=new MyAdapter();
                 listCategory.setAdapter(adapter);
                 editBtn= view.findViewById(R.id.traveler_profile_edit_btn);
+                editBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(isNetworkConnected()) {
+                            String[] arrayCategories = new String[favoriteCategories.size()];
+                            favoriteCategories.toArray(arrayCategories);
+                            TravelerProfileFragmentDirections.ActionNavProfileToTravelerEditProfileFragment action = TravelerProfileFragmentDirections.actionNavProfileToTravelerEditProfileFragment(traveler, arrayCategories);
+                            Navigation.findNavController(view).navigate(action);
+                        }
+                        else{
+                            Toast.makeText(getContext(), "Error! Connect to Internet", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
             }
         });
@@ -193,7 +207,7 @@ public class TravelerProfileFragment extends Fragment {
     public static final int GALLERY_REQUEST_CODE = 105;
     ImageView selectedImage;
     String currentPhotoPath;
-    
+
     private void askCameraPermissions() {
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);

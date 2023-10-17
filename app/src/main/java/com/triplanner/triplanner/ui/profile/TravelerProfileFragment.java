@@ -1,11 +1,12 @@
 package com.triplanner.triplanner.ui.profile;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.FileUtils;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -22,56 +23,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.squareup.picasso.Picasso;
+import com.triplanner.triplanner.CircularImageView;
+import com.triplanner.triplanner.Model.FavoriteCategories;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Traveler;
 import com.triplanner.triplanner.R;
+import com.triplanner.triplanner.RealPathUtil;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
-import io.realm.mongodb.mongo.MongoCollection;
-import io.realm.mongodb.mongo.MongoDatabase;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.triplanner.triplanner.R;
-
-import org.bson.types.Binary;
-import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 public class TravelerProfileFragment extends Fragment {
     TextView name, mail,categories;
@@ -80,10 +69,13 @@ public class TravelerProfileFragment extends Fragment {
     MyAdapter adapter;
     String [] arrCategory;
     TextView category,logout;
-
     Button cameraGalleryBtn;
 
+    String travelerPicture;
 
+    CircularImageView imageProfile;
+
+    User user;
 
     final String[] categoriesArray={
             "amusement park","aquarium","art gallery","bar","casino",
@@ -109,7 +101,7 @@ public class TravelerProfileFragment extends Fragment {
         listCategory=view.findViewById(R.id.traveler_profile_list_category);
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
-        User user = app.currentUser();
+        user = app.currentUser();
         logout=view.findViewById(R.id.traveler_profile_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +110,8 @@ public class TravelerProfileFragment extends Fragment {
             }
         });
 
-       Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
+        imageProfile= view.findViewById(R.id.displayImageView);
+                Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
                 name.setText(traveler.getTravelerName());
@@ -127,6 +120,9 @@ public class TravelerProfileFragment extends Fragment {
                 favoriteCategories.toArray(arrCategory);
                 adapter=new MyAdapter();
                 listCategory.setAdapter(adapter);
+                String picturePath = traveler.getTravelerPicture(); // Assuming this is a String representing the URI or file path
+                Log.d("mylog","picture:"+ picturePath);
+                Picasso.get().load(picturePath).into(imageProfile);
                 editBtn= view.findViewById(R.id.traveler_profile_edit_btn);
                 editBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -144,7 +140,7 @@ public class TravelerProfileFragment extends Fragment {
                 });
 
             }
-        });
+       });
 
         //for galary and camera
         selectedImage = view.findViewById(R.id.displayImageView);
@@ -248,19 +244,83 @@ public class TravelerProfileFragment extends Fragment {
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 Uri contentUri = Uri.fromFile(imageFile);
                 requireActivity().sendBroadcast(mediaScanIntent);
+                travelerPicture = contentUri.toString();
+                Log.d("mylog","travelerPicture:"+travelerPicture);
+                editTraveler();
             }
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                // Handle the result when an image is selected from the gallery
                 Uri contentUri = data.getData();
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
-                Log.d("tag", "onActivityResult: Gallery Image Uri:  " + imageFileName);
-                selectedImage.setImageURI(contentUri);
+
+                // Create a temporary file to store the selected image
+                File imageFile = createGalleryImageFile();
+
+                try {
+                    // Copy the selected image to the temporary file
+                    copyImageToTempFile(contentUri, imageFile);
+
+                    // Display the image and proceed to handle it
+                    selectedImage.setImageURI(Uri.fromFile(imageFile));
+                    travelerPicture = Uri.fromFile(imageFile).toString();
+                    editTraveler();
+                } catch (IOException e) {
+                    Log.e("tag", "Failed to copy the image to the temporary file");
+                    e.printStackTrace();
+                }
             }
         }
+
+
+
+    }
+
+    // Function to create a temporary file for gallery images
+    private File createGalleryImageFile() {
+        try {
+            // Create an image file name
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            File storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            return File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+        } catch (IOException e) {
+            Log.e("tag", "Failed to create the temporary file");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Function to copy the selected image to a temporary file
+    private void copyImageToTempFile(Uri sourceUri, File destFile) throws IOException {
+        try (InputStream inputStream = requireActivity().getContentResolver().openInputStream(sourceUri);
+             OutputStream outputStream = new FileOutputStream(destFile)) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+        }
+    }
+
+    // Function to get the real path from a content URI
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        try (Cursor cursor = requireActivity().getContentResolver().query(contentUri, projection, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                if (columnIndex != -1) {
+                    return cursor.getString(columnIndex);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     private String getFileExt(Uri contentUri) {
         ContentResolver c = requireActivity().getContentResolver();
@@ -284,6 +344,7 @@ public class TravelerProfileFragment extends Fragment {
         return image;
     }
 
+    // Function to create a temporary file for gallery images
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
@@ -345,6 +406,39 @@ public class TravelerProfileFragment extends Fragment {
         dialog.show();
     }
 
+    private void editTraveler() {
+        Log.d("mylog","mail"+user.getProfile().getEmail());
+        Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
+            @Override
+            public void onComplete(Traveler traveler, List<String> favoriteCategories) {
+                name.setText(traveler.getTravelerName());
+                mail.setText(traveler.getTravelerMail());
+                arrCategory= new String[favoriteCategories.size()];
+                favoriteCategories.toArray(arrCategory);
+                adapter=new MyAdapter();
+                listCategory.setAdapter(adapter);
+                Log.d("mylog","picture:"+travelerPicture);
+                Traveler traveler1=new Traveler(user.getProfile().getEmail(),traveler.getTravelerName(),traveler.getTravelerBirthYear(),traveler.getTravelerGender(),travelerPicture);
+                List<FavoriteCategories> listFavoriteCategories = new ArrayList<FavoriteCategories>();
+                for(int i=0; i< favoriteCategories.size();++i){
+                    listFavoriteCategories.add(new FavoriteCategories(favoriteCategories.get(i),traveler.getTravelerMail()));
+                }
+                Model.instance.editTraveler(traveler1,listFavoriteCategories,getContext(),new Model.EditTravelerListener() {
+                    @Override
+                    public void onComplete(String isSuccess) {
+                        if (isSuccess.equals("true")) {
+                            Toast.makeText(getContext(), "Edit user successful", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(getContext(), "Edit user successful", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                });
+            }
+        });
+
+    }
 }
 
 

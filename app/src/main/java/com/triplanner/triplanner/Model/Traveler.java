@@ -17,14 +17,17 @@ public class Traveler implements Parcelable {
     private String travelerGender;
     private String travelerName;
 
+    private String travelerPicture;
+
     @Ignore
     public Traveler(){ }
 
-    public Traveler(String travelerMail,String travelerName, int travelerBirthYear, String travelerGender) {
+    public Traveler(String travelerMail,String travelerName, int travelerBirthYear, String travelerGender ,String travelerPicture) {
         this.travelerName = travelerName;
         this.travelerBirthYear = travelerBirthYear;
         this.travelerGender = travelerGender;
         this.travelerMail=travelerMail;
+        this.travelerPicture = travelerPicture;
     }
     // Standard getters & setters
 
@@ -37,6 +40,7 @@ public class Traveler implements Parcelable {
         }
         travelerGender = in.readString();
         travelerName = in.readString();
+        travelerPicture = in.readString();
     }
 
     public static final Creator<Traveler> CREATOR = new Creator<Traveler>() {
@@ -60,6 +64,9 @@ public class Traveler implements Parcelable {
     public String getTravelerName() { return travelerName; }
     public void setTravelerName(String travelerName) { this.travelerName = travelerName; }
 
+    public String getTravelerPicture() { return travelerPicture; }
+    public void setTravelerPicture(String travelerPicture) { this.travelerPicture = travelerPicture; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -76,6 +83,7 @@ public class Traveler implements Parcelable {
         }
         dest.writeString(travelerGender);
         dest.writeString(travelerName);
+        dest.writeString(travelerPicture);
     }
 }
 

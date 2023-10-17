@@ -120,8 +120,12 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void saveTraveler() {
         String partitionValue = userProfile.getEmail();
         travelerName=InputsName.getEditText().getText().toString();
+        String travelerPicture = "https://pinson.co.il/wp-content/uploads/2020/03/1602_2.png";
         ObjectId _id=new ObjectId(user.getId());
-        Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender);
+        Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender,travelerPicture);
+        Log.d("mylog", "traveler");
+        Log.d("mylog", "name"+travelerName);
+        Log.d("mylog", "travelerPicture: " + travelerPicture);
         List<FavoriteCategories> listFavoriteCategories = new ArrayList<FavoriteCategories>();
         for(int i=0; i< travelerFavoriteCategories.size();++i){
             listFavoriteCategories.add(new FavoriteCategories(travelerFavoriteCategories.get(i),traveler.getTravelerMail()));

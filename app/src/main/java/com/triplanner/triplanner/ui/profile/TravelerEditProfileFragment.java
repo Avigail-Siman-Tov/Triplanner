@@ -163,6 +163,8 @@ public class TravelerEditProfileFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(TravelerEditProfileFragmentDirections.actionTravelerEditProfileFragmentToNavProfile());
             }
         });
+
+
         return view;
     }
     public String[] getYears() {
@@ -275,7 +277,8 @@ public class TravelerEditProfileFragment extends Fragment {
     private void editTraveler() {
         String partitionValue = user.getProfile().getEmail();
         travelerName=InputsName.getEditText().getText().toString();
-        Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender);
+        String travelerPicture = "https://www.google.com/search?q=%D7%AA%D7%9E%D7%95%D7%A0%D7%94&sca_esv=573870793&rlz=1C1ONGR_iwIL1055IL1055&tbm=isch&sxsrf=AM9HkKn7IHlWWbYJ1axnEAd-ElPpWBTGjg:1697483009834&source=lnms&sa=X&ved=2ahUKEwjuxsD-oPuBAxX8hv0HHQyEAI8Q_AUoAXoECAEQAw&biw=1280&bih=563&dpr=1.5#imgrc=t3b3vpzlf8Ci7M";
+        Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender,travelerPicture);
         List<FavoriteCategories> listFavoriteCategories = new ArrayList<FavoriteCategories>();
         for(int i=0; i< travelerFavoriteCategories.size();++i){
             listFavoriteCategories.add(new FavoriteCategories(travelerFavoriteCategories.get(i),traveler.getTravelerMail()));

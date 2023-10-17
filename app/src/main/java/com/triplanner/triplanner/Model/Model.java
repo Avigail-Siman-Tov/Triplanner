@@ -114,4 +114,5 @@ public class Model {
     public interface GetTripUserListener{
         void onComplete(boolean isSuccess);
     }
+
 }

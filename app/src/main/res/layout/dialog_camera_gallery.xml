@@ -35,7 +35,7 @@
             android:id="@+id/galleryOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/icon_galary"
+            android:drawableTop="@drawable/galary"
             android:text="Gallery"
             android:padding="8dp"
             android:background="@android:color/transparent"

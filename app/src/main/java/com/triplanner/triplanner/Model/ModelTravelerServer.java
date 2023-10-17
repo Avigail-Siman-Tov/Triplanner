@@ -43,6 +43,7 @@ public class ModelTravelerServer {
         for (int i = 0; i < listFavoriteCategories.size() ; ++i) {
             paramsTraveler.put("travelerFavoriteCategories" + "[" + i + "]", listFavoriteCategories.get(i).getCategory());
         }
+        paramsTraveler.put("travelerPicture",traveler.getTravelerPicture());
         httpCallPost.setParams(paramsTraveler);
         new HttpRequest() {
             @Override
@@ -82,7 +83,7 @@ public class ModelTravelerServer {
                 String result = response.toString();
                 try {
                     JSONObject  jsonTraveler = new JSONObject(result);
-                    Traveler traveler= new Traveler(jsonTraveler.get("travelerMail").toString(),jsonTraveler.get("travelerName").toString(),Integer.valueOf(jsonTraveler.get("travelerBirthYear").toString()),jsonTraveler.get("travelerGender").toString());
+                    Traveler traveler= new Traveler(jsonTraveler.get("travelerMail").toString(),jsonTraveler.get("travelerName").toString(),Integer.valueOf(jsonTraveler.get("travelerBirthYear").toString()),jsonTraveler.get("travelerGender").toString(),jsonTraveler.get("travelerPicture").toString());
                     List<FavoriteCategories>listFavoriteCategories= new ArrayList<FavoriteCategories>();
                     String str = jsonTraveler.get("travelerFavoriteCategories").toString();
                     str = str.substring(1,str.length()-1);
@@ -121,6 +122,7 @@ public class ModelTravelerServer {
         for (int i = 0; i < listFavoriteCategories.size() ; ++i) {
             paramsTraveler.put("travelerFavoriteCategories" + "[" + i + "]", listFavoriteCategories.get(i).getCategory());
         }
+        paramsTraveler.put("travelerPicture",traveler.getTravelerPicture());
         httpCallPost.setParams(paramsTraveler);
         new HttpRequest() {
             @Override
@@ -398,6 +400,7 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
 
     }
+
 
 
 }

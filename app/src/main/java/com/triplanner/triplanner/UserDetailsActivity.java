@@ -120,7 +120,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void saveTraveler() {
         String partitionValue = userProfile.getEmail();
         travelerName=InputsName.getEditText().getText().toString();
-        String travelerPicture = "https://pinson.co.il/wp-content/uploads/2020/03/1602_2.png";
+        String travelerPicture = "https://sheelerhs.com/ourpages/auto/2021/10/26/53239318/profile_picture.jpg";
         ObjectId _id=new ObjectId(user.getId());
         Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender,travelerPicture);
         Log.d("mylog", "traveler");

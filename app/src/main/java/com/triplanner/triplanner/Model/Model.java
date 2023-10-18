@@ -74,6 +74,10 @@ public class Model {
         travelerModelServer.getTripUser(travelerMail,context,listener);
     }
 
+    public void getPlaceFromRecommender(String travelerMail,String tripDestination,Model.GetPlaceRecommenderListener listener){
+        travelerModelServer.getPlaceFromRecommender(travelerMail,tripDestination,listener);
+    }
+
     public interface AddTripListener{
         void onComplete(String tripId);
     }
@@ -113,6 +117,10 @@ public class Model {
     }
     public interface GetTripUserListener{
         void onComplete(boolean isSuccess);
+    }
+
+    public interface GetPlaceRecommenderListener{
+        void onComplete(List<PlacePlanning> result);
     }
 
 }

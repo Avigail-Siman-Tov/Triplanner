@@ -400,6 +400,8 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
 
     }
+    public void getPlaceFromRecommender(String travelerMail,String tripDestination,Model.GetPlaceRecommenderListener listener) {
+    }
 
 
 

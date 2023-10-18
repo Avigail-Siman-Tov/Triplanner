@@ -34,10 +34,8 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
 
-
 public class TravelerEditProfileFragment extends Fragment {
     Traveler traveler;
-
     TextInputLayout InputsName;
     Spinner genderSpinner, birthYearSpinner;
     TextView textViewCategory,errorCategory;
@@ -48,7 +46,6 @@ public class TravelerEditProfileFragment extends Fragment {
     String travelerName,travelerGender;
     int travelerBirthYear;
     String travelerPicture;
-
     final String[] categoriesArray={
             "amusement park","aquarium","art gallery","bar","casino",
             "museum","night club","park","shopping mall","spa",

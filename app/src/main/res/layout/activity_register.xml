@@ -76,7 +76,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_register_input_password1"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="Password"
                     android:inputType="textPassword" />
@@ -109,7 +109,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_register_input_verify_password1"
                     android:layout_width="match_parent"
-                    android:layout_height="49dp"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="Verify Password "
                     android:inputType="textPassword" />

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background8"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background8">
 
     <TextView
         android:id="@+id/traveler_profile_logout"
@@ -35,7 +35,6 @@
         android:gravity="center"
         android:text="traveler name"
         android:textColor="#646561"
-
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +68,8 @@
         app:layout_constraintVertical_bias="0.251">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="342dp"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="262dp">
 
             <ListView
                 android:id="@+id/traveler_profile_list_category"
@@ -79,26 +78,27 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="84dp"
                 android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                android:background="@android:color/transparent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/traveler_profile_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="20dp"
+                android:gravity="center"
                 android:text="Your favorite categories:"
                 android:textColor="#646561"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="39dp" />
 
 

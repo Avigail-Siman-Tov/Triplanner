@@ -47,6 +47,7 @@ public class TravelerEditProfileFragment extends Fragment {
     ArrayList<Integer> categoriesList = new ArrayList<>();
     String travelerName,travelerGender;
     int travelerBirthYear;
+    String travelerPicture;
 
     final String[] categoriesArray={
             "amusement park","aquarium","art gallery","bar","casino",
@@ -78,6 +79,7 @@ public class TravelerEditProfileFragment extends Fragment {
 
         InputsName= view.findViewById(R.id.fragment_edit_profile_userName);
         InputsName.getEditText().setText(traveler.getTravelerName());
+        travelerPicture = traveler.getTravelerPicture();
         genderSpinner= view.findViewById(R.id.fragment_edit_profile_spinner_gender);
         ArrayAdapter<CharSequence> adapterGender = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,genderArray);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -277,7 +279,6 @@ public class TravelerEditProfileFragment extends Fragment {
     private void editTraveler() {
         String partitionValue = user.getProfile().getEmail();
         travelerName=InputsName.getEditText().getText().toString();
-        String travelerPicture = "https://www.google.com/search?q=%D7%AA%D7%9E%D7%95%D7%A0%D7%94&sca_esv=573870793&rlz=1C1ONGR_iwIL1055IL1055&tbm=isch&sxsrf=AM9HkKn7IHlWWbYJ1axnEAd-ElPpWBTGjg:1697483009834&source=lnms&sa=X&ved=2ahUKEwjuxsD-oPuBAxX8hv0HHQyEAI8Q_AUoAXoECAEQAw&biw=1280&bih=563&dpr=1.5#imgrc=t3b3vpzlf8Ci7M";
         Traveler traveler=new Traveler(partitionValue, travelerName,travelerBirthYear,travelerGender,travelerPicture);
         List<FavoriteCategories> listFavoriteCategories = new ArrayList<FavoriteCategories>();
         for(int i=0; i< travelerFavoriteCategories.size();++i){

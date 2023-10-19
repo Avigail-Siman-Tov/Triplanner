@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -30,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Model;
@@ -79,6 +82,10 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         myLoadingDialog=new ProgressDialog(getContext());
         wazeBtn = view.findViewById(R.id.btn_waze);
         moovitBtn = view.findViewById(R.id.btn_moovit);
+        ratingBarTraveler = view.findViewById(R.id.fragment_place_traveler_details_place_rating_user);
+        Drawable drawable = ratingBarTraveler.getProgressDrawable();
+        drawable.setColorFilter(Color.parseColor("#2877B6"), PorterDuff.Mode.SRC_ATOP);
+        editRating =view.findViewById(R.id.fragment_place_traveler_details_place_edit_rating_user);
         Model.instance.getOpenHoursOfPlace(place.getPlaceID(), getContext(), new Model.GetOpenHoursOfPlaceListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -102,8 +109,20 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             placePhone.setText(Html.fromHtml(text));
         }
         ratingBar.setRating(place.getPlaceRating());
+        ratingBarTraveler.setRating(place.getTravelerRating());
         placeImg.setTag(place.getPlaceImgUrl());
+        editRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isNetworkConnected()) {
+//                    ShowDialog();
+                }
+                else{
+                    Toast.makeText(getContext(), "Error! Connect to Internet", Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
         if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
             if (place.getPlaceImgUrl() == placeImg.getTag()) {
                 Picasso.get().load(place.getPlaceImgUrl()).into(placeImg);

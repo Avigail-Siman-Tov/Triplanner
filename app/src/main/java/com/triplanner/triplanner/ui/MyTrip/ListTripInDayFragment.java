@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -86,6 +87,27 @@ public class ListTripInDayFragment extends Fragment {
                 drawRoutes();
             }
         });
+
+        // Disable nested scrolling for the map
+//        mapView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                int action = event.getAction();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        // Disallow the touch request for parent scroll on touch of child view
+//                        v.getParent().requestDisallowInterceptTouchEvent(true);
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        // Allow the touch request for parent scroll on touch release
+//                        v.getParent().requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                }
+//                // Handle the touch event for the MapView
+//                v.onTouchEvent(event);
+//                return true;
+//            }
+//        });
         return view;
     }
 
@@ -128,7 +150,7 @@ public class ListTripInDayFragment extends Fragment {
         // Build the bounds
         bounds = builder.build();
 
-        int padding = 100; // Adjust this value as needed
+        int padding = 50; // Adjust this value as needed
         // Zoom to fit all markers and polylines with padding
         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
     }

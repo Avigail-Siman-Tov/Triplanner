@@ -1,7 +1,9 @@
 package com.triplanner.triplanner.ui.MyTrip;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -30,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -115,7 +118,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isNetworkConnected()) {
-//                    ShowDialog();
+                    ShowDialog();
                 }
                 else{
                     Toast.makeText(getContext(), "Error! Connect to Internet", Toast.LENGTH_SHORT).show();
@@ -212,5 +215,70 @@ public class PlaceTravelerDetailsFragment extends Fragment {
 
     }
 
+    public void ShowDialog()
+    {
+        final AlertDialog.Builder popDialog = new AlertDialog.Builder(getContext());
+
+        LinearLayout linearLayout = new LinearLayout(getContext());
+        final RatingBar rating = new RatingBar(getContext());
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        rating.setLayoutParams(lp);
+        rating.setNumStars(5);
+        rating.setStepSize(1);
+
+        //add ratingBar to linearLayout
+        linearLayout.addView(rating);
+
+
+        popDialog.setIcon(android.R.drawable.btn_star_big_on);
+        popDialog.setTitle("Edit Rating: ");
+
+        //add linearLayout to dailog
+        popDialog.setView(linearLayout);
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                System.out.println("Rated val:"+v);
+            }
+        });
+
+        // Button OK
+        popDialog.setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                myLoadingDialog.setTitle("Edit Rating");
+                                myLoadingDialog.setMessage("Please wait,Edit your rating");
+                                myLoadingDialog.setCanceledOnTouchOutside(false);
+                                myLoadingDialog.show();
+                                ratingBarTraveler.setRating((float) rating.getProgress());
+                                place.setTravelerRating((float) rating.getProgress());
+                                Model.instance.editPlace(place, destination, getContext(), new Model.EditPlaceListener() {
+                                    @Override
+                                    public void onComplete(boolean isSuccess) {
+                                        myLoadingDialog.dismiss();
+                                    }
+                                });
+
+                            }
+
+                        })
+
+                // Button Cancel
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        popDialog.create();
+        popDialog.show();
+
+    }
 
 }

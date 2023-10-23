@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.MyTrip.ListTripInDayFragment"
+    android:fillViewport="true"
     android:paddingBottom="?attr/actionBarSize">
-
-    <TextView
-        android:id="@+id/fragment_list_trip_in_day_num_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="#646561"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:contentDescription="Day Number"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".ui.MyTrip.ListTripInDayFragment"
+        android:paddingBottom="?attr/actionBarSize">
 
-        <!-- ListView -->
+        <TextView
+            android:id="@+id/fragment_list_trip_in_day_num_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#646561"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:contentDescription="Day Number"/>
+
+        <!-- List View -->
         <ListView
             android:id="@+id/fragment_list_trip_in_day_list_view"
             android:layout_width="match_parent"
-            android:layout_height="498dp"
+            android:layout_height="wrap_content"
             android:contentDescription="List View" />
 
-        <!-- MapView -->
+        <!-- Map View -->
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="241dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:contentDescription="Map View"
+            android:layout_height="200dp"
             app:liteMode="true" />
     </LinearLayout>
-
-
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

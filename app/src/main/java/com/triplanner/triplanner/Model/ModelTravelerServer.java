@@ -401,6 +401,41 @@ public class ModelTravelerServer {
 
     }
     public void getPlaceFromRecommender(String travelerMail,String tripDestination,Model.GetPlaceRecommenderListener listener) {
+        final String URL_GET_PLACE = "https://triplanner--server-5139d3ccceab.herokuapp.com/plantrip/recommender";
+        HttpCall httpCallPost = new HttpCall();
+        httpCallPost.setMethodtype(HttpCall.GET);
+        httpCallPost.setUrl(URL_GET_PLACE );
+        HashMap<String, String> paramsPlace = new HashMap<>();
+        paramsPlace.put("travelerMail", travelerMail);
+        paramsPlace.put("tripDestination", tripDestination);
+        httpCallPost.setParams(paramsPlace);
+        new HttpRequest() {
+            @Override
+            public void onResponse(String response) {
+                super.onResponse(response);
+
+                try {
+                    if (response != "false") {
+                        JSONArray places  = new JSONArray(response);
+                        if(places.length()>0) {
+                            List<PlacePlanning>  arrPlace = new ArrayList<>();
+
+                            listener.onComplete(arrPlace);
+
+                        }
+                        else{
+                            listener.onComplete(null);
+                        }
+                    }
+                    else{
+                        listener.onComplete(null);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(httpCallPost);
     }
 
 

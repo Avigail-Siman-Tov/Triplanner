@@ -419,7 +419,31 @@ public class ModelTravelerServer {
                         JSONArray places  = new JSONArray(response);
                         if(places.length()>0) {
                             List<PlacePlanning>  arrPlace = new ArrayList<>();
+                            for (int i = 0; i < places.length(); ++i) {
+                                JSONObject placeObject = places.getJSONObject(i);
+                                String placeID = placeObject.get("placeId").toString();
+                                String placeName = placeObject.get("placeName").toString();
+                                double placeLocationLat = Double.valueOf(placeObject.get("placeLocationLat").toString());
+                                double placeLocationLng = Double.valueOf(placeObject.get("placeLocationLng").toString());
+                                String placeFormattedAddress = placeObject.get("placeFormattedAddress").toString();
+                                String placeInternationalPhoneNumber = placeObject.get("placeInternationalPhoneNumber").toString();
+                                float placeRating = Float.parseFloat(placeObject.get("placeRating").toString());
+                                String placeWebsite = placeObject.get("placeWebsite").toString();
+                                String placeImgUrl = placeObject.get("placeImgUrl").toString();
+                                JSONArray openHours = placeObject.getJSONArray("placeOpeningHours");
+                                List<String> myOpenHours=null;
+                                if(openHours.length()>0) {
+                                    myOpenHours= new ArrayList<>();
+                                    for (int j = 0; j < openHours.length(); ++j) {
+                                        myOpenHours.add(openHours.get(j).toString());
+                                    }
+                                }
+                                PlacePlanning place= new PlacePlanning(placeID, placeName, placeLocationLat,placeLocationLng, placeFormattedAddress,placeInternationalPhoneNumber, myOpenHours,placeRating, placeWebsite,  placeImgUrl,false);
+                                place.setRecommended("1");
+                                System.out.println(place.getPlaceID());
+                                arrPlace.add(place);
 
+                            }
                             listener.onComplete(arrPlace);
 
                         }
@@ -437,8 +461,5 @@ public class ModelTravelerServer {
             }
         }.execute(httpCallPost);
     }
-
-
-
 }
 

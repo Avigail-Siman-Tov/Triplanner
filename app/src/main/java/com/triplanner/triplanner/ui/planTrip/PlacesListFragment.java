@@ -247,6 +247,10 @@ public class PlacesListFragment extends Fragment {
             button=view.findViewById(R.id.place_list_row_button);
             name.setText(place.getPlaceName());
             imagev.setTag(place.getPlaceImgUrl());
+            rating=view.findViewById(R.id.place_list_row_rating);
+            rating.setRating(place.getPlaceRating());
+            Drawable drawable = rating.getProgressDrawable();
+            drawable.setColorFilter(Color.parseColor("#FDC313"), PorterDuff.Mode.SRC_ATOP);
             if (place.getPlaceImgUrl() != null && !place.getPlaceImgUrl().equals("")) {
                 if (place.getPlaceImgUrl() == imagev.getTag()) {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
@@ -255,7 +259,21 @@ public class PlacesListFragment extends Fragment {
 
 
             }
+            imageBest.setTag(place.isRecommended());
+            if(place.isRecommended()!=null){
+                if(place.isRecommended().equals("1") && imageBest.getTag().equals("1")){
+                    imageBest.setVisibility(View.VISIBLE);
+                    String uri = "@drawable/icons_best_seller";  // where myresource (without the extension) is the file
 
+                    int imageResource = getResources().getIdentifier(uri, null,packageName);
+                    Drawable res = getResources().getDrawable(imageResource);
+                    imageBest.setImageDrawable(res);
+                }
+
+                else{
+                    imageBest.setVisibility(View.GONE);
+                }
+            }
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

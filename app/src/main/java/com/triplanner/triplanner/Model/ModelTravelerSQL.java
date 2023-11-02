@@ -12,6 +12,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -168,8 +169,6 @@ public class ModelTravelerSQL {
         task.execute();
     }
 
-
-
     public void getOpenHoursOfPlace(String placeId,Context context,Model.GetOpenHoursOfPlaceListener listener){
         class MyAsynchTask extends AsyncTask {
             List<String> openHours;
@@ -235,30 +234,30 @@ public class ModelTravelerSQL {
         task.execute();
     }
         public  void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
-        class MyAsynchTask extends AsyncTask {
-            Trip [] arrTrip ;
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                List<Trip> trips = AppLocalDB.getDatabase(context).tripDao().getTripByEmail(travelerMail);
+            class MyAsynchTask extends AsyncTask {
+                Trip [] arrTrip ;
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    List<Trip> trips = AppLocalDB.getDatabase(context).tripDao().getTripByEmail(travelerMail);
+                    Log.d("mylog",""+trips);
+                    if(trips!=null){
+                        Collections.sort(trips, new SortByDate());
+                        arrTrip=new Trip[trips.size()];
+                        trips.toArray(arrTrip);
 
-                if(trips!=null){
-                    Collections.sort(trips, new SortByDate());
-                    arrTrip=new Trip[trips.size()];
-                    trips.toArray(arrTrip);
-
+                    }
+                    return null;
                 }
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                if (listener != null) {
-                    listener.onComplete(arrTrip);
+                @Override
+                protected void onPostExecute(Object o) {
+                    super.onPostExecute(o);
+                    if (listener != null) {
+                        listener.onComplete(arrTrip);
+                    }
                 }
             }
-        }
-        MyAsynchTask task = new MyAsynchTask();
-        task.execute();
+            MyAsynchTask task = new MyAsynchTask();
+            task.execute();
     }
     static class SortByDate implements Comparator<Trip> {
 

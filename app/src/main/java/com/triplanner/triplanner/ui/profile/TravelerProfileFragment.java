@@ -121,7 +121,6 @@ public class TravelerProfileFragment extends Fragment {
                 adapter=new MyAdapter();
                 listCategory.setAdapter(adapter);
                 String picturePath = traveler.getTravelerPicture(); // Assuming this is a String representing the URI or file path
-                Log.d("mylog","picture:"+ picturePath);
                 Picasso.get().load(picturePath).into(imageProfile);
                 editBtn= view.findViewById(R.id.traveler_profile_edit_btn);
                 editBtn.setOnClickListener(new View.OnClickListener() {
@@ -238,14 +237,11 @@ public class TravelerProfileFragment extends Fragment {
                 // Handle the result when an image is captured with the camera
                 File imageFile = new File(currentPhotoPath);
                 selectedImage.setImageURI(Uri.fromFile(imageFile));
-                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(imageFile));
-
                 // Tell the media scanner to scan the newly created image file
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 Uri contentUri = Uri.fromFile(imageFile);
                 requireActivity().sendBroadcast(mediaScanIntent);
                 travelerPicture = contentUri.toString();
-                Log.d("mylog","travelerPicture:"+travelerPicture);
                 editTraveler();
             }
         }
@@ -407,7 +403,6 @@ public class TravelerProfileFragment extends Fragment {
     }
 
     private void editTraveler() {
-        Log.d("mylog","mail"+user.getProfile().getEmail());
         Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
@@ -417,7 +412,6 @@ public class TravelerProfileFragment extends Fragment {
                 favoriteCategories.toArray(arrCategory);
                 adapter=new MyAdapter();
                 listCategory.setAdapter(adapter);
-                Log.d("mylog","picture:"+travelerPicture);
                 Traveler traveler1=new Traveler(user.getProfile().getEmail(),traveler.getTravelerName(),traveler.getTravelerBirthYear(),traveler.getTravelerGender(),travelerPicture);
                 List<FavoriteCategories> listFavoriteCategories = new ArrayList<FavoriteCategories>();
                 for(int i=0; i< favoriteCategories.size();++i){

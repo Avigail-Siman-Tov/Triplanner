@@ -38,15 +38,6 @@ public class CircularImageView extends AppCompatImageView {
         super.onLayout(changed, left, top, right, bottom);
     }
 
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        int min = Math.min(getWidth(), getHeight());
-//        Bitmap bitmap = ((BitmapDrawable) getDrawable()).getBitmap();
-//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, min, min, false);
-//        Bitmap roundedBitmap = getRoundedBitmap(scaledBitmap);
-//        canvas.drawBitmap(roundedBitmap, 0, 0, null);
-//    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         BitmapDrawable drawable = (BitmapDrawable) getDrawable();

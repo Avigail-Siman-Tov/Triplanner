@@ -7,18 +7,10 @@ import androidx.navigation.Navigation;
 
 import com.triplanner.triplanner.HTTP.HttpCall;
 import com.triplanner.triplanner.HTTP.HttpRequest;
-import com.triplanner.triplanner.Model.FavoriteCategories;
-import com.triplanner.triplanner.Model.Model;
-import com.triplanner.triplanner.Model.ModelTravelerSQL;
-import com.triplanner.triplanner.Model.OpenHours;
-import com.triplanner.triplanner.Model.Place;
-import com.triplanner.triplanner.Model.PlacePlanning;
-import com.triplanner.triplanner.Model.Traveler;
-import com.triplanner.triplanner.Model.Trip;
-
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -82,7 +74,7 @@ public class ModelTravelerServer {
                 Log.d("My Response:",response.toString());
                 String result = response.toString();
                 try {
-                    JSONObject  jsonTraveler = new JSONObject(result);
+                    JSONObject jsonTraveler = new JSONObject(result);
                     Traveler traveler= new Traveler(jsonTraveler.get("travelerMail").toString(),jsonTraveler.get("travelerName").toString(),Integer.valueOf(jsonTraveler.get("travelerBirthYear").toString()),jsonTraveler.get("travelerGender").toString(),jsonTraveler.get("travelerPicture").toString());
                     List<FavoriteCategories>listFavoriteCategories= new ArrayList<FavoriteCategories>();
                     String str = jsonTraveler.get("travelerFavoriteCategories").toString();
@@ -413,6 +405,7 @@ public class ModelTravelerServer {
             @Override
             public void onResponse(String response) {
                 super.onResponse(response);
+                Log.d("my",response);
 
                 try {
                     if (response != "false") {

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -138,7 +139,6 @@ public class ResetPassActivity extends AppCompatActivity {
             }
         });
     }
-
     private void togglePasswordVisibility(TextInputLayout passwordEditText , boolean isPasswordVisible,ImageButton togglePasswordButton) {
         int cursorPosition = passwordEditText.getEditText().getSelectionStart();
         if (isPasswordVisible) {

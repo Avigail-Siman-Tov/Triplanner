@@ -6,9 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities ={Traveler.class,FavoriteCategories.class,Trip.class,OpenHours.class,Place.class}, version = 3,exportSchema = true)
-
-//@Database(entities ={Traveler.class,FavoriteCategories.class,Trip.class,OpenHours.class,Place.class}, version = 1,exportSchema = true)
+@Database(entities ={Traveler.class,FavoriteCategories.class,Trip.class,OpenHours.class,Place.class}, version = 1,exportSchema = true)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract TravelerDao travelerDao();
     public abstract FavoriteCategoriesDao favoriteCategoriesDao();

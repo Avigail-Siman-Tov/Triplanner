@@ -18,7 +18,6 @@ import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
 
 public class LogoutActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +25,7 @@ public class LogoutActivity extends AppCompatActivity {
         Realm.init(this);
         App app=new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         User user = app.currentUser();
+        Log.d("mylog",""+user);
         Runnable runnable=new Runnable() {
             @Override
             public void run() {
@@ -35,7 +35,7 @@ public class LogoutActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(boolean isSuccess) {
                                 if(isSuccess){
-                                    Toast.makeText(LogoutActivity.this,"Delete user  Succeeded",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LogoutActivity.this,"Delete user Succeeded",Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

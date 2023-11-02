@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -166,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         passwordEditText.getEditText().setSelection(cursorPosition); // Restore cursor position
     }
+
 
     private void setPasswordVisibility(TextInputLayout passwordEditText, int inputType, @DrawableRes int iconResource, ImageButton togglePasswordButton) {
         passwordEditText.getEditText().setInputType(inputType);

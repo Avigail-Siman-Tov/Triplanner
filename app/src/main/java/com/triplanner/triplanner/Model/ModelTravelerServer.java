@@ -310,8 +310,6 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
     }
 
-
-
     public  void getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
         final String URL_GET_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/getTripUser";
         HttpCall httpCallPost = new HttpCall();
@@ -405,10 +403,12 @@ public class ModelTravelerServer {
             @Override
             public void onResponse(String response) {
                 super.onResponse(response);
-                Log.d("my",response);
 
                 try {
-                    if (response != "false") {
+                    Log.d("my","tat"+response);
+//                    if (response != "false") {
+                    if (!response.equals("false")) {
+                        Log.d("my", response);
                         JSONArray places  = new JSONArray(response);
                         if(places.length()>0) {
                             List<PlacePlanning>  arrPlace = new ArrayList<>();

@@ -13,7 +13,7 @@ import io.realm.mongodb.User;
 
 public class Model {
     public final static Model instance = new Model();
-    String appID = "triplanner-fjgqd";
+    String appID = "application-0-frsbh";
     App app = new App(new AppConfiguration.Builder(appID).build());
     private ModelTravelerServer travelerModelServer=new ModelTravelerServer();
     private ModelTravelerSQL travelerModelSQL=new ModelTravelerSQL();

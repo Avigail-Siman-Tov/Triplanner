@@ -46,7 +46,6 @@ public class LogoutActivity extends AppCompatActivity {
                         Log.e("AUTH", result.getError().toString());
                     }
                 });
-//
             }
         };
         Handler handler=new Handler();

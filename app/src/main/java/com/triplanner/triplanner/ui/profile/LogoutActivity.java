@@ -30,14 +30,14 @@ public class LogoutActivity extends AppCompatActivity {
             public void run() {
                 user.logOutAsync( result -> {
                     if (result.isSuccess()) {
-//                        Model.instance.deleteTraveler(user.getProfile().getEmail(), LogoutActivity.this, new Model.DeleteTravelerListener() {
-//                            @Override
-//                            public void onComplete(boolean isSuccess) {
-//                                if(isSuccess){
-//                                    Toast.makeText(LogoutActivity.this,"Delete user Succeeded",Toast.LENGTH_LONG).show();
-//                                }
-//                            }
-//                        });
+                        Model.instance.deleteTraveler(user.getProfile().getEmail(), LogoutActivity.this, new Model.DeleteTravelerListener() {
+                            @Override
+                            public void onComplete(boolean isSuccess) {
+                                if(isSuccess){
+                                    Toast.makeText(LogoutActivity.this,"Delete user Succeeded",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
                         Intent intent=new Intent(LogoutActivity.this,LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

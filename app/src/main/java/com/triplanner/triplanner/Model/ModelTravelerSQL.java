@@ -50,7 +50,7 @@ public class ModelTravelerSQL {
         task.execute();
 
     }
-    public  void addTraveler(Traveler traveler,List<FavoriteCategories> favoriteCategories ,Context context,final Model.AddTravelerListener listener) {
+    public void addTraveler(Traveler traveler,List<FavoriteCategories> favoriteCategories ,Context context,final Model.AddTravelerListener listener) {
         class MyAsynchTask extends AsyncTask {
             @Override
             protected Object doInBackground(Object[] objects) {

@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:paddingBottom="?attr/actionBarSize">
+    android:paddingBottom="?attr/actionBarSize"
+    tools:context=".ui.MyTrip.ListTripInDayFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/fragment_list_trip_in_day_num_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".ui.MyTrip.ListTripInDayFragment"
-        android:paddingBottom="?attr/actionBarSize">
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#646561"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:contentDescription="Day Number"/>
+    <!-- Map View -->
+    <com.google.android.gms.maps.MapView
+        android:layout_marginTop="80dp"
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:liteMode="true" />
 
-        <TextView
-            android:id="@+id/fragment_list_trip_in_day_num_day"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="696dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="#646561"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            android:contentDescription="Day Number"/>
+            android:layout_marginTop="280dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
 
-        <!-- List View -->
-        <ListView
-            android:id="@+id/fragment_list_trip_in_day_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="List View" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DCEEF1">
 
-        <!-- Map View -->
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:liteMode="true" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+                <!-- List View -->
+                <ListView
+                    android:id="@+id/fragment_list_trip_in_day_list_view"
+                    android:layout_width="407dp"
+                    android:layout_height="600dp"
+                    android:contentDescription="List View"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="-310dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

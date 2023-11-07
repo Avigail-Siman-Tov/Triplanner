@@ -405,10 +405,10 @@ public class ModelTravelerServer {
                 super.onResponse(response);
 
                 try {
-                    Log.d("my","tat"+response);
-//                    if (response != "false") {
-                    if (!response.equals("false")) {
-                        Log.d("my", response);
+                    Log.d("mylog","tat"+response);
+                    if (response != "false") {
+//                    if (!response.equals("false")) {
+                        Log.d("mylog", response);
                         JSONArray places  = new JSONArray(response);
                         if(places.length()>0) {
                             List<PlacePlanning>  arrPlace = new ArrayList<>();

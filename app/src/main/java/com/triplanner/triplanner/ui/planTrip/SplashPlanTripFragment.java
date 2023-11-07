@@ -171,36 +171,36 @@ public class SplashPlanTripFragment extends Fragment {
                             });
                             myAllPlaces.addAll(myPlaces);
                             if(m== end) {
-//                                Model.instance.getPlaceFromRecommender(user.getProfile().getEmail(), tripLocation, new Model.GetPlaceRecommenderListener() {
-//                                    @Override
-//                                    public void onComplete(List<PlacePlanning> result) {
-//                                        if(result!=null) {
-//                                            Log.d("mylog","resulttt"+result);
-//                                            for(int b=0;b<myAllPlaces.size();++b){
-//                                                for(int c=0;c<result.size();++c){
-//                                                    if(result.get(c).getPlaceID().equals(myAllPlaces.get(b).getPlaceID())){
-//                                                        myAllPlaces.remove(b);
-//                                                        break;
-//                                                    }
-//                                                }
-//                                            }
-//                                            Collections.sort(result, new SortByDatePlace());
-//                                            Collections.sort(myAllPlaces, new SortByDatePlace());
-//                                            myAllPlaces.addAll(0,result);
-//
-//                                        }
-//                                        else {
-//                                            Collections.sort(myAllPlaces, new SortByDatePlace());
-//                                        }
+                                Model.instance.getPlaceFromRecommender(user.getProfile().getEmail(), tripLocation, new Model.GetPlaceRecommenderListener() {
+                                    @Override
+                                    public void onComplete(List<PlacePlanning> result) {
+                                        if(result!=null) {
+                                            Log.d("mylog","resulttt"+result);
+                                            for(int b=0;b<myAllPlaces.size();++b){
+                                                for(int c=0;c<result.size();++c){
+                                                    if(result.get(c).getPlaceID().equals(myAllPlaces.get(b).getPlaceID())){
+                                                        myAllPlaces.remove(b);
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            Collections.sort(result, new SortByDatePlace());
+                                            Collections.sort(myAllPlaces, new SortByDatePlace());
+                                            myAllPlaces.addAll(0,result);
+
+                                        }
+                                        else {
+                                            Collections.sort(myAllPlaces, new SortByDatePlace());
+                                        }
                                         PlacePlanning[] arrayPlaces = new PlacePlanning[myAllPlaces.size()];
                                         myAllPlaces.toArray(arrayPlaces);
                                         getParentFragmentManager().popBackStack();
                                         SplashPlanTripFragmentDirections.ActionSplashPlanTripFragmentToPlacesListFragment action = SplashPlanTripFragmentDirections.actionSplashPlanTripFragmentToPlacesListFragment(arrayPlaces, tripDaysNumber,tripName,tripLocation);
                                         Navigation.findNavController(view).navigate(action);
                                     }
-//                                });
-//
-//                            }
+                                });
+
+                            }
                         }
                         System.out.println("Finish");
                     } catch (InterruptedException | JSONException e) {

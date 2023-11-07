@@ -1,12 +1,9 @@
 package com.triplanner.triplanner.ui.profile;
 import android.app.AlertDialog;
 import android.content.Intent;
-
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.View;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -22,16 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.CircularImageView;
 import com.triplanner.triplanner.Model.FavoriteCategories;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Traveler;
 import com.triplanner.triplanner.R;
-import com.triplanner.triplanner.RealPathUtil;
-
-import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -41,22 +34,18 @@ import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -267,9 +256,6 @@ public class TravelerProfileFragment extends Fragment {
                 }
             }
         }
-
-
-
     }
 
     // Function to create a temporary file for gallery images

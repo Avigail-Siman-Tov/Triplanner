@@ -70,7 +70,7 @@ public class Model {
     public void editPlace(Place place,String tripDestination,Context context, Model.EditPlaceListener listener){
         travelerModelServer.editPlace(place,tripDestination,context,listener);
     }
-    public void  getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
+    public void getTripUser(String travelerMail, Context context,Model.GetTripUserListener listener){
         travelerModelServer.getTripUser(travelerMail,context,listener);
     }
 

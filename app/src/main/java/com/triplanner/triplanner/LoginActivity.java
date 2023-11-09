@@ -126,12 +126,17 @@ public class LoginActivity extends AppCompatActivity {
                         Model.instance.getTravelerByEmailInServer(mail, getApplicationContext(), new Model.GetTravelerByEmailListener() {
                             @Override
                             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
-                                myLoadingDialog.dismiss();
-                                Toast.makeText(LoginActivity.this,"Log-in Succeeded",Toast.LENGTH_LONG).show();
-                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+                                Model.instance.getTripUser(mail,getApplicationContext(), new Model.GetTripUserListener() {
+                                    @Override
+                                    public void onComplete(boolean isSuccess) {
+                                        myLoadingDialog.dismiss();
+                                        Toast.makeText(LoginActivity.this,"Log-in Succeeded",Toast.LENGTH_LONG).show();
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
                             }
                         });
                     }

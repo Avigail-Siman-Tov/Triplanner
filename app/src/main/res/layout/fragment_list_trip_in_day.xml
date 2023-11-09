@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,49 +21,55 @@
         android:textSize="34sp"
         android:textStyle="bold"
         android:contentDescription="Day Number"/>
-    <!-- Map View -->
+
     <com.google.android.gms.maps.MapView
         android:layout_marginTop="80dp"
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:liteMode="true" />
-
+        android:layout_height="400dp"
+        app:liteMode="false" />
     <androidx.core.widget.NestedScrollView
+        android:layout_marginTop="470dp"
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="696dp"
+        android:layout_height="match_parent"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Map View -->
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
 
-                <!-- List View -->
-                <ListView
-                    android:id="@+id/fragment_list_trip_in_day_list_view"
-                    android:layout_width="407dp"
-                    android:layout_height="600dp"
-                    android:contentDescription="List View"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="2dp"
-                    tools:layout_editor_absoluteY="-310dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- List View -->
+                    <ListView
+                        android:id="@+id/fragment_list_trip_in_day_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp"
+                        android:contentDescription="List View"
+                        tools:ignore="MissingConstraints">
 
-        </androidx.cardview.widget.CardView>
+                    </ListView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

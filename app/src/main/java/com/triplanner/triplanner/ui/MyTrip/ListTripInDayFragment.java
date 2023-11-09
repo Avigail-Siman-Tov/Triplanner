@@ -83,6 +83,25 @@ public class ListTripInDayFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap map) {
                 googleMap = map;
+                // Enable zoom controls on the map
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+                // Disable nested scrolling for the map
+                mapView.setNestedScrollingEnabled(false);
+
+                // Set touch gesture for scrolling and zooming the map
+                mapView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                        v.onTouchEvent(event);
+                        return true;
+                    }
+                });
                 // Initialize your map settings and drawRoutes() here
                 drawRoutes();
             }

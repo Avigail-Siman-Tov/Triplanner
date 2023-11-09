@@ -100,7 +100,7 @@ public class TravelerProfileFragment extends Fragment {
         });
 
         imageProfile= view.findViewById(R.id.displayImageView);
-                Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
+        Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
             public void onComplete(Traveler traveler, List<String> favoriteCategories) {
                 name.setText(traveler.getTravelerName());

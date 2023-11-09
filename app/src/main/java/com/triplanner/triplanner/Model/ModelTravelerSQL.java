@@ -233,7 +233,7 @@ public class ModelTravelerSQL {
         MyAsynchTask task = new MyAsynchTask();
         task.execute();
     }
-        public  void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
+    public void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
             class MyAsynchTask extends AsyncTask {
                 Trip [] arrTrip ;
                 @Override

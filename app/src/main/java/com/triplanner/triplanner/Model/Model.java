@@ -45,7 +45,7 @@ public class Model {
     public void getAllTrip(String travelerMail,Context context,Model.GetAllTripListener listener){
         travelerModelSQL.getAllTrip(travelerMail,context,listener);
     }
-        public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
+    public void getTravelerByEmailInServer(String travelerMail, Context context, final GetTravelerByEmailListener listener){
         travelerModelServer.getTraveler(travelerMail, context,listener);
 
     }

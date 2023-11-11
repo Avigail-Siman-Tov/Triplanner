@@ -79,58 +79,18 @@ public class ListTripInDayFragment extends Fragment {
 
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap map) {
-                googleMap = map;
-                // Enable zoom controls on the map
-                googleMap.getUiSettings().setZoomControlsEnabled(true);
 
-                // Disable nested scrolling for the map
-                mapView.setNestedScrollingEnabled(false);
+        showMap();
 
-                // Set touch gesture for scrolling and zooming the map
-                mapView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                            v.getParent().requestDisallowInterceptTouchEvent(true);
-                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                            v.getParent().requestDisallowInterceptTouchEvent(false);
-                        }
-                        v.onTouchEvent(event);
-                        return true;
-                    }
-                });
-                // Initialize your map settings and drawRoutes() here
-                drawRoutes();
-            }
-        });
-
-        // Disable nested scrolling for the map
-//        mapView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                int action = event.getAction();
-//                switch (action) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        // Disallow the touch request for parent scroll on touch of child view
-//                        v.getParent().requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        // Allow the touch request for parent scroll on touch release
-//                        v.getParent().requestDisallowInterceptTouchEvent(false);
-//                        break;
-//                }
-//                // Handle the touch event for the MapView
-//                v.onTouchEvent(event);
-//                return true;
-//            }
-//        });
         return view;
     }
 
     private void drawRoutes() {
+
+        if (googleMap == null) {
+            // Map is not ready yet, postpone the execution
+            return;
+        }
         // Define and initialize the LatLng array for places.
         LatLng[] placeLatLngs = new LatLng[arrayPlaces.length];
 
@@ -147,11 +107,9 @@ public class ListTripInDayFragment extends Fragment {
 
         // Check if there are more than 1 place before calculating/displaying routes
         if (arrayPlaces.length > 1) {
-            // Calculate and display routes between places
+            // Calculate and display routes only between consecutive places
             for (int i = 1; i < arrayPlaces.length; i++) {
-                for (int j = 0; j < i; j++) {
-                    calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[j]);
-                }
+                calculateAndDisplayRoute(placeLatLngs[i], placeLatLngs[i-1]);
             }
 
             // Include all points in the polylines
@@ -206,12 +164,11 @@ public class ListTripInDayFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+//        mapView.onResume();
+        showMap();
     }
 
     @Override
@@ -232,6 +189,36 @@ public class ListTripInDayFragment extends Fragment {
         mapView.onLowMemory();
     }
 
+    public void showMap(){
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                googleMap = map;
+                // Enable zoom controls on the map
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+                // Disable nested scrolling for the map
+                mapView.setNestedScrollingEnabled(false);
+
+                // Set touch gesture for scrolling and zooming the map
+                mapView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                        v.onTouchEvent(event);
+                        return true;
+                    }
+                });
+
+                // Initialize your map settings and drawRoutes() here
+                drawRoutes();
+            }
+        });
+    }
     class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {

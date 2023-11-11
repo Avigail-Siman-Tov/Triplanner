@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
         android:text="traveler name"
@@ -37,7 +37,7 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayImageView" />
 
@@ -45,62 +45,61 @@
         android:id="@+id/traveler_profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="48dp"
         android:drawableStart="@drawable/ic_mail"
         android:gravity="center"
-        android:layout_marginLeft="20dp"
         android:text="traveler email"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/traveler_profile_name"
         app:layout_constraintTop_toBottomOf="@+id/traveler_profile_name" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/traveler_profile_email">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ListView
-                android:id="@+id/traveler_profile_list_category"
-                android:layout_width="355dp"
-                android:layout_height="186dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ListView
+                    android:id="@+id/traveler_profile_list_category"
+                    android:layout_width="310dp"
+                    android:layout_height="156dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/traveler_profile_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:text="Your favorite categories:"
                     android:textColor="#646561"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.166"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="39dp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,7 +112,7 @@
         android:id="@+id/traveler_profile_edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="104dp"
         android:drawableStart="@drawable/baseline_edit_24"
         android:text="edit"
         app:backgroundTint="#29AEBF"
@@ -126,8 +125,8 @@
 
     <com.triplanner.triplanner.CircularImageView
         android:id="@+id/displayImageView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="174dp"
+        android:layout_height="167dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="55dp"
         android:foregroundGravity="center"
@@ -145,7 +144,7 @@
         android:id="@+id/cameraGalleryBtn"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/circular_button"
         app:icon="@drawable/ic_camera"
         app:iconGravity="start|textStart"

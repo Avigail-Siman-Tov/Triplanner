@@ -184,7 +184,7 @@ public class TravelerProfileFragment extends Fragment {
             category = view.findViewById(R.id.row_favorite_category_text_view);
             String c = arrCategory[i];
             String a=c.replace('_',' ');
-            category.setText(a);
+            category.setText("  "+a);
             return view;
         }
 

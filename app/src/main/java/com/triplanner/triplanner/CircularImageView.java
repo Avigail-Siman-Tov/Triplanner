@@ -3,6 +3,7 @@ package com.triplanner.triplanner;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -38,6 +39,28 @@ public class CircularImageView extends AppCompatImageView {
         super.onLayout(changed, left, top, right, bottom);
     }
 
+//    @Override
+//    protected void onDraw(Canvas canvas) {
+//        BitmapDrawable drawable = (BitmapDrawable) getDrawable();
+//        if (drawable == null) {
+//            return;
+//        }
+//
+//        int min = Math.min(getWidth(), getHeight());
+//        if (min <= 0) {
+//            return;
+//        }
+//
+//        Bitmap sourceBitmap = drawable.getBitmap();
+//        if (sourceBitmap == null) {
+//            return;
+//        }
+//
+//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(sourceBitmap, min, min, false);
+//        Bitmap roundedBitmap = getRoundedBitmap(scaledBitmap);
+//        canvas.drawBitmap(roundedBitmap, 0, 0, null);
+//    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         BitmapDrawable drawable = (BitmapDrawable) getDrawable();
@@ -55,9 +78,31 @@ public class CircularImageView extends AppCompatImageView {
             return;
         }
 
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(sourceBitmap, min, min, false);
+        // Increase the thickness of the frame
+        int frameThickness = (int) (8 * getResources().getDisplayMetrics().density); // Convert dp to pixels
+        int frameRadius = min / 2;
+
+        // Draw the circular frame directly on the canvas
+        Paint borderPaint = new Paint();
+        borderPaint.setColor(Color.parseColor("#29AEBF"));
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(frameThickness);
+
+        // Calculate the coordinates for drawing the frame
+        int frameLeft = frameThickness / 2;
+        int frameTop = frameThickness / 2;
+        int frameRight = min - frameThickness / 2;
+        int frameBottom = min - frameThickness / 2;
+
+        // Draw the circular frame
+        canvas.drawCircle(frameRadius, frameRadius, frameRadius - frameThickness / 2, borderPaint);
+
+        // Draw the rounded image inside the circular frame
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(sourceBitmap, min - frameThickness, min - frameThickness, false);
         Bitmap roundedBitmap = getRoundedBitmap(scaledBitmap);
-        canvas.drawBitmap(roundedBitmap, 0, 0, null);
+
+        // Draw the rounded image inside the circular frame
+        canvas.drawBitmap(roundedBitmap, frameLeft, frameTop, null);
     }
 
 

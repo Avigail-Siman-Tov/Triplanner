@@ -87,7 +87,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         moovitBtn = view.findViewById(R.id.btn_moovit);
         ratingBarTraveler = view.findViewById(R.id.fragment_place_traveler_details_place_rating_user);
         Drawable drawable = ratingBarTraveler.getProgressDrawable();
-        drawable.setColorFilter(Color.parseColor("#2877B6"), PorterDuff.Mode.SRC_ATOP);
+        drawable.setColorFilter(Color.parseColor("#29AEBF"), PorterDuff.Mode.SRC_ATOP);
         editRating =view.findViewById(R.id.fragment_place_traveler_details_place_edit_rating_user);
         Model.instance.getOpenHoursOfPlace(place.getPlaceID(), getContext(), new Model.GetOpenHoursOfPlaceListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -247,7 +247,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         });
 
         // Button OK
-        popDialog.setPositiveButton(android.R.string.ok,
+        popDialog.setPositiveButton("Ok",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -269,12 +269,12 @@ public class PlaceTravelerDetailsFragment extends Fragment {
                         })
 
                 // Button Cancel
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+        .setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+        });
 
         popDialog.create();
         popDialog.show();

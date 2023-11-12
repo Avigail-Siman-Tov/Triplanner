@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.FavoriteCategories;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Traveler;
@@ -76,7 +77,13 @@ public class TravelerEditProfileFragment extends Fragment {
 
         InputsName= view.findViewById(R.id.fragment_edit_profile_userName);
         InputsName.getEditText().setText(traveler.getTravelerName());
-        travelerPicture = traveler.getTravelerPicture();
+        Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
+            @Override
+            public void onComplete(Traveler traveler, List<String> favoriteCategories) {
+                travelerPicture = traveler.getTravelerPicture(); // Assuming this is a String representing the URI or file path
+
+            }
+        });
         genderSpinner= view.findViewById(R.id.fragment_edit_profile_spinner_gender);
         ArrayAdapter<CharSequence> adapterGender = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,genderArray);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

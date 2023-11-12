@@ -88,6 +88,7 @@ public class TravelerProfileFragment extends Fragment {
         mail = view.findViewById(R.id.traveler_profile_email);
         name = view.findViewById(R.id.traveler_profile_name);
         listCategory=view.findViewById(R.id.traveler_profile_list_category);
+
         Realm.init(getContext()); // context, usually an Activity or Application
         App app = new App(new AppConfiguration.Builder(getString(R.string.AppId)).build());
         user = app.currentUser();
@@ -388,6 +389,8 @@ public class TravelerProfileFragment extends Fragment {
         dialog.show();
     }
 
+
+
     private void editTraveler() {
         Model.instance.getTravelerByEmailInDB(user.getProfile().getEmail(), getContext(), new Model.GetTravelerByEmailListener() {
             @Override
@@ -419,6 +422,7 @@ public class TravelerProfileFragment extends Fragment {
         });
 
     }
+
 }
 
 

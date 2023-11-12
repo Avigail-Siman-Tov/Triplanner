@@ -52,7 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TravelerProfileFragment extends Fragment {
-    TextView name, mail,categories;
+    TextView name, mail;
     Button editBtn;
     ListView listCategory;
     MyAdapter adapter;

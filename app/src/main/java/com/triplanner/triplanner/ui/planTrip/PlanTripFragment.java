@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -73,6 +74,7 @@ public class PlanTripFragment extends Fragment {
         // use value in your code
         final int nr = np_channel_nr.getValue();
         planTripButton=view.findViewById(R.id.fragment_plan_trip_textview_ok);
+
         planTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

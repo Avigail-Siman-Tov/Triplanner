@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "77f75abf2107b501a688ccb9de4aea58",
+    "identityHash": "aa23fef440126c7446719ea6573db025",
     "entities": [
       {
         "tableName": "Traveler",
@@ -76,7 +76,7 @@
       },
       {
         "tableName": "Trip",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trip` TEXT NOT NULL, `travelerMail` TEXT, `tripDestination` TEXT, `tripName` TEXT, `tripDaysNumber` INTEGER NOT NULL, `date` TEXT, PRIMARY KEY(`id_trip`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trip` TEXT NOT NULL, `travelerMail` TEXT, `tripDestination` TEXT, `tripName` TEXT, `tripDaysNumber` INTEGER NOT NULL, `date` TEXT, `photoUrl` TEXT, PRIMARY KEY(`id_trip`))",
         "fields": [
           {
             "fieldPath": "id_trip",
@@ -111,6 +111,12 @@
           {
             "fieldPath": "date",
             "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -257,7 +263,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"77f75abf2107b501a688ccb9de4aea58\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"aa23fef440126c7446719ea6573db025\")"
     ]
   }
 }

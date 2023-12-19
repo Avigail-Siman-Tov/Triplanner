@@ -39,7 +39,6 @@ public class ResetPassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
-        Log.d("mylog","I am til");
         InputPassword =findViewById(R.id.fragment_reset_password_password);
         InputVerifyPassword =findViewById(R.id.fragment_reset_password_verify_password);
         resPasswordBtm=findViewById(R.id.fragment_reset_password_btm);
@@ -86,7 +85,6 @@ public class ResetPassActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) {
-        Log.d("mylog","I am stress");
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null){

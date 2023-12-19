@@ -137,7 +137,7 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
 
     }
-    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,Context context, Model.AddTripListener listener) {
+    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,String tripPicture,Context context, Model.AddTripListener listener) {
         final String URL_ADD_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/addTrip";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
@@ -152,6 +152,7 @@ public class ModelTravelerServer {
         Date date = new Date();
         String myDate=dateFormat.format(date);
         paramsPost.put("tripDate",myDate);
+        paramsPost.put("tripPicture", tripPicture);
         ObjectId _id= new ObjectId();
         String myId=_id.toString();
         paramsPost.put("tripId",myId);
@@ -164,7 +165,7 @@ public class ModelTravelerServer {
                 String result = response.toString();
                 try {
 
-                    Trip trip = new Trip(myId, myDate, travelerMail, tripLocation, tripName, tripDays);
+                    Trip trip = new Trip(myId, myDate, travelerMail, tripLocation, tripName, tripDays ,tripPicture);
                     travelerModelSQL.addTrip(trip, context, new Model.AddTripListener() {
                         @Override
                         public void onComplete(String tripId) {
@@ -336,7 +337,9 @@ public class ModelTravelerServer {
                             String tripName = trip.get("tripName").toString();
                             int tripDaysNumber= Integer.parseInt(trip.get("tripDaysNumber").toString());
                             String date= trip.get("tripDate").toString();
-                            Trip myTrip=new Trip(id_trip,date,travelerMail,tripDestination,tripName,tripDaysNumber);
+                            String tripPicture=  trip.get("tripPicture").toString();
+
+                            Trip myTrip=new Trip(id_trip,date,travelerMail,tripDestination,tripName,tripDaysNumber,tripPicture);
                             travelerModelSQL.addTrip(myTrip, context, new Model.AddTripListener() {
                                 @Override
                                 public void onComplete(String tripId) {
@@ -406,7 +409,8 @@ public class ModelTravelerServer {
 
                 try {
                     Log.d("mylog","tat"+response);
-                    if (response != "false") {
+//                    if (response!= "false") {
+                    if (!response.equals("false")) {
                         JSONArray places  = new JSONArray(response);
                         if(places.length()>0) {
                             List<PlacePlanning>  arrPlace = new ArrayList<>();

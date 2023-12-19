@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/background8"
     android:layout_height="match_parent"
+    android:layout_gravity="start"
     tools:context=".ui.MyTrip.ListMyTripFragment">
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="36dp"
         android:text="My Plans"
@@ -17,14 +17,18 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp"/>
 
     <ListView
         android:id="@+id/fragment_list_my_trip_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="60dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:layout_editor_absoluteX="1dp" />

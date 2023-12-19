@@ -72,6 +72,9 @@
         <argument
             android:name="locationTrip"
             app:argType="string" />
+        <argument
+            android:name="destinationTrip"
+            app:argType="string" />
         <action
             android:id="@+id/action_placesListFragment_to_listDayInTripFragment"
             app:destination="@id/listDayInTripFragment" />
@@ -99,6 +102,10 @@
         <argument
             android:name="nameTrip"
             app:argType="string" />
+        <argument
+            android:name="destinationTrip"
+            app:argType="string" />
+
     </fragment>
 
     <fragment
@@ -123,6 +130,9 @@
         <argument
             android:name="tripDays"
             app:argType="integer" />
+        <argument
+            android:name="tripPicture"
+            app:argType="string" />
         <argument
             android:name="arrPlaces"
             app:argType="com.triplanner.triplanner.Model.Place[]" />

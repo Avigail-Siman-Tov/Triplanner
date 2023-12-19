@@ -1,14 +1,19 @@
 package com.triplanner.triplanner.ui.planTrip;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +26,34 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
+import com.google.android.libraries.places.api.model.PhotoMetadata;
+import com.google.android.libraries.places.api.net.FetchPhotoRequest;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.squareup.picasso.Picasso;
 import com.triplanner.triplanner.Model.Model;
 import com.triplanner.triplanner.Model.Place;
 import com.triplanner.triplanner.Model.PlacePlanning;
 import com.triplanner.triplanner.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -43,13 +65,11 @@ import okhttp3.Request;
 
 import android.os.Build;
 
-
-
 public class PlacesListFragment extends Fragment {
     ListView listViewPlaces;
     MyAdapter adapter;
     TextView name;
-    ImageView imagev,imageBest;
+    ImageView imagev,imageBest;;
     RatingBar rating;
     PlacePlanning[] arrayPlaces;
     ArrayList<PlacePlanning> chosenPlaces;
@@ -58,7 +78,7 @@ public class PlacesListFragment extends Fragment {
     Integer tripDays,placesNum=0;
     TextView amountUserPlace,location;
     ProgressDialog myLoadingDialog;
-    String tripName,tripLocation;
+    String tripName,tripLocation ,tripPicture ,tripDestination;
     int[] colorArray;
     User user;
     String packageName;
@@ -86,6 +106,10 @@ public class PlacesListFragment extends Fragment {
         user = app.currentUser();
         tripName= PlacesListFragmentArgs.fromBundle(getArguments()).getTripName();
         tripLocation = PlacesListFragmentArgs.fromBundle(getArguments()).getLocationTrip();
+        tripDestination = PlacesListFragmentArgs.fromBundle(getArguments()).getDestinationTrip();
+
+        Log.d("mylog","999" +tripDestination);
+
         chosenNumber(arrayPlaces);
         amountUserPlace=view.findViewById(R.id.fragment_places_list_count_place_user);
         amountUserPlace.setText(String.valueOf(placesNum));
@@ -112,6 +136,66 @@ public class PlacesListFragment extends Fragment {
         return view;
     }
 
+    private class GoogleImageTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String query = params[0];
+            StringBuilder result = new StringBuilder();
+            HttpURLConnection connection = null;
+
+            try {
+                Log.d("mylog","I am");
+                String apiKey = getString(R.string.places_api_key);
+                String cx = "f4af544f1e97c4189";
+//                String searchUrl = "https://www.googleapis.com/customsearch/v1?q=" + query +
+//                        "&cx=" + cx + "&key=" + apiKey + "&searchType=image";
+                String searchUrl = Uri.parse("https://www.googleapis.com/customsearch/v1")
+                        .buildUpon()
+                        .appendQueryParameter("q", tripDestination + " city")
+                        .appendQueryParameter("cx", cx)
+                        .appendQueryParameter("key", apiKey)
+                        .appendQueryParameter("searchType", "image")
+                        .build()
+                        .toString();
+
+                URL url = new URL(searchUrl);
+                connection = (HttpURLConnection) url.openConnection();
+
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+
+                if (reader != null)
+                    reader.close();
+                if (inputStream != null)
+                    inputStream.close();
+            } catch (IOException e) {
+                Log.d("mylog","oppp");
+                e.printStackTrace();
+                return null;
+            }
+            finally {
+                Log.d("mylog","11"+connection);
+                // Close the connection in the finally block to ensure it is always done
+                if (connection != null) {
+                        connection.disconnect();
+
+                }
+            }
+
+            return result.toString();
+        }
+    }
+
+
+
+
+
     private void CreateListForPlanning() {
         planBtn.setEnabled(false);
         myLoadingDialog.setTitle("Planing Trip");
@@ -127,11 +211,14 @@ public class PlacesListFragment extends Fragment {
             }
         }
 
+        String query = tripDestination; // Replace with the actual destination
+        new GoogleImageTask().execute(query);
+
         Model.instance.planTrip(chosenPlaces, tripDays, new Model.PlanTripListener() {
             @Override
             public void onComplete(ArrayList<PlacePlanning> chosenPlaces1) {
 
-                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,getContext(), new Model.AddTripListener() {
+                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,tripPicture,getContext(), new Model.AddTripListener() {
                     @Override
                     public void onComplete(String  tripId) {
                      addPlaces(chosenPlaces1,0,tripId);
@@ -144,13 +231,11 @@ public class PlacesListFragment extends Fragment {
     }
     public void addPlaces(ArrayList<PlacePlanning> chosenPlaces,int index,String tripId){
         if(index==chosenPlaces.size()) {
-
-
             Model.instance.getAllPlacesOfTrip(tripId, getContext(), new Model.GetAllPlacesOfTrip() {
                 @Override
                 public void onComplete(Place[] places) {
                     myLoadingDialog.dismiss();
-                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,places );
+                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,tripPicture,places );
                     Navigation.findNavController(getView()).navigate( action);
                 }
             });

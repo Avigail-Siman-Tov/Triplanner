@@ -167,7 +167,6 @@ public class ListTripInDayFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        mapView.onResume();
         showMap();
     }
 

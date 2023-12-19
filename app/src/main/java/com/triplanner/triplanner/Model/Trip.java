@@ -24,15 +24,18 @@ public class Trip implements Parcelable {
     private int tripDaysNumber;
     private String date;
 
+    private String tripPicture;
+
     @Ignore
     public Trip(){ }
-    public Trip(String id_trip,String date,String travelerMail,String tripDestination, String tripName,int tripDaysNumber) {
+    public Trip(String id_trip,String date,String travelerMail,String tripDestination, String tripName,int tripDaysNumber , String tripPicture) {
         this.id_trip = id_trip;
         this.tripDestination = tripDestination;
         this.tripName = tripName;
         this.tripDaysNumber = tripDaysNumber;
         this.travelerMail=travelerMail;
         this.date=date;
+        this.tripPicture=tripPicture;
     }
 
 
@@ -43,6 +46,7 @@ public class Trip implements Parcelable {
         tripName = in.readString();
         tripDaysNumber = in.readInt();
         date = in.readString();
+        tripPicture = in.readString();
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -107,6 +111,14 @@ public class Trip implements Parcelable {
         this.date = date;
     }
 
+    public String getTripPicture() {
+        return tripPicture;
+    }
+
+    public void setTripPicture(String tripPicture) {
+        this.tripPicture = tripPicture;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -120,6 +132,7 @@ public class Trip implements Parcelable {
         dest.writeString(tripName);
         dest.writeInt(tripDaysNumber);
         dest.writeString(date);
+        dest.writeString(tripPicture);
     }
 
 }

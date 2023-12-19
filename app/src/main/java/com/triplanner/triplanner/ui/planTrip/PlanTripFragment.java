@@ -37,7 +37,7 @@ public class PlanTripFragment extends Fragment {
     Integer tripDaysNumber;
     ProgressDialog myLoadingDialog;
     ProgressBar progressBar;
-    String tripName;
+    String tripName, tripDestination;
     TextView planTripButton;
     JSONObject jsonDataPage1=null,jsonDataPage2=null,jsonDataPage3=null;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,6 +62,7 @@ public class PlanTripFragment extends Fragment {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 myPlace=place;
+                Log.d("mylog","myPlace"+myPlace);
             }
             @Override
             public void onError(@NonNull Status status) {
@@ -83,7 +84,7 @@ public class PlanTripFragment extends Fragment {
                 if(checkName(InputsTripName.getEditText().getText().toString()) )
                 {
                     if(myPlace!=null) {
-                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName);
+                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName,myPlace.getName());
                         Navigation.findNavController(view).navigate(action);
                     }
                     else {

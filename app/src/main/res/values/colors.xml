@@ -11,6 +11,7 @@
     <color name="gray">#8E918E</color>
     <color name="blue">#29AEBF</color>
     <color name="green">#3F9C53</color>
+    <color name="transparent">#E4EEF0</color>
     <color name="gold">#FDC313</color>
     <color name="red">#AE4038</color>
     <array name="array_name">

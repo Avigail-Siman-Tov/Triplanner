@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-
     public  static Traveler traveler;
     private ActivityMainBinding binding;
     @Override

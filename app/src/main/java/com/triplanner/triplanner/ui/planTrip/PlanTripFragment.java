@@ -3,6 +3,7 @@ package com.triplanner.triplanner.ui.planTrip;
 import static io.realm.Realm.getApplicationContext;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +29,21 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.triplanner.triplanner.R;
 import com.triplanner.triplanner.horizontalNumberPicker.HorizontalNumberPicker;
 import org.json.JSONObject;
+
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+import com.google.android.libraries.places.api.model.PhotoMetadata;
+
 
 
 public class PlanTripFragment extends Fragment {
@@ -37,7 +52,7 @@ public class PlanTripFragment extends Fragment {
     Integer tripDaysNumber;
     ProgressDialog myLoadingDialog;
     ProgressBar progressBar;
-    String tripName, tripDestination;
+    String tripName, tripDestination,tripPicutre;
     TextView planTripButton;
     JSONObject jsonDataPage1=null,jsonDataPage2=null,jsonDataPage3=null;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,7 +77,31 @@ public class PlanTripFragment extends Fragment {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 myPlace=place;
-                Log.d("mylog","myPlace"+myPlace);
+
+                List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
+                if (photoMetadataList != null && photoMetadataList.size() > 0) {
+                    PhotoMetadata photoMetadata = photoMetadataList.get(0);
+                    Log.d("Photo URL","photos"+photoMetadataList);
+
+                    // Get the photo metadata attributions
+                    String attributions = photoMetadata.toString();
+                    // Extract the photo reference from attributions (if applicable)
+                    String photoReference = extractPhotoReference(attributions);
+                    // Use getAttributions to obtain the photo reference
+                    if (photoReference != null) {
+                        tripPicutre = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + Uri.encode(photoReference) + "&key=AIzaSyC-2lRMHs-8VTX-pePcej_Lsb807VOxk8U";
+                    } else {
+                        // Handle the case where the attributions (photo reference) is null
+                        tripPicutre = "https://dalicanvas.co.il/wp-content/uploads/2022/10/%D7%A9%D7%A7%D7%99%D7%A2%D7%94-%D7%A7%D7%9C%D7%90%D7%A1%D7%99%D7%AA-1.jpg";
+                    }
+
+                    // Print or use the URL as needed
+                    Log.d("Photo URL", tripPicutre);
+                } else {
+                    tripPicutre = "https://dalicanvas.co.il/wp-content/uploads/2022/10/%D7%A9%D7%A7%D7%99%D7%A2%D7%94-%D7%A7%D7%9C%D7%90%D7%A1%D7%99%D7%AA-1.jpg";
+                    // Handle the case where no photos are available for the selected place
+                }
+
             }
             @Override
             public void onError(@NonNull Status status) {
@@ -84,7 +123,7 @@ public class PlanTripFragment extends Fragment {
                 if(checkName(InputsTripName.getEditText().getText().toString()) )
                 {
                     if(myPlace!=null) {
-                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName,myPlace.getName());
+                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName,myPlace.getName(),tripPicutre);
                         Navigation.findNavController(view).navigate(action);
                     }
                     else {
@@ -95,6 +134,37 @@ public class PlanTripFragment extends Fragment {
 
         return view;
     }
+
+    private String extractPhotoReference(String attributions) {
+        if (attributions == null || attributions.isEmpty()) {
+            return null;
+        }
+
+        // Find the index of "photoReference="
+        int photoReferenceIndex = attributions.indexOf("photoReference=");
+
+        if (photoReferenceIndex != -1) {
+            // Move to the end of "photoReference="
+            int startIndex = photoReferenceIndex + "photoReference=".length();
+
+            // Find the index of the next comma starting from "photoReference="
+            int commaIndex = attributions.indexOf(',', startIndex);
+
+            if (commaIndex != -1) {
+                // Extract the substring between "photoReference=" and the next comma
+                String photoReference = attributions.substring(startIndex, commaIndex);
+
+                return photoReference.trim();
+            }
+        }
+
+        return null;
+    }
+
+
+
+
+
 
     private boolean checkName(String tripName) {
         if (tripName.length()>0)

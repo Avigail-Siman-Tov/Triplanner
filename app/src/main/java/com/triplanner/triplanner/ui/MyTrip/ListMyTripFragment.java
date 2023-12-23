@@ -138,7 +138,6 @@ public class ListMyTripFragment extends Fragment {
             }
             Trip trip = arrayTrip[i];
 
-
             name = view.findViewById(R.id.my_plan_row_name);
             name.setText(trip.getTripName());
             destination= view.findViewById(R.id.my_plan_row_destination);
@@ -148,9 +147,9 @@ public class ListMyTripFragment extends Fragment {
 //            date=view.findViewById(R.id.my_plan_row_date);
 //            date.setText(trip.getDate());
             image = view.findViewById(R.id.imageView4);
-            if (trip.getTripPicture() != null) {
+//            if (trip.getTripPicture() != null) {
                 Picasso.get().load(trip.getTripPicture()).into(image);
-            }
+//            }
 
             return view;
         }

@@ -75,6 +75,9 @@
         <argument
             android:name="destinationTrip"
             app:argType="string" />
+        <argument
+            android:name="pictureTrip"
+            app:argType="string" />
         <action
             android:id="@+id/action_placesListFragment_to_listDayInTripFragment"
             app:destination="@id/listDayInTripFragment" />
@@ -104,6 +107,9 @@
             app:argType="string" />
         <argument
             android:name="destinationTrip"
+            app:argType="string" />
+        <argument
+            android:name="PictureTrip"
             app:argType="string" />
 
     </fragment>

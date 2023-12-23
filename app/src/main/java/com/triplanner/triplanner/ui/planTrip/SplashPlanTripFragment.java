@@ -62,6 +62,7 @@ public class SplashPlanTripFragment extends Fragment {
         tripName = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getNameTrip();
         tripLocation = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getLocationTrip();
         tripDestination = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getDestinationTrip();
+        tripPicture = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getPictureTrip();
 
         Runnable runnable=new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -197,7 +198,7 @@ public class SplashPlanTripFragment extends Fragment {
                                         PlacePlanning[] arrayPlaces = new PlacePlanning[myAllPlaces.size()];
                                         myAllPlaces.toArray(arrayPlaces);
                                         getParentFragmentManager().popBackStack();
-                                        SplashPlanTripFragmentDirections.ActionSplashPlanTripFragmentToPlacesListFragment action = SplashPlanTripFragmentDirections.actionSplashPlanTripFragmentToPlacesListFragment(arrayPlaces,tripDaysNumber,tripName,tripLocation,tripDestination);
+                                        SplashPlanTripFragmentDirections.ActionSplashPlanTripFragmentToPlacesListFragment action = SplashPlanTripFragmentDirections.actionSplashPlanTripFragmentToPlacesListFragment(arrayPlaces,tripDaysNumber,tripName,tripLocation,tripDestination,tripPicture);
                                         Navigation.findNavController(view).navigate(action);
                                     }
                                 });

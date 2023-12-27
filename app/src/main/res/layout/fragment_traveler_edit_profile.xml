@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background8"
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".ui.profile.TravelerEditProfileFragment">
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeColor="@color/black"
+                app:boxStrokeColor="#29AEBF"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
@@ -71,7 +69,8 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:inputType="textPersonName"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -87,17 +86,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+
             <Spinner
                 android:id="@+id/fragment_edit_profile_spinner_gender"
+                style="@android:style/Widget.EditText"
                 android:layout_width="222dp"
                 android:layout_height="31dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Select Gender"
+                android:paddingTop="2px"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.567"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toTopOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="@+id/textView11"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:contentDescription="Arrow Icon"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -111,12 +124,15 @@
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
+
             <Spinner
                 android:id="@+id/fragment_edit_profile_spinner_birthyear"
                 android:layout_width="222dp"
                 android:layout_height="31dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Select Year"
+                android:paddingTop="2px"
+                style="@android:style/Widget.EditText"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="@+id/textView13"
                 app:layout_constraintEnd_toEndOf="parent"

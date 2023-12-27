@@ -161,11 +161,6 @@ public class PlanTripFragment extends Fragment {
         return null;
     }
 
-
-
-
-
-
     private boolean checkName(String tripName) {
         if (tripName.length()>0)
             return true;

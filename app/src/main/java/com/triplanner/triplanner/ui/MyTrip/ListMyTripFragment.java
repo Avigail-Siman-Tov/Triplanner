@@ -143,7 +143,7 @@ public class ListMyTripFragment extends Fragment {
             destination= view.findViewById(R.id.my_plan_row_destination);
             destination.setText(trip.getTripDestination());
             numDays = view.findViewById(R.id.my_plan_row_num_days);
-            numDays.setText(String.valueOf(trip.getTripDaysNumber()));
+            numDays.setText(String.valueOf(trip.getTripDaysNumber())+"\nDays\n");
 //            date=view.findViewById(R.id.my_plan_row_date);
 //            date.setText(trip.getDate());
             image = view.findViewById(R.id.imageView4);

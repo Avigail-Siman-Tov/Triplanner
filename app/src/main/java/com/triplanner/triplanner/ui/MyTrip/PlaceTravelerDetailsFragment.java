@@ -279,6 +279,12 @@ public class PlaceTravelerDetailsFragment extends Fragment {
         popDialog.create();
         popDialog.show();
 
+
+
+
+
+
+
     }
 
 }

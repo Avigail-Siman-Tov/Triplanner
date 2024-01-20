@@ -47,7 +47,6 @@ public class ListTripInDayFragment extends Fragment {
     MyAdapter adapter;
     private MapView mapView;
     private GoogleMap googleMap;
-
     RatingBar rating;
 
     private static final String API_KEY = "AIzaSyC-2lRMHs-8VTX-pePcej_Lsb807VOxk8U";
@@ -79,7 +78,6 @@ public class ListTripInDayFragment extends Fragment {
 
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
         showMap();
 
         return view;
@@ -262,7 +260,7 @@ public class ListTripInDayFragment extends Fragment {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
                 }
             } else {
-
+              Log.d("mylog","you have error");
             }
 
             return view;

@@ -263,11 +263,8 @@ public class PlaceTravelerDetailsFragment extends Fragment {
                                         myLoadingDialog.dismiss();
                                     }
                                 });
-
                             }
-
                         })
-
                 // Button Cancel
         .setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
@@ -275,10 +272,7 @@ public class PlaceTravelerDetailsFragment extends Fragment {
                         dialog.cancel();
                     }
         });
-
         popDialog.create();
         popDialog.show();
-
     }
-
 }

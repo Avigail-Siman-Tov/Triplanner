@@ -1,87 +1,112 @@
 package com.triplanner.triplanner.ui.planTrip;
+import androidx.navigation.Navigation;
 
-import static io.realm.Realm.getApplicationContext;
-
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
+import androidx.core.util.Pair;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.triplanner.triplanner.R;
 import com.triplanner.triplanner.horizontalNumberPicker.HorizontalNumberPicker;
 import org.json.JSONObject;
 
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
-import com.google.android.libraries.places.api.model.PhotoMetadata;
-
-
+import java.util.Locale;
 
 public class PlanTripFragment extends Fragment {
+    private Button selectDatesButton;
+    private TextView dateRangeTextView;
+    private Calendar startDateCalendar;
+    private Calendar endDateCalendar;
+    private MaterialDatePicker<Pair<Long, Long>> materialDatePicker; // Corrected declaration
+
+    private TextView tripDatesTextView;
+
     TextInputLayout InputsTripName;
-    Place myPlace=null;
+    Place myPlace = null;
     Integer tripDaysNumber;
     ProgressDialog myLoadingDialog;
-    ProgressBar progressBar;
-    String tripName, tripDestination,tripPicutre;
+    String tripName, tripPicutre;
     TextView planTripButton;
-    JSONObject jsonDataPage1=null,jsonDataPage2=null,jsonDataPage3=null;
+
+    JSONObject jsonDataPage1 = null, jsonDataPage2 = null, jsonDataPage3 = null;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plan_trip, container, false);
 
         if (!Places.isInitialized()) {
-            Places.initialize(this.getContext(),getString(R.string.places_api_key));
+            Places.initialize(requireContext(), getString(R.string.places_api_key));
         }
-        InputsTripName =view.findViewById(R.id.fragment_plan_trip_input_name_trip);
 
-        myLoadingDialog=new ProgressDialog(this.getContext());
-        TextView tripDays=view.findViewById(R.id.et_number);
+        InputsTripName = view.findViewById(R.id.fragment_plan_trip_input_name_trip);
+
+        // Initialize your views
+        selectDatesButton = view.findViewById(R.id.selectDatesButton);
+        dateRangeTextView = view.findViewById(R.id.dateRangeTextView);
+
+        startDateCalendar = Calendar.getInstance();
+        endDateCalendar = Calendar.getInstance();
+
+        // Handle the selection of date range
+        materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("Select Dates")
+                .setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+                .build();
+
+        // Handle button click to show the MaterialDatePicker
+        selectDatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialDatePicker.show(getChildFragmentManager(), materialDatePicker.toString());
+            }
+        });
+
+        myLoadingDialog = new ProgressDialog(requireContext());
+
+        TextView tripDays = view.findViewById(R.id.et_number);
         // Create a new Places client instance.
-        PlacesClient placesClient = Places.createClient(getActivity());
+        PlacesClient placesClient = Places.createClient(requireActivity());
         // Initialize the AutocompleteSupportFragment.
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                this.getChildFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+                getChildFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.PHOTO_METADATAS,Place.Field.LAT_LNG));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.PHOTO_METADATAS, Place.Field.LAT_LNG));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                myPlace=place;
+                myPlace = place;
 
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                 if (photoMetadataList != null && photoMetadataList.size() > 0) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
-                    Log.d("Photo URL","photos"+photoMetadataList);
+                    Log.d("Photo URL", "photos" + photoMetadataList);
 
                     // Get the photo metadata attributions
                     String attributions = photoMetadata.toString();
@@ -103,36 +128,84 @@ public class PlanTripFragment extends Fragment {
                 }
 
             }
+
             @Override
             public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
-                Toast.makeText(getApplicationContext(), status.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("mylog",status.toString());
+                Toast.makeText(requireContext(), status.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("mylog", status.toString());
             }
         });
         final HorizontalNumberPicker np_channel_nr = view.findViewById(R.id.np_channel_nr);
         // use value in your code
         final int nr = np_channel_nr.getValue();
-        planTripButton=view.findViewById(R.id.fragment_plan_trip_textview_ok);
+        planTripButton = view.findViewById(R.id.fragment_plan_trip_textview_ok);
 
         planTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tripName=InputsTripName.getEditText().getText().toString();
-                tripDaysNumber=Integer.parseInt(tripDays.getText().toString());
-                if(checkName(InputsTripName.getEditText().getText().toString()) )
-                {
-                    if(myPlace!=null) {
-                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName,myPlace.getName(),tripPicutre);
+                tripName = InputsTripName.getEditText().getText().toString();
+                tripDaysNumber = Integer.parseInt(tripDays.getText().toString());
+                if (checkName(InputsTripName.getEditText().getText().toString())) {
+                    if (myPlace != null) {
+                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre);
                         Navigation.findNavController(view).navigate(action);
-                    }
-                    else {
-                        Toast.makeText(getContext(),"please choose destination for the trip", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "please choose destination for the trip", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }});
+            }
+        });
 
         return view;
+    }
+
+    private void showDatePickerDialog(final boolean isStartDate) {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                if (isStartDate) {
+                    startDateCalendar.set(Calendar.YEAR, year);
+                    startDateCalendar.set(Calendar.MONTH, monthOfYear);
+                    startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    showDatePickerDialog(false);
+                } else {
+                    endDateCalendar.set(Calendar.YEAR, year);
+                    endDateCalendar.set(Calendar.MONTH, monthOfYear);
+                    endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateDateRangeText();
+                }
+            }
+        };
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                dateSetListener,
+                isStartDate ? startDateCalendar.get(Calendar.YEAR) : endDateCalendar.get(Calendar.YEAR),
+                isStartDate ? startDateCalendar.get(Calendar.MONTH) : endDateCalendar.get(Calendar.MONTH),
+                isStartDate ? startDateCalendar.get(Calendar.DAY_OF_MONTH) : endDateCalendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        if (isStartDate) {
+            datePickerDialog.getDatePicker().setMaxDate(endDateCalendar.getTimeInMillis());
+        } else {
+            datePickerDialog.getDatePicker().setMinDate(startDateCalendar.getTimeInMillis());
+        }
+
+        datePickerDialog.show();
+    }
+
+    private void updateDateRangeText() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        String startDateStr = dateFormat.format(startDateCalendar.getTime());
+        String endDateStr = dateFormat.format(endDateCalendar.getTime());
+
+        String dateRangeText = "Selected dates: " + startDateStr + " - " + endDateStr;
+        dateRangeTextView.setText(dateRangeText);
+
+        // Update the button text as well
+        String buttonText = "Select Dates: " + startDateStr + " - " + endDateStr;
+        selectDatesButton.setText(buttonText);
     }
 
     private String extractPhotoReference(String attributions) {
@@ -162,10 +235,9 @@ public class PlanTripFragment extends Fragment {
     }
 
     private boolean checkName(String tripName) {
-        if (tripName.length()>0)
+        if (tripName.length() > 0)
             return true;
-        Toast.makeText(getContext(), "please enter a name for the trip", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "please enter a name for the trip", Toast.LENGTH_SHORT).show();
         return false;
     }
-
 }

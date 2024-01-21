@@ -76,6 +76,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
@@ -119,8 +120,28 @@
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:textSize="18sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/selectDatesButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Select Dates"
+            app:layout_constraintEnd_toEndOf="@+id/np_channel_nr"
+            app:layout_constraintStart_toStartOf="@+id/np_channel_nr"
+            app:layout_constraintTop_toBottomOf="@+id/np_channel_nr" />
+
+        <TextView
+            android:id="@+id/dateRangeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="@+id/selectDatesButton"
+            app:layout_constraintStart_toStartOf="@+id/selectDatesButton"
+            app:layout_constraintTop_toBottomOf="@+id/selectDatesButton" />
         <TextView
             android:id="@+id/fragment_plan_trip_textview_ok"
             android:layout_width="364dp"
@@ -137,5 +158,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

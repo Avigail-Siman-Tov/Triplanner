@@ -3,5 +3,13 @@
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="boxBackgroundMode">none</item>
     </style>
+    <style name="CustomMaterialDatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!-- Add any other styling attributes you want here -->
+    </style>
+
+
+
 
 </resources>

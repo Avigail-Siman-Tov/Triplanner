@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,18 +25,22 @@ import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.triplanner.triplanner.R;
 import com.triplanner.triplanner.horizontalNumberPicker.HorizontalNumberPicker;
 import org.json.JSONObject;
-
+import com.google.android.material.datepicker.CalendarConstraints;
+import java.util.concurrent.TimeUnit;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import com.google.android.material.datepicker.MaterialDatePicker;
+
 
 public class PlanTripFragment extends Fragment {
     private Button selectDatesButton;
@@ -75,10 +78,33 @@ public class PlanTripFragment extends Fragment {
         endDateCalendar = Calendar.getInstance();
 
         // Handle the selection of date range
+        // Handle the selection of date range
         materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
                 .setTitleText("Select Dates")
                 .setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+                .setCalendarConstraints(buildCalendarConstraints())
+                .setTheme(R.style.CustomMaterialDatePickerStyle) // Apply the custom style
                 .build();
+
+
+        // Apply the custom theme
+
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+            @Override
+            public void onPositiveButtonClick(Pair<Long, Long> selection) {
+                long currentDay = MaterialDatePicker.todayInUtcMilliseconds();
+                if (selection.first < currentDay || selection.second < currentDay) {
+                    Toast.makeText(getContext(), "Please select valid dates.", Toast.LENGTH_SHORT).show();
+                } else {
+                    startDateCalendar.setTimeInMillis(selection.first);
+                    endDateCalendar.setTimeInMillis(selection.second);
+
+                    updateDateRangeText();
+                }
+            }
+        });
+
 
         // Handle button click to show the MaterialDatePicker
         selectDatesButton.setOnClickListener(new View.OnClickListener() {
@@ -159,18 +185,26 @@ public class PlanTripFragment extends Fragment {
 
         return view;
     }
+    private CalendarConstraints buildCalendarConstraints() {
+        long currentDay = MaterialDatePicker.todayInUtcMilliseconds();
+
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setValidator(DateValidatorPointForward.from(currentDay));
+
+        return constraintsBuilder.build();
+    }
 
     private void showDatePickerDialog(final boolean isStartDate) {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 if (isStartDate) {
-                    startDateCalendar.set(Calendar.YEAR, year);
+             startDateCalendar.set(Calendar.YEAR, year);
                     startDateCalendar.set(Calendar.MONTH, monthOfYear);
                     startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     showDatePickerDialog(false);
                 } else {
-                    endDateCalendar.set(Calendar.YEAR, year);
+                   endDateCalendar.set(Calendar.YEAR, year);
                     endDateCalendar.set(Calendar.MONTH, monthOfYear);
                     endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     updateDateRangeText();
@@ -196,15 +230,15 @@ public class PlanTripFragment extends Fragment {
     }
 
     private void updateDateRangeText() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.US);
         String startDateStr = dateFormat.format(startDateCalendar.getTime());
         String endDateStr = dateFormat.format(endDateCalendar.getTime());
 
-        String dateRangeText = "Selected dates: " + startDateStr + " - " + endDateStr;
-        dateRangeTextView.setText(dateRangeText);
+//        String dateRangeText = "Selected dates: " + startDateStr + " - " + endDateStr;
+//        dateRangeTextView.setText(dateRangeText);
 
-        // Update the button text as well
-        String buttonText = "Select Dates: " + startDateStr + " - " + endDateStr;
+       // Update the button text as well
+       String buttonText = "Select Dates: " + startDateStr + " - " + endDateStr;
         selectDatesButton.setText(buttonText);
     }
 

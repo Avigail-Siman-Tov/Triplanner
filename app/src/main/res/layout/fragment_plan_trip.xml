@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,9 +12,9 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/np_channel_nr"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9">
+            app:layout_constraintEnd_toEndOf="@id/np_channel_nr"
+            app:layout_constraintStart_toStartOf="@id/textView9"
+            app:layout_constraintTop_toBottomOf="@id/textView9">
 
                 <fragment
                     android:id="@+id/place_autocomplete_fragment"
@@ -33,9 +34,9 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toTopOf="@+id/textView10" />
+            app:layout_constraintBottom_toBottomOf="@id/textView10"
+            app:layout_constraintStart_toEndOf="@id/textView10"
+            app:layout_constraintTop_toTopOf="@id/textView10" />
 
         <TextView
             android:id="@+id/textView15"
@@ -48,7 +49,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintTop_toBottomOf="@id/imageView3" />
 
         <TextView
             android:id="@+id/textView9"
@@ -61,7 +62,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@id/textView15" />
 
         <TextView
             android:id="@+id/textView10"
@@ -74,8 +75,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -98,7 +98,7 @@
             android:textColor="#FBFBFB"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintBottom_toBottomOf="@id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,9 +111,9 @@
             android:layout_marginStart="16dp"
             app:boxStrokeColor="#000000"
             app:hintTextColor="#070707"
-            app:layout_constraintBottom_toBottomOf="@+id/textView15"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toTopOf="@+id/textView15">
+            app:layout_constraintBottom_toBottomOf="@id/textView15"
+            app:layout_constraintStart_toEndOf="@id/textView15"
+            app:layout_constraintTop_toTopOf="@id/textView15">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -125,12 +125,12 @@
 
         <Button
             android:id="@+id/selectDatesButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="230dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:text="Select Dates"
-            app:layout_constraintEnd_toEndOf="@+id/np_channel_nr"
-            app:layout_constraintStart_toStartOf="@+id/np_channel_nr"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/np_channel_nr" />
 
         <TextView
@@ -139,14 +139,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/selectDatesButton"
-            app:layout_constraintStart_toStartOf="@+id/selectDatesButton"
-            app:layout_constraintTop_toBottomOf="@+id/selectDatesButton" />
+            app:layout_constraintEnd_toEndOf="@id/selectDatesButton"
+            app:layout_constraintStart_toStartOf="@id/selectDatesButton"
+            app:layout_constraintTop_toBottomOf="@id/selectDatesButton" />
+
         <TextView
             android:id="@+id/fragment_plan_trip_textview_ok"
             android:layout_width="364dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="112dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/btn"
             android:gravity="center"
@@ -154,10 +156,9 @@
             android:textColor="#29AEBF"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
+            app:layout_constraintTop_toBottomOf="@id/textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

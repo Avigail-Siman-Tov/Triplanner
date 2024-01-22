@@ -63,6 +63,18 @@ public class ListTripInDayFragment extends Fragment {
         for(int i=0 ; i<arrayPlaces.length;i++){
             Log.d("mylog","place:"+arrayPlaces[i].getPlaceFormattedAddress());
         }
+        // Solve TSP
+        Place[] tspSolution = solveTSP(arrayPlaces);
+
+        // Copy the elements from tspSolution to arrayPlaces
+        for (int i = 0; i < arrayPlaces.length; i++) {
+            arrayPlaces[i] = tspSolution[i];
+        }
+
+        // Print or use the solution as needed
+        for (Place place : tspSolution) {
+            Log.d("mylog","the place is:"+place.getPlaceName());
+        }
         destination= ListTripInDayFragmentArgs.fromBundle(getArguments()).getTripDestination();
         numDay = view.findViewById(R.id.fragment_list_trip_in_day_num_day);
         numDay.setText("Day "+String.valueOf(arrayPlaces[0].getDay_in_trip()));
@@ -78,9 +90,58 @@ public class ListTripInDayFragment extends Fragment {
 
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+
         showMap();
 
         return view;
+    }
+
+    public static Place[] solveTSP(Place[] arrayPlaces) {
+        List<Place> solutionList = new ArrayList<>();
+        List<Place> unvisited = new ArrayList<>();
+
+        for (Place place : arrayPlaces) {
+            unvisited.add(place);
+        }
+
+        // Start from the first place
+        Place currentPlace = arrayPlaces[0];
+        solutionList.add(currentPlace);
+        unvisited.remove(currentPlace);
+
+        while (!unvisited.isEmpty()) {
+            Place nearestPlace = findNearestPlace(currentPlace, unvisited);
+            solutionList.add(nearestPlace);
+            unvisited.remove(nearestPlace);
+            currentPlace = nearestPlace;
+        }
+
+        // Convert the List to an array
+        Place[] solutionArray = new Place[solutionList.size()];
+        solutionList.toArray(solutionArray);
+
+        return solutionArray;
+    }
+
+    private static Place findNearestPlace(Place from, List<Place> places) {
+        double minDistance = Double.MAX_VALUE;
+        Place nearestPlace = null;
+
+        for (Place place : places) {
+            double distance = calculateDistance(from, place);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPlace = place;
+            }
+        }
+
+        return nearestPlace;
+    }
+
+    private static double calculateDistance(Place place1, Place place2) {
+        double dLat = place2.getPlaceLocationLat() - place1.getPlaceLocationLat();
+        double dLon = place2.getPlaceLocationLng() - place1.getPlaceLocationLng();
+        return Math.sqrt(dLat * dLat + dLon * dLon);
     }
 
     private void drawRoutes() {
@@ -124,7 +185,6 @@ public class ListTripInDayFragment extends Fragment {
 
         // Build the bounds
         bounds = builder.build();
-
         int padding = 50; // Adjust this value as needed
         // Zoom to fit all markers and polylines with padding
         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
@@ -260,7 +320,7 @@ public class ListTripInDayFragment extends Fragment {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
                 }
             } else {
-              Log.d("mylog","you have error");
+
             }
 
             return view;

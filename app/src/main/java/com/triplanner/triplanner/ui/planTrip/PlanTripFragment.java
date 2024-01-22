@@ -72,18 +72,17 @@ public class PlanTripFragment extends Fragment {
 
         // Initialize your views
         selectDatesButton = view.findViewById(R.id.selectDatesButton);
-        dateRangeTextView = view.findViewById(R.id.dateRangeTextView);
 
         startDateCalendar = Calendar.getInstance();
         endDateCalendar = Calendar.getInstance();
 
         // Handle the selection of date range
         // Handle the selection of date range
+        // Handle the selection of date range
         materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
-                .setTitleText("Select Dates")
                 .setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
                 .setCalendarConstraints(buildCalendarConstraints())
-                .setTheme(R.style.CustomMaterialDatePickerStyle) // Apply the custom style
+                .setTheme(R.style.MaterialCalendarThemeBackground)
                 .build();
 
 
@@ -194,54 +193,51 @@ public class PlanTripFragment extends Fragment {
         return constraintsBuilder.build();
     }
 
-    private void showDatePickerDialog(final boolean isStartDate) {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                if (isStartDate) {
-             startDateCalendar.set(Calendar.YEAR, year);
-                    startDateCalendar.set(Calendar.MONTH, monthOfYear);
-                    startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    showDatePickerDialog(false);
-                } else {
-                   endDateCalendar.set(Calendar.YEAR, year);
-                    endDateCalendar.set(Calendar.MONTH, monthOfYear);
-                    endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    updateDateRangeText();
-                }
-            }
-        };
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                requireContext(),
-                dateSetListener,
-                isStartDate ? startDateCalendar.get(Calendar.YEAR) : endDateCalendar.get(Calendar.YEAR),
-                isStartDate ? startDateCalendar.get(Calendar.MONTH) : endDateCalendar.get(Calendar.MONTH),
-                isStartDate ? startDateCalendar.get(Calendar.DAY_OF_MONTH) : endDateCalendar.get(Calendar.DAY_OF_MONTH)
-        );
-
-        if (isStartDate) {
-            datePickerDialog.getDatePicker().setMaxDate(endDateCalendar.getTimeInMillis());
-        } else {
-            datePickerDialog.getDatePicker().setMinDate(startDateCalendar.getTimeInMillis());
-        }
-
-        datePickerDialog.show();
-    }
 
     private void updateDateRangeText() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.US);
         String startDateStr = dateFormat.format(startDateCalendar.getTime());
         String endDateStr = dateFormat.format(endDateCalendar.getTime());
 
-//        String dateRangeText = "Selected dates: " + startDateStr + " - " + endDateStr;
-//        dateRangeTextView.setText(dateRangeText);
-
        // Update the button text as well
-       String buttonText = "Select Dates: " + startDateStr + " - " + endDateStr;
+       String buttonText =  startDateStr + " - " + endDateStr;
         selectDatesButton.setText(buttonText);
     }
 
+//    private void showDatePickerDialog(final boolean isStartDate) {
+//        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                if (isStartDate) {
+//                    startDateCalendar.set(Calendar.YEAR, year);
+//                    startDateCalendar.set(Calendar.MONTH, monthOfYear);
+//                    startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//                    showDatePickerDialog(false);
+//                } else {
+//                    endDateCalendar.set(Calendar.YEAR, year);
+//                    endDateCalendar.set(Calendar.MONTH, monthOfYear);
+//                    endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//                    updateDateRangeText();
+//                }
+//            }
+//        };
+//
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                requireContext(),
+//                dateSetListener,
+//                isStartDate ? startDateCalendar.get(Calendar.YEAR) : endDateCalendar.get(Calendar.YEAR),
+//                isStartDate ? startDateCalendar.get(Calendar.MONTH) : endDateCalendar.get(Calendar.MONTH),
+//                isStartDate ? startDateCalendar.get(Calendar.DAY_OF_MONTH) : endDateCalendar.get(Calendar.DAY_OF_MONTH)
+//        );
+//
+//        if (isStartDate) {
+//            datePickerDialog.getDatePicker().setMaxDate(endDateCalendar.getTimeInMillis());
+//        } else {
+//            datePickerDialog.getDatePicker().setMinDate(startDateCalendar.getTimeInMillis());
+//        }
+//
+//        datePickerDialog.show();
+//    }
     private String extractPhotoReference(String attributions) {
         if (attributions == null || attributions.isEmpty()) {
             return null;

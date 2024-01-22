@@ -57,6 +57,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="44dp"
+            android:fontFamily="sans-serif"
             android:text="Your destination:"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -123,25 +124,23 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/selectDatesButton"
-            android:layout_width="230dp"
-            android:layout_height="65dp"
+            android:layout_width="356dp"
+            android:layout_height="62dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
-            android:text="Select Dates"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif"
+            android:text="When arrive? - When leave?"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_calendar"
+            app:iconGravity="start"
+            app:iconTint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/np_channel_nr" />
 
-        <TextView
-            android:id="@+id/dateRangeTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="@id/selectDatesButton"
-            app:layout_constraintStart_toStartOf="@id/selectDatesButton"
-            app:layout_constraintTop_toBottomOf="@id/selectDatesButton" />
 
         <TextView
             android:id="@+id/fragment_plan_trip_textview_ok"

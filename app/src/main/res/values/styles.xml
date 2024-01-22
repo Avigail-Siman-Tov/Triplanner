@@ -6,9 +6,15 @@
     <style name="CustomMaterialDatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+
         <!-- Add any other styling attributes you want here -->
     </style>
-
+    <style name="MaterialCalendarThemeBackground" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
 
 
 

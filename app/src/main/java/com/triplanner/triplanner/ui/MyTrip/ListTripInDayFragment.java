@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -65,9 +68,29 @@ public class ListTripInDayFragment extends Fragment {
         }
         // Solve TSP
         Place[] tspSolution = solveTSP(arrayPlaces);
+        int cardViewHeight = calculateCardViewHeight(arrayPlaces.length);
+        Log.d("mylog", "onCreateView: lenght "+arrayPlaces.length);
+        Log.d("mylog", "onCreateView: cardViewHeight "+cardViewHeight);
+        // Adjust the height of the CardView dynamically
+        // Adjust the height of the CardView dynamically
+
+        // Adjust the height of the ScrollView dynamically
+        ScrollView scrollView = view.findViewById(R.id.scrollView);
+        ViewGroup.LayoutParams scrollViewParams = scrollView.getLayoutParams();
+
+// Set the height of the ScrollView
+        scrollViewParams.height = calculateCardViewHeight(arrayPlaces.length);
+        scrollView.setLayoutParams(scrollViewParams);;
+
+//        ListView listView = view.findViewById(R.id.fragment_list_trip_in_day_list_view);
+//        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//        params.height = cardViewHeight;
+//        Log.d("mylog", "onCreateView: cardViewHeight "+params.height);
+//        listView.setLayoutParams(params);
+
 
         // Copy the elements from tspSolution to arrayPlaces
-        for (int i = 0; i < arrayPlaces.length; i++) {
+        for(int i = 0; i < arrayPlaces.length; i++) {
             arrayPlaces[i] = tspSolution[i];
         }
 
@@ -94,6 +117,17 @@ public class ListTripInDayFragment extends Fragment {
         showMap();
 
         return view;
+    }
+
+    private int calculateCardViewHeight(int numberOfTrips) {
+        // Define your height values here
+        int heightForOneTrip = 200;  // dp
+        int heightIncrement = 200;   // dp
+
+
+        // Calculate the dynamic height based on the number of trips
+        return heightForOneTrip + (heightIncrement * (numberOfTrips - 1));
+
     }
 
     public static Place[] solveTSP(Place[] arrayPlaces) {

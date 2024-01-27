@@ -58,14 +58,14 @@
                     android:background="#FFFFFF">
 
                     <!-- List View -->
-                    <ListView
+                    <com.triplanner.triplanner.DynamicHeightListView
                         android:id="@+id/fragment_list_trip_in_day_list_view"
                         android:layout_width="match_parent"
-                        android:layout_height="600dp"
+                        android:layout_height="wrap_content"
                         android:contentDescription="List View"
                         tools:ignore="MissingConstraints">
 
-                    </ListView>
+                    </com.triplanner.triplanner.DynamicHeightListView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>

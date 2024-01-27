@@ -34,8 +34,8 @@ public class Model {
     public void getAllPlacesOfTrip(String tripId,Context context,Model.GetAllPlacesOfTrip listener){
         travelerModelSQL.getAllPlacesOfTrip(tripId,context,listener);
     }
-    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays, String tripPicture,Context context, Model.AddTripListener listener){
-        travelerModelServer.addTrip(tripName,tripLocation,travelerMail,tripDays,tripPicture,context,  listener );
+    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays, String tripPicture,String tripDateStart,String tripDateEnd,Context context, Model.AddTripListener listener){
+        travelerModelServer.addTrip(tripName,tripLocation,travelerMail,tripDays,tripPicture,tripDateStart,tripDateEnd,context,  listener );
     }
 
     public void addPlace(PlacePlanning place,String tripLocation,String travelerMail,String tripId,Context context,Model.AddPlaceListener listener) {

@@ -137,7 +137,7 @@ public class ModelTravelerServer {
         }.execute(httpCallPost);
 
     }
-    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,String tripPicture,Context context, Model.AddTripListener listener) {
+    public void addTrip(String tripName,String tripLocation,String travelerMail, Integer  tripDays,String tripPicture,String tripDateStart,String tripDateEnd,Context context, Model.AddTripListener listener) {
         final String URL_ADD_TRIP = "https://triplanner--server-5139d3ccceab.herokuapp.com/traveler/addTrip";
         HttpCall httpCallPost = new HttpCall();
         httpCallPost.setMethodtype(HttpCall.GET);
@@ -153,6 +153,8 @@ public class ModelTravelerServer {
         String myDate=dateFormat.format(date);
         paramsPost.put("tripDate",myDate);
         paramsPost.put("tripPicture", tripPicture);
+        paramsPost.put("tripDateStart", tripDateStart);
+        paramsPost.put("tripDateEnd", tripDateEnd);
         ObjectId _id= new ObjectId();
         String myId=_id.toString();
         paramsPost.put("tripId",myId);
@@ -165,7 +167,7 @@ public class ModelTravelerServer {
                 String result = response.toString();
                 try {
 
-                    Trip trip = new Trip(myId, myDate, travelerMail, tripLocation, tripName, tripDays ,tripPicture);
+                    Trip trip = new Trip(myId, myDate, travelerMail, tripLocation, tripName, tripDays ,tripPicture,tripDateStart,tripDateEnd);
                     travelerModelSQL.addTrip(trip, context, new Model.AddTripListener() {
                         @Override
                         public void onComplete(String tripId) {
@@ -338,8 +340,10 @@ public class ModelTravelerServer {
                             int tripDaysNumber= Integer.parseInt(trip.get("tripDaysNumber").toString());
                             String date= trip.get("tripDate").toString();
                             String tripPicture=  trip.get("tripPicture").toString();
+                            String tripDateStart=  trip.get("tripDateStart").toString();
+                            String tripDateEnd=  trip.get("tripDateEnd").toString();
 
-                            Trip myTrip=new Trip(id_trip,date,travelerMail,tripDestination,tripName,tripDaysNumber,tripPicture);
+                            Trip myTrip=new Trip(id_trip,date,travelerMail,tripDestination,tripName,tripDaysNumber,tripPicture,tripDateStart,tripDateEnd);
                             travelerModelSQL.addTrip(myTrip, context, new Model.AddTripListener() {
                                 @Override
                                 public void onComplete(String tripId) {

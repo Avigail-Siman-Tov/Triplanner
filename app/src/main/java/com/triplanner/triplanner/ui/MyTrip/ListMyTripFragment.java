@@ -56,7 +56,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 public class ListMyTripFragment extends Fragment {
 
     Trip[] arrayTrip;
-    TextView name,destination,numDays,date;
+    TextView name,destination,numDays,date ,dateStart,dateEnd;
     ListView listViewTrip;
     MyAdapter adapter;
     User user;
@@ -92,7 +92,7 @@ public class ListMyTripFragment extends Fragment {
                         Model.instance.getAllPlacesOfTrip(arrayTrip[i].getId_trip(), getContext(), new Model.GetAllPlacesOfTrip() {
                             @Override
                             public void onComplete(Place[] places) {
-                                ListMyTripFragmentDirections.ActionNavMyTripToListDayInTripFragment action=ListMyTripFragmentDirections.actionNavMyTripToListDayInTripFragment(arrayTrip[i].getTripName(),arrayTrip[i].getTripDestination(),arrayTrip[i].getTripDaysNumber(),arrayTrip[i].getTripPicture(),places);
+                                ListMyTripFragmentDirections.ActionNavMyTripToListDayInTripFragment action=ListMyTripFragmentDirections.actionNavMyTripToListDayInTripFragment(arrayTrip[i].getTripName(),arrayTrip[i].getTripDestination(),arrayTrip[i].getTripDaysNumber(),arrayTrip[i].getTripPicture(),arrayTrip[i].getTripDateStart(),arrayTrip[i].getTripDateEnd(),places);
                                 Navigation.findNavController(view).navigate( action);
                             }
                         });

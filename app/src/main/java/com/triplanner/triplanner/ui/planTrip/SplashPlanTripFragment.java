@@ -49,7 +49,7 @@ public class SplashPlanTripFragment extends Fragment {
     int end=0;
     int m;
     float latitude,longitude;
-    String  tripName,tripLocation,tripDestination;
+    String  tripName,tripLocation,tripDestination,tripDateStart,tripDateEnd;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,6 +63,8 @@ public class SplashPlanTripFragment extends Fragment {
         tripLocation = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getLocationTrip();
         tripDestination = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getDestinationTrip();
         tripPicture = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getPictureTrip();
+        tripDateStart = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getDateStartTrip();
+        tripDateEnd = SplashPlanTripFragmentArgs.fromBundle(getArguments()).getDateEndTrip();
 
         Runnable runnable=new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -198,7 +200,7 @@ public class SplashPlanTripFragment extends Fragment {
                                         PlacePlanning[] arrayPlaces = new PlacePlanning[myAllPlaces.size()];
                                         myAllPlaces.toArray(arrayPlaces);
                                         getParentFragmentManager().popBackStack();
-                                        SplashPlanTripFragmentDirections.ActionSplashPlanTripFragmentToPlacesListFragment action = SplashPlanTripFragmentDirections.actionSplashPlanTripFragmentToPlacesListFragment(arrayPlaces,tripDaysNumber,tripName,tripLocation,tripDestination,tripPicture);
+                                        SplashPlanTripFragmentDirections.ActionSplashPlanTripFragmentToPlacesListFragment action = SplashPlanTripFragmentDirections.actionSplashPlanTripFragmentToPlacesListFragment(arrayPlaces,tripDaysNumber,tripName,tripLocation,tripDestination,tripPicture,tripDateStart,tripDateEnd);
                                         Navigation.findNavController(view).navigate(action);
                                     }
                                 });

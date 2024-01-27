@@ -55,7 +55,7 @@ public class PlanTripFragment extends Fragment {
     Place myPlace = null;
     Integer tripDaysNumber;
     ProgressDialog myLoadingDialog;
-    String tripName, tripPicutre;
+    String tripName, tripPicutre , tripDateStart,tripDateEnd;
     TextView planTripButton;
 
     JSONObject jsonDataPage1 = null, jsonDataPage2 = null, jsonDataPage3 = null;
@@ -173,7 +173,7 @@ public class PlanTripFragment extends Fragment {
                 tripDaysNumber = Integer.parseInt(tripDays.getText().toString());
                 if (checkName(InputsTripName.getEditText().getText().toString())) {
                     if (myPlace != null) {
-                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre);
+                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre,tripDateStart,tripDateEnd);
                         Navigation.findNavController(view).navigate(action);
                     } else {
                         Toast.makeText(requireContext(), "please choose destination for the trip", Toast.LENGTH_SHORT).show();
@@ -197,7 +197,9 @@ public class PlanTripFragment extends Fragment {
     private void updateDateRangeText() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.US);
         String startDateStr = dateFormat.format(startDateCalendar.getTime());
+        tripDateStart = startDateStr;
         String endDateStr = dateFormat.format(endDateCalendar.getTime());
+        tripDateEnd = endDateStr;
 
        // Update the button text as well
        String buttonText =  startDateStr + " - " + endDateStr;

@@ -83,7 +83,7 @@ public class PlacesListFragment extends Fragment {
     Integer tripDays,placesNum=0;
     TextView amountUserPlace,location;
     ProgressDialog myLoadingDialog;
-    String tripName,tripLocation ,tripPicture ,tripDestination;
+    String tripName,tripLocation ,tripPicture ,tripDestination,tripDateStart,tripDateEnd;
     int[] colorArray;
     User user;
     String packageName;
@@ -112,6 +112,8 @@ public class PlacesListFragment extends Fragment {
         tripLocation = PlacesListFragmentArgs.fromBundle(getArguments()).getLocationTrip();
         tripDestination = PlacesListFragmentArgs.fromBundle(getArguments()).getDestinationTrip();
         tripPicture = PlacesListFragmentArgs.fromBundle(getArguments()).getPictureTrip();
+        tripDateStart =  PlacesListFragmentArgs.fromBundle(getArguments()).getDateStartTrip();
+        tripDateEnd =  PlacesListFragmentArgs.fromBundle(getArguments()).getDateEndTrip();
         chosenNumber(arrayPlaces);
         amountUserPlace=view.findViewById(R.id.fragment_places_list_count_place_user);
         amountUserPlace.setText(String.valueOf(placesNum));
@@ -158,7 +160,7 @@ public class PlacesListFragment extends Fragment {
         Model.instance.planTrip(chosenPlaces, tripDays, new Model.PlanTripListener() {
             @Override
             public void onComplete(ArrayList<PlacePlanning> chosenPlaces1) {
-                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,tripPicture,getContext(), new Model.AddTripListener() {
+                Model.instance.addTrip(tripName, tripLocation, user.getProfile().getEmail(), tripDays,tripPicture,tripDateStart,tripDateEnd,getContext(), new Model.AddTripListener() {
                     @Override
                     public void onComplete(String  tripId) {
                      addPlaces(chosenPlaces1,0,tripId);
@@ -174,7 +176,7 @@ public class PlacesListFragment extends Fragment {
                 @Override
                 public void onComplete(com.triplanner.triplanner.Model.Place[] places) {
                     myLoadingDialog.dismiss();
-                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,tripPicture,places );
+                    PlacesListFragmentDirections.ActionPlacesListFragmentToListDayInTripFragment action=PlacesListFragmentDirections.actionPlacesListFragmentToListDayInTripFragment(tripName,tripLocation,tripDays,tripPicture,tripDateStart,tripDateEnd,places );
                     Navigation.findNavController(getView()).navigate( action);
                 }
             });

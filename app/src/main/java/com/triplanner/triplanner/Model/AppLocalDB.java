@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities ={Traveler.class,FavoriteCategories.class,Trip.class,OpenHours.class,Place.class}, version = 2,exportSchema = true)
+@Database(entities ={Traveler.class,FavoriteCategories.class,Trip.class,OpenHours.class,Place.class}, version = 3,exportSchema = true)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract TravelerDao travelerDao();
     public abstract FavoriteCategoriesDao favoriteCategoriesDao();

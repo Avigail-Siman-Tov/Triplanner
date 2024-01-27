@@ -24,11 +24,14 @@ public class Trip implements Parcelable {
     private int tripDaysNumber;
     private String date;
 
+    private String tripDateStart;
+    private String tripDateEnd;
+
     private String tripPicture;
 
     @Ignore
     public Trip(){ }
-    public Trip(String id_trip,String date,String travelerMail,String tripDestination, String tripName,int tripDaysNumber , String tripPicture) {
+    public Trip(String id_trip,String date,String travelerMail,String tripDestination, String tripName,int tripDaysNumber , String tripPicture,String tripDateStart,String tripDateEnd) {
         this.id_trip = id_trip;
         this.tripDestination = tripDestination;
         this.tripName = tripName;
@@ -36,6 +39,8 @@ public class Trip implements Parcelable {
         this.travelerMail=travelerMail;
         this.date=date;
         this.tripPicture=tripPicture;
+        this.tripDateStart=tripDateStart;
+        this.tripDateEnd=tripDateEnd;
     }
 
 
@@ -47,6 +52,8 @@ public class Trip implements Parcelable {
         tripDaysNumber = in.readInt();
         date = in.readString();
         tripPicture = in.readString();
+        tripDateStart = in.readString();
+        tripDateEnd = in.readString();
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -119,6 +126,22 @@ public class Trip implements Parcelable {
         this.tripPicture = tripPicture;
     }
 
+    public String getTripDateStart() {
+        return tripDateStart;
+    }
+
+    public void setTripDateStart(String tripDateStart) {
+        this.tripDateStart = tripDateStart;
+    }
+
+    public String getTripDateEnd() {
+        return tripDateEnd;
+    }
+
+    public void setTripDateEnd(String tripDateEnd) {
+        this.tripDateEnd = tripDateEnd;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -133,6 +156,8 @@ public class Trip implements Parcelable {
         dest.writeInt(tripDaysNumber);
         dest.writeString(date);
         dest.writeString(tripPicture);
+        dest.writeString(tripDateStart);
+        dest.writeString(tripDateEnd);
     }
 
 }

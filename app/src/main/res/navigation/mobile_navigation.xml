@@ -78,6 +78,12 @@
         <argument
             android:name="pictureTrip"
             app:argType="string" />
+        <argument
+            android:name="dateStartTrip"
+            app:argType="string" />
+        <argument
+            android:name="dateEndTrip"
+            app:argType="string" />
         <action
             android:id="@+id/action_placesListFragment_to_listDayInTripFragment"
             app:destination="@id/listDayInTripFragment" />
@@ -111,6 +117,12 @@
         <argument
             android:name="PictureTrip"
             app:argType="string" />
+        <argument
+            android:name="DateStartTrip"
+            app:argType="string" />
+        <argument
+            android:name="DateEndTrip"
+            app:argType="string" />
 
     </fragment>
 
@@ -138,6 +150,12 @@
             app:argType="integer" />
         <argument
             android:name="tripPicture"
+            app:argType="string" />
+        <argument
+            android:name="tripDateStart"
+            app:argType="string" />
+        <argument
+            android:name="tripDateEnd"
             app:argType="string" />
         <argument
             android:name="arrPlaces"

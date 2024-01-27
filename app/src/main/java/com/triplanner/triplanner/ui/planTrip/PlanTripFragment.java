@@ -206,40 +206,6 @@ public class PlanTripFragment extends Fragment {
         selectDatesButton.setText(buttonText);
     }
 
-//    private void showDatePickerDialog(final boolean isStartDate) {
-//        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                if (isStartDate) {
-//                    startDateCalendar.set(Calendar.YEAR, year);
-//                    startDateCalendar.set(Calendar.MONTH, monthOfYear);
-//                    startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                    showDatePickerDialog(false);
-//                } else {
-//                    endDateCalendar.set(Calendar.YEAR, year);
-//                    endDateCalendar.set(Calendar.MONTH, monthOfYear);
-//                    endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                    updateDateRangeText();
-//                }
-//            }
-//        };
-//
-//        DatePickerDialog datePickerDialog = new DatePickerDialog(
-//                requireContext(),
-//                dateSetListener,
-//                isStartDate ? startDateCalendar.get(Calendar.YEAR) : endDateCalendar.get(Calendar.YEAR),
-//                isStartDate ? startDateCalendar.get(Calendar.MONTH) : endDateCalendar.get(Calendar.MONTH),
-//                isStartDate ? startDateCalendar.get(Calendar.DAY_OF_MONTH) : endDateCalendar.get(Calendar.DAY_OF_MONTH)
-//        );
-//
-//        if (isStartDate) {
-//            datePickerDialog.getDatePicker().setMaxDate(endDateCalendar.getTimeInMillis());
-//        } else {
-//            datePickerDialog.getDatePicker().setMinDate(startDateCalendar.getTimeInMillis());
-//        }
-//
-//        datePickerDialog.show();
-//    }
     private String extractPhotoReference(String attributions) {
         if (attributions == null || attributions.isEmpty()) {
             return null;

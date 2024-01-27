@@ -56,7 +56,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 public class ListMyTripFragment extends Fragment {
 
     Trip[] arrayTrip;
-    TextView name,destination,numDays,date ,dateStart,dateEnd;
+    TextView name,destination,numDays,date ,dateTrip;
     ListView listViewTrip;
     MyAdapter adapter;
     User user;
@@ -144,6 +144,8 @@ public class ListMyTripFragment extends Fragment {
             destination.setText(trip.getTripDestination());
             numDays = view.findViewById(R.id.my_plan_row_num_days);
             numDays.setText(String.valueOf(trip.getTripDaysNumber())+"\nDays\n");
+            dateTrip = view.findViewById(R.id.my_plan_row_dateTrip);
+            dateTrip.setText(trip.getTripDateStart()+"-"+trip.getTripDateEnd());
 //            date=view.findViewById(R.id.my_plan_row_date);
 //            date.setText(trip.getDate());
             image = view.findViewById(R.id.imageView4);

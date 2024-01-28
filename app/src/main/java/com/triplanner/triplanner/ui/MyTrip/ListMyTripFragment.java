@@ -54,7 +54,6 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 
 public class ListMyTripFragment extends Fragment {
-
     Trip[] arrayTrip;
     TextView name,destination,numDays,date ,dateTrip;
     ListView listViewTrip;
@@ -149,9 +148,8 @@ public class ListMyTripFragment extends Fragment {
 //            date=view.findViewById(R.id.my_plan_row_date);
 //            date.setText(trip.getDate());
             image = view.findViewById(R.id.imageView4);
-//            if (trip.getTripPicture() != null) {
                 Picasso.get().load(trip.getTripPicture()).into(image);
-//            }
+
 
             return view;
         }

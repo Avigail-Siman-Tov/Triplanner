@@ -7,36 +7,33 @@
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".ui.MyTrip.ListDayInTripFragment">
 
-    <ImageView
-        android:id="@+id/imageTrip"
-        android:layout_width="403dp"
-        android:layout_height="235dp"
-        android:scaleType="fitXY"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="4dp" />
-
-    <ListView
-        android:id="@+id/fragment_list_day_in_trip_list_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:divider="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_list_day_in_trip_location" >
+        android:layout_height="200dp"
+        tools:ignore="MissingConstraints">
 
+        <!-- Your existing ImageView -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person" />
 
-    </ListView>
+        <!-- Wave mask -->
+        <ImageView
+            android:id="@+id/waveMask"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/circle_shape" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/fragment_list_day_in_trip_name"
         android:layout_width="363dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="146dp"
         android:text="Name Trip"
         android:textColor="#646561"
         android:textSize="28sp"
@@ -56,9 +53,22 @@
         android:textColorHint="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/fragment_list_day_in_trip_name"
         app:layout_constraintTop_toBottomOf="@+id/fragment_list_day_in_trip_name"
         app:layout_constraintVertical_bias="0.195" />
+
+    <ListView
+        android:id="@+id/fragment_list_day_in_trip_list_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:divider="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_day_in_trip_location" >
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

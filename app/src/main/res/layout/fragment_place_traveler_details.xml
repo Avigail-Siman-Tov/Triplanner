@@ -126,8 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/ic_website"
-                    android:text=" website:"
+                    android:text="      website:"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -138,9 +137,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/baseline_phone_24"
-                    android:text=" Phone:"
+                    android:layout_marginTop="8dp"
+                    android:text="      Phone:"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +157,6 @@
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <TextView
-                    android:drawableStart="@drawable/ic_star_rate"
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -33,6 +33,9 @@ import com.triplanner.triplanner.R;
 import com.triplanner.triplanner.horizontalNumberPicker.HorizontalNumberPicker;
 import org.json.JSONObject;
 import com.google.android.material.datepicker.CalendarConstraints;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -76,8 +79,7 @@ public class PlanTripFragment extends Fragment {
         startDateCalendar = Calendar.getInstance();
         endDateCalendar = Calendar.getInstance();
 
-        // Handle the selection of date range
-        // Handle the selection of date range
+
         // Handle the selection of date range
         materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
                 .setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
@@ -100,6 +102,8 @@ public class PlanTripFragment extends Fragment {
                     endDateCalendar.setTimeInMillis(selection.second);
 
                     updateDateRangeText();
+
+
                 }
             }
         });
@@ -115,7 +119,7 @@ public class PlanTripFragment extends Fragment {
 
         myLoadingDialog = new ProgressDialog(requireContext());
 
-        TextView tripDays = view.findViewById(R.id.et_number);
+//        TextView tripDays = view.findViewById(R.id.et_number);
         // Create a new Places client instance.
         PlacesClient placesClient = Places.createClient(requireActivity());
         // Initialize the AutocompleteSupportFragment.
@@ -161,16 +165,23 @@ public class PlanTripFragment extends Fragment {
                 Log.d("mylog", status.toString());
             }
         });
-        final HorizontalNumberPicker np_channel_nr = view.findViewById(R.id.np_channel_nr);
+//        final HorizontalNumberPicker np_channel_nr = view.findViewById(R.id.np_channel_nr);
         // use value in your code
-        final int nr = np_channel_nr.getValue();
+        long tripDuration = calculateTripDuration();
+
         planTripButton = view.findViewById(R.id.fragment_plan_trip_textview_ok);
 
         planTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tripName = InputsTripName.getEditText().getText().toString();
-                tripDaysNumber = Integer.parseInt(tripDays.getText().toString());
+                // Check if tripDuration is a valid positive value before conversion
+                if (tripDuration >= 0) {
+                    tripDaysNumber = (int) tripDuration; // Convert long to Integer
+                } else {
+                    // Handle the case where tripDuration is a negative value (indicating an error)
+                    tripDaysNumber = null; // or set a default value
+                }
                 if (checkName(InputsTripName.getEditText().getText().toString())) {
                     if (myPlace != null) {
                         PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre,tripDateStart,tripDateEnd);
@@ -205,6 +216,25 @@ public class PlanTripFragment extends Fragment {
        String buttonText =  startDateStr + " - " + endDateStr;
         selectDatesButton.setText(buttonText);
     }
+
+    private long calculateTripDuration() {
+        // Assuming tripDateStart and tripDateEnd are initialized as String dates
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+
+        try {
+            LocalDate startDate = LocalDate.parse(tripDateStart, formatter);
+            LocalDate endDate = LocalDate.parse(tripDateEnd, formatter);
+
+            // Calculate the difference in days
+            long daysDifference = endDate.toEpochDay() - startDate.toEpochDay();
+
+            return daysDifference;
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle parsing exception if needed
+            return -1; // Return a negative value to indicate an error
+        }
+    }
+
 
     private String extractPhotoReference(String attributions) {
         if (attributions == null || attributions.isEmpty()) {

@@ -50,10 +50,10 @@ public class ListDayInTripFragment extends Fragment {
 
         arrDays = new int[tripDays];
         nameTrip = view.findViewById(R.id.fragment_list_day_in_trip_name);
-        String temp = "Schedule of trip \"";
-        temp += name;
-        temp += "\"";
-        nameTrip.setText(temp);
+//        String temp = "Schedule of trip \"";
+//        temp += name;
+//        temp += "\"";
+  //      nameTrip.setText(temp);
         locationTrip = view.findViewById(R.id.fragment_list_day_in_trip_location);
         // Set the image resource if tripPicture is a resource ID
         // Find the ImageView by ID

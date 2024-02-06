@@ -167,33 +167,40 @@ public class PlanTripFragment extends Fragment {
         });
 //        final HorizontalNumberPicker np_channel_nr = view.findViewById(R.id.np_channel_nr);
         // use value in your code
-        long tripDuration = calculateTripDuration();
+
 
         planTripButton = view.findViewById(R.id.fragment_plan_trip_textview_ok);
 
+        // Inside the onClick method of planTripButton
         planTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tripName = InputsTripName.getEditText().getText().toString();
-                // Check if tripDuration is a valid positive value before conversion
-                if (tripDuration >= 0) {
-                    tripDaysNumber = (int) tripDuration; // Convert long to Integer
-                } else {
-                    // Handle the case where tripDuration is a negative value (indicating an error)
-                    tripDaysNumber = null; // or set a default value
-                }
-                if (checkName(InputsTripName.getEditText().getText().toString())) {
-                    if (myPlace != null) {
-                        PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre,tripDateStart,tripDateEnd);
-                        Navigation.findNavController(view).navigate(action);
+                if (startDateCalendar != null && endDateCalendar != null) {
+                    long tripDuration = calculateTripDuration();
+
+                    if (tripDuration >= 0) {
+                        tripDaysNumber = (int) tripDuration; // Convert long to Integer
+
+                        if (checkName(InputsTripName.getEditText().getText().toString())) {
+                            if (myPlace != null) {
+                                PlanTripFragmentDirections.ActionNavPlanTripToSplashPlanTripFragment action = PlanTripFragmentDirections.actionNavPlanTripToSplashPlanTripFragment(tripDaysNumber, myPlace.getName(), (float) myPlace.getLatLng().latitude, (float) myPlace.getLatLng().longitude, tripName, myPlace.getName(), tripPicutre, tripDateStart, tripDateEnd);
+                                Navigation.findNavController(view).navigate(action);
+                            } else {
+                                Toast.makeText(requireContext(), "Please choose a destination for the trip", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     } else {
-                        Toast.makeText(requireContext(), "please choose destination for the trip", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Please enter a valid date range.", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(requireContext(), "Please select dates first.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         return view;
+
     }
     private CalendarConstraints buildCalendarConstraints() {
         long currentDay = MaterialDatePicker.todayInUtcMilliseconds();
@@ -228,9 +235,11 @@ public class PlanTripFragment extends Fragment {
             // Calculate the difference in days
             long daysDifference = endDate.toEpochDay() - startDate.toEpochDay();
 
-            return daysDifference;
-        } catch (Exception e) {
-            e.printStackTrace(); // Handle parsing exception if needed
+            return daysDifference+1;
+        }catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Date Parsing Error", "Error parsing dates: " + e.getMessage()); // Log the error
+            Toast.makeText(requireContext(), "Error parsing dates. Please enter valid date format.", Toast.LENGTH_SHORT).show();
             return -1; // Return a negative value to indicate an error
         }
     }

@@ -75,7 +75,7 @@ public class ListDayInTripFragment extends Fragment {
 //
         locationTrip.setText(location);
         String formattedDate = convertDateFormat(dateTrip);
-        dateStart.setText(formattedDate);
+        dateStart.setText(formattedDate +"  "+ tripDays +" days");
         listViewPlaces = view.findViewById(R.id.fragment_list_day_in_trip_list_view);
         ArrayList<ArrayList<Place>> array_place_days_planing = new ArrayList<>();
         for (int k = 0; k < tripDays; ++k) {

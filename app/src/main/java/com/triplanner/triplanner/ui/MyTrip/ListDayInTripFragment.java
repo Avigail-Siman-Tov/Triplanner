@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ListDayInTripFragment extends Fragment {
     Place[] arrayPlaces;
@@ -33,7 +34,7 @@ public class ListDayInTripFragment extends Fragment {
     MyAdapter adapter;
     int[] arrDays;
 
-    TextView numDay, nameTrip, locationTrip;
+    TextView numDay, nameTrip, locationTrip,dateStart;
     String location, dateTrip,tripPicture;
 
 
@@ -46,7 +47,7 @@ public class ListDayInTripFragment extends Fragment {
         String name = ListDayInTripFragmentArgs.fromBundle(getArguments()).getTripName();
         location = ListDayInTripFragmentArgs.fromBundle(getArguments()).getTripLocation();
         dateTrip = ListDayInTripFragmentArgs.fromBundle(getArguments()).getTripDateStart();
-     tripPicture = ListDayInTripFragmentArgs.fromBundle(getArguments()).getTripPicture();
+        tripPicture = ListDayInTripFragmentArgs.fromBundle(getArguments()).getTripPicture();
 
         arrDays = new int[tripDays];
         nameTrip = view.findViewById(R.id.fragment_list_day_in_trip_name);
@@ -55,6 +56,8 @@ public class ListDayInTripFragment extends Fragment {
 //        temp += "\"";
   //      nameTrip.setText(temp);
         locationTrip = view.findViewById(R.id.fragment_list_day_in_trip_location);
+        dateStart = view.findViewById(R.id.fragment_list_day_in_trip_date);
+
         // Set the image resource if tripPicture is a resource ID
         // Find the ImageView by ID
         // Find the wave mask ImageView by ID
@@ -71,6 +74,8 @@ public class ListDayInTripFragment extends Fragment {
         waveMaskImageView.setImageResource(R.drawable.circle_shape);
 //
         locationTrip.setText(location);
+        String formattedDate = convertDateFormat(dateTrip);
+        dateStart.setText(formattedDate);
         listViewPlaces = view.findViewById(R.id.fragment_list_day_in_trip_list_view);
         ArrayList<ArrayList<Place>> array_place_days_planing = new ArrayList<>();
         for (int k = 0; k < tripDays; ++k) {
@@ -130,6 +135,24 @@ public class ListDayInTripFragment extends Fragment {
                 dateTextView.setText("N/A");
             }
             return view;
+        }
+    }
+    public static String convertDateFormat(String inputDate) {
+        try {
+            // Input date format
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+            // Parse the input date
+            Date date = inputFormat.parse(inputDate);
+
+            // Output date format with four-digit year
+            SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+
+            // Format the date in the desired output format
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null; // Handle parsing exception
         }
     }
 

@@ -213,7 +213,7 @@ public class PlanTripFragment extends Fragment {
 
 
     private void updateDateRangeText() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         String startDateStr = dateFormat.format(startDateCalendar.getTime());
         tripDateStart = startDateStr;
         String endDateStr = dateFormat.format(endDateCalendar.getTime());
@@ -226,7 +226,7 @@ public class PlanTripFragment extends Fragment {
 
     private long calculateTripDuration() {
         // Assuming tripDateStart and tripDateEnd are initialized as String dates
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         try {
             LocalDate startDate = LocalDate.parse(tripDateStart, formatter);

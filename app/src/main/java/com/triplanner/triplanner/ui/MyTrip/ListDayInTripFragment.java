@@ -71,7 +71,6 @@ public class ListDayInTripFragment extends Fragment {
 
 // Set the image resource if tripPicture is a resource ID
         waveMaskImageView.setImageResource(R.drawable.circle_shape);
-//
         locationTrip.setText(location);
         String formattedDate = convertDateFormat(dateTrip);
         dateStart.setText(formattedDate +" • "+ tripDays +" days");

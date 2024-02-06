@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/ic_calendar"
+        android:drawableStart="@drawable/calander"
         android:text="trip date"
         android:textColor="#646561"
         android:textColorHint="@color/black"

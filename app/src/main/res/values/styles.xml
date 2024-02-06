@@ -9,6 +9,7 @@
 
         <!-- Add any other styling attributes you want here -->
     </style>
+
     <style name="MaterialCalendarThemeBackground" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/black</item>

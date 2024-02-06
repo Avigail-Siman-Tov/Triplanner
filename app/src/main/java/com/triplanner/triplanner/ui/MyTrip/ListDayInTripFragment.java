@@ -135,7 +135,7 @@ public class ListDayInTripFragment extends Fragment {
 
     private String formatDate(int day) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat outputFormat = new SimpleDateFormat("MMM \n dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("EEE \n dd");
 
         try {
             Date startDate = inputFormat.parse(dateTrip);

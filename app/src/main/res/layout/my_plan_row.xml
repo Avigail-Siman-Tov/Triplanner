@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="85dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:textColor="@color/white"
                 android:textSize="35sp"
@@ -47,16 +47,16 @@
 
             <TextView
                 android:id="@+id/my_plan_row_destination"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="303dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="125dp"
                 android:layout_marginEnd="20dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="155dp"
                 android:layout_marginEnd="20dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -76,13 +76,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
             <TextView
                 android:id="@+id/my_plan_row_num_days"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="280dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/circular_background"
                 android:elevation="4dp"
                 android:gravity="center"
@@ -93,8 +92,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/my_plan_row_destination"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/my_plan_row_destination"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="@+id/my_plan_row_destination" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

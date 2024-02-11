@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:drawableStart="@drawable/calander"
         android:text="trip date"
         android:textColor="#646561"

@@ -50,7 +50,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class PlaceTravelerDetailsFragment extends Fragment {
@@ -93,8 +101,9 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(List<String> result) {
-
-                String openingHours = result.stream().map(n -> String.valueOf(n))
+                String openingHours = result.stream()
+                        .distinct()  // Ensure distinct opening hours
+                        .map(n -> String.valueOf(n))
                         .collect(Collectors.joining("\n", "", ""));
                 placeOpeningHours.setText(openingHours);
             }

@@ -37,7 +37,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import okhttp3.OkHttpClient;
@@ -81,17 +84,14 @@ public class PlaceDetailsFragment extends Fragment {
         colorArray= getContext().getResources().getIntArray(R.array.array_name);
         placeName.setText(placeFullDetails.getPlaceName());
         placeAddress.setText(placeFullDetails.getPlaceFormattedAddress());
-        HashSet<String> openingHours = new HashSet<>();
-        placeFullDetails.getPlaceOpeningHours().stream()
-                .forEach(n -> openingHours.add(String.valueOf(n)));
-        String openingHoursText = String.join("\n", openingHours);
-        placeOpeningHours.setText(openingHoursText);
 
 
-//        String openingHours = placeFullDetails.getPlaceOpeningHours().stream()
-//                .map(n -> String.valueOf(n))
-//                .collect(Collectors.joining("\n", "", ""));
-//        placeOpeningHours.setText(openingHours);
+        String openingHours = placeFullDetails.getPlaceOpeningHours().stream()
+                .distinct()  // Ensure distinct opening hours
+                .map(n -> String.valueOf(n))
+                .collect(Collectors.joining("\n", "", ""));
+        placeOpeningHours.setText(openingHours);
+
         String weblink = placeFullDetails.getPlaceWebsite();
         if(weblink!=null && weblink!="") {
             placeWebsite.setMovementMethod(LinkMovementMethod.getInstance());

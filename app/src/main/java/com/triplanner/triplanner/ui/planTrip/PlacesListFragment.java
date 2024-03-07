@@ -286,6 +286,7 @@ public class PlacesListFragment extends Fragment {
                     Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
                 }
             } else {
+                Picasso.get().load(place.getPlaceImgUrl()).into(imagev);
 
 
             }

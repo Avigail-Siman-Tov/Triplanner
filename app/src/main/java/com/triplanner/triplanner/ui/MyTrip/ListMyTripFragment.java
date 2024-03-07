@@ -148,7 +148,7 @@ public class ListMyTripFragment extends Fragment {
 //            date=view.findViewById(R.id.my_plan_row_date);
 //            date.setText(trip.getDate());
             image = view.findViewById(R.id.imageView4);
-                Picasso.get().load(trip.getTripPicture()).into(image);
+            Picasso.get().load(trip.getTripPicture()).into(image);
 
 
             return view;

@@ -139,6 +139,9 @@ public class PlaceTravelerDetailsFragment extends Fragment {
             if (place.getPlaceImgUrl() == placeImg.getTag()) {
                 Picasso.get().load(place.getPlaceImgUrl()).into(placeImg);
             }
+            else{
+
+            }
         }
         wazeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

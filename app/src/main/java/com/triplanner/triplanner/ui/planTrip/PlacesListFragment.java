@@ -125,7 +125,6 @@ public class PlacesListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 planBtn.setBackgroundResource(R.drawable.button_hover);
-
                 if(placesNum==0)
                     Toast.makeText(getContext(),"no places selected ", Toast.LENGTH_SHORT).show();
                 else if (placesNum<tripDays)
@@ -312,7 +311,6 @@ public class PlacesListFragment extends Fragment {
                         placesNum++;
                         arrayPlaces[i].setStatus(true);
                         amountUserPlace.setText(String.valueOf(placesNum));
-
                     }
                     else{
                         place.setStatus(false);

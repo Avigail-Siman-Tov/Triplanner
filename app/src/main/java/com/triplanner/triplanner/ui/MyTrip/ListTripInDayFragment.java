@@ -51,7 +51,7 @@ public class ListTripInDayFragment extends Fragment {
     private GoogleMap googleMap;
     RatingBar rating;
 
-    private static final String API_KEY = "AIzaSyC-2lRMHs-8VTX-pePcej_Lsb807VOxk8U";
+    private static final String API_KEY = "AIzaSyAnbXXJNIMmSVhYSya_Mre_bvNKBGz0v8E";
     private static final GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(API_KEY).build();
     private List<Polyline> polylines = new ArrayList<>();
 

@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 
 public class PlacesList {
-    public static final String api_key_place = "AIzaSyC-2lRMHs-8VTX-pePcej_Lsb807VOxk8U";
+    public static final String api_key_place = "AIzaSyAnbXXJNIMmSVhYSya_Mre_bvNKBGz0v8E";
 
     public static List<PlacePlanning> JsonArrayToListPlace(JSONArray arrayPlace) throws JSONException {
         List<PlacePlanning> myList = new ArrayList<PlacePlanning>();

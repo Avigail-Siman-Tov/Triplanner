@@ -143,7 +143,7 @@ public class PlanTripFragment extends Fragment {
                     String photoReference = extractPhotoReference(attributions);
                     // Use getAttributions to obtain the photo reference
                     if (photoReference != null) {
-                        tripPicutre = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + Uri.encode(photoReference) + "&key=AIzaSyC-2lRMHs-8VTX-pePcej_Lsb807VOxk8U";
+                        tripPicutre = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + Uri.encode(photoReference) + "&key=AIzaSyAnbXXJNIMmSVhYSya_Mre_bvNKBGz0v8E";
                     } else {
                         // Handle the case where the attributions (photo reference) is null
                         tripPicutre = "https://dalicanvas.co.il/wp-content/uploads/2022/10/%D7%A9%D7%A7%D7%99%D7%A2%D7%94-%D7%A7%D7%9C%D7%90%D7%A1%D7%99%D7%AA-1.jpg";
